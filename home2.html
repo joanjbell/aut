@@ -1,0 +1,143 @@
+import React, { useState, useEffect } from "react";
+import "./App.css"; // You can move the styles to an external CSS file.
+
+const App = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const banners = [
+    "file:///H:/My%20Drive/Website/image.png",
+    "banner2.jpg",
+    "banner3.jpg",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [banners.length]);
+
+  return (
+    <div>
+      <header style={headerStyle}>
+        <div className="header-left" style={headerLeftStyle}>
+          <h1>Joan J. Bell</h1>
+          <p>Author of Poetry Books</p>
+        </div>
+        <div className="header-right" style={headerRightStyle}>
+          <div className="social-links">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="https://tumblr.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-tumblr"></i>
+            </a>
+          </div>
+          <div className="search-bar">
+            <input type="text" placeholder="Search..." />
+          </div>
+        </div>
+      </header>
+
+      <nav style={navStyle}>
+        <a href="home.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="contact.html">Contact</a>
+        <a href="shop.html">Shop</a>
+        <a href="instagram.html">Instagram Feed</a>
+      </nav>
+
+      <div className="banner-gallery" style={bannerGalleryStyle}>
+        {banners.map((src, index) => (
+          <img
+            key={index}
+            src={src}
+            alt={`Banner ${index + 1}`}
+            style={{
+              ...bannerImageStyle,
+              opacity: index === currentIndex ? 1 : 0,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container" style={containerStyle}>
+        <h2>Welcome</h2>
+        <p>
+          This is the homepage of Joan J. Bell. Explore the sections above to
+          learn more about me, contact me, visit my shop, or view my latest
+          Instagram posts.
+        </p>
+      </div>
+
+      <section id="latest-news" style={latestNewsStyle}>
+        <h2>Latest News</h2>
+        <div className="news-item">
+          <h3>New Book Release</h3>
+          <p className="date">November 2024</p>
+          <p>Joan J. Bell's latest novel, "Title of Book," is now available for pre-order!</p>
+        </div>
+        <div className="news-item">
+          <h3>Upcoming Events</h3>
+          <p className="date">December 2024</p>
+          <p>Joan J. Bell will be speaking at the Writer's Conference in City Name.</p>
+        </div>
+      </section>
+
+      <footer style={footerStyle}>
+        <p>&copy; 2024 Joan J. Bell. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
+
+const headerStyle = {
+  backgroundColor: "#62776d",
+  color: "#fff",
+  padding: "1rem 2rem",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
+};
+
+const headerLeftStyle = { marginLeft: "250px" };
+
+const headerRightStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "1.5rem",
+  marginRight: "250px",
+};
+
+const navStyle = {
+  backgroundColor: "#7a9b8a",
+  padding: "0.75rem 250px",
+  display: "flex",
+  justifyContent: "flex-start",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+};
+
+const bannerGalleryStyle = {
+  position: "relative",
+  width: "100%",
+  height: "400px",
+  overflow: "hidden",
+  padding: "280px",
+  boxSizing: "border-box",
+  borderRadius: "15px",
+};
+
+const bannerImageStyle = {
+  width: "calc(100% - 560px)",
+  height: "calc(100% - 40px)",
+  objectFit: "cover",
+  position: "absolute",
+  top: "20px",
+  left: "280px"

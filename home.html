@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joan J. Bell - Author</title>
+    <!-- Updated Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-oS4zQpFmrDomHh1GPOl5J4MDQyEOxX8NU2N+I6nOP5m2t9tUFGKTx1eTzS2bTo4U" crossorigin="anonymous">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f5f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #62776d;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title (Left side) */
+        .header-left {
+            margin-left: 250px; /* Add 250px padding on the left side of the title */
+        }
+
+        /* Social Links and Search Bar */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-right: 250px; /* Add 250px padding on the right side of the search bar */
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.2em;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #d4e4d0;
+        }
+        .search-bar input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1em;
+            border: 1px solid #dcdcd7;
+            border-radius: 5px;
+            outline: none;
+        }
+        .search-bar input[type="text"]::placeholder {
+            color: #666;
+        }
+
+        /* Navigation (Left Justified) */
+        nav {
+            background-color: #7a9b8a;
+            padding: 0.75rem 250px; /* 250px padding on both sides */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start; /* Left justify navigation links */
+        }
+        nav a {
+            color: #f5f5f0;
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.3rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            font-family: 'Georgia', serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #9bb8a8;
+            color: #fff;
+            border-radius: 5px;
+        }
+        nav {
+            display: flex;
+            justify-content: flex-start; /* Left justify navigation links */
+        }
+
+        /* Banner Gallery with Rounded Corners */
+        .banner-gallery {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden; /* Ensures rounded corners are visible */
+            padding: 280px;
+            box-sizing: border-box;
+            border-radius: 15px; /* Rounded corners */
+        }
+        .banner-gallery img {
+            width: calc(100% - 560px);
+            height: calc(100% - 40px);
+            object-fit: cover;
+            position: absolute;
+            top: 20px;
+            left: 280px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .banner-gallery img.active {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .container {
+            width: calc(100% - 560px); /* Matches the banner gallery's width */
+            padding: 280px; /* Same padding as banner-gallery */
+            margin: 3rem auto; /* Center the container vertically */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dcdcd7;
+            box-sizing: border-box;
+        }
+        .container h2 {
+            font-size: 2em;
+            color: #8ba89b;
+            margin-bottom: 1rem;
+            font-family: 'Merriweather', serif;
+        }
+        .container p {
+            line-height: 1.7;
+            font-size: 1.15em;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #8ba89b;
+            color: #f9f9f9;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        #latest-news {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+
+        #latest-news h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .news-item {
+            margin-bottom: 15px;
+        }
+
+        .news-item h3 {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .news-item .date {
+            font-size: 14px;
+            color: #666;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Joan J. Bell</h1>
+            <p>Author of Poetry Books</p>
+        </div>
+        <div class="header-right">
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tumblr.com" target="_blank" title="Tumblr"><i class="fab fa-tumblr"></i></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="contact.html">Contact</a>
+        <a href="shop.html">Shop</a>
+        <a href="instagram.html">Instagram Feed</a>
+    </nav>
+
+    <!-- Banner Gallery -->
+    <div class="banner-gallery">
+        <img src="file:///H:/My%20Drive/Website/image.png" alt="Banner 1" class="active">
+        <img src="banner2.jpg" alt="Banner 2">
+        <img src="banner3.jpg" alt="Banner 3">
+    </div>
+
+    <div class="container">
+        <h2>Welcome</h2>
+        <p>This is the homepage of Joan J. Bell. Explore the sections above to learn more about me, contact me, visit my shop, or view my latest Instagram posts.</p>
+    </div>
+
+    <section id="latest-news">
+        <h2>Latest News</h2>
+        <div class="news-item">
+            <h3>New Book Release</h3>
+            <p class="date">November 2024</p>
+            <p>Joan J. Bell's latest novel, "Title of Book," is now available for pre-order!</p>
+        </div>
+        <div class="news-item">
+            <h3>Upcoming Events</h3>
+            <p class="date">December 2024</p>
+            <p>Joan J. Bell will be speaking at the Writer's Conference in City Name.</p>
+        </div>
+        <!-- Add more news items as needed -->
+    </section>
+    
+
+    <footer>
+        <p>&copy; 2024 Joan J. Bell. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to rotate the banner images
+        let currentIndex = 0;
+        const banners = document.querySelectorAll('.banner-gallery img');
+        const bannerCount = banners.length;
+
+        function showNextBanner() {
+            banners[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % bannerCount;
+            banners[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextBanner, 5000); // Change image every 5 seconds
+    </script>
+</body>
+</html>
