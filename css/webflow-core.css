@@ -377,19 +377,20 @@ a {
 
 /* subtle width variation inside columns */
 .book-small {
-  transform: scale(0.98);
-}
-
-.book-medium {
-  transform: scale(1);
+  opacity: 0.92;
 }
 
 .book-tall {
   transform: scale(1.02);
 }
 
+.book-medium {
+  transform: scale(1.04);
+}
+
 .book-featured {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  z-index: 2;
 }
 
 
@@ -466,4 +467,34 @@ a {
   #books-grid {
     column-count: 1;
   }
+}
+
+.card.book-card {
+  padding: 18px 16px 14px;
+  border-radius: 16px;
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card.book-card {
+  border: 1px solid rgba(60, 60, 60, 0.08);
+  background: rgba(255, 250, 245, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.book-featured .book-cover {
+  aspect-ratio: 3 / 4;
+  filter: contrast(1.05);
+}
+
+.book-featured {
+  margin-bottom: 10px;
+}
+
+.card-link {
+  margin-bottom: 52px;
+}
+
+#books-grid {
+  column-gap: 52px;
 }
