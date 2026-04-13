@@ -258,6 +258,7 @@ p {
 .book-card {
   position: relative;
   overflow: hidden;
+  transition: transform 0.35s ease;
 }
 
 /* metadata overlay */
@@ -315,4 +316,9 @@ p {
   overflow: hidden;
   border: 1px solid rgba(60, 60, 60, 0.08);
   background: transparent;
+}
+
+.card-link:hover .book-cover {
+  transform: scale(1.03);
+  transition: transform 0.35s ease;
 }
