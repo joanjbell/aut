@@ -40,32 +40,7 @@
       line-height: 1.6;
       opacity: 0.9;
     }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(205,207,192,0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 0;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .nav a {
-      text-decoration: none;
-      color: inherit;
-      margin-left: 18px;
-      opacity: 0.8;
-    }
-
+    
     .nav a:hover {
       opacity: 1;
     }
@@ -154,14 +129,16 @@
 <!-- NAV -->
 <div class="nav">
   <div class="container nav-inner">
+
     <div class="logo">JOAN J. BELL</div>
 
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="shop.html">Books</a>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="shop.html">Shop</a>
       <a href="contact.html">Contact</a>
     </div>
+
   </div>
 </div>
 
@@ -245,9 +222,8 @@
     </div>
 
     <!-- BOOK GRID (kept but now contextualized) -->
-    <div class="shelf-wrapper">
-      <div id="books-shelf" class="shelf"></div>
-    </div>
+    <div id="books-grid" style="margin-top:40px;"></div>
+  </div>
 </section>
 
 <!-- EXTERNAL TRACE -->
@@ -270,13 +246,18 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("./data/books.json")
     .then(res => res.json())
     .then(books => {
-      const grid = document.getElementById('books-shelf');
+      const grid = document.getElementById('books-grid');
       if (!grid) return;
 
       books.forEach((book, i) => {
         const card = document.createElement('a');
         card.href = book.link;
         card.className = 'card-link';
+
+        // controlled variation system
+        if (i % 9 === 0) card.classList.add('is-large');
+        else if (i % 6 === 0) card.classList.add('is-wide');
+        else if (i % 4 === 0) card.classList.add('is-tall');
 
         card.innerHTML = `
           <div class="book-card">
