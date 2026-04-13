@@ -8,11 +8,9 @@
   <link rel="stylesheet" href="css/webflow-core.css" />
 
   <style>
-    /* ===== EDITORIAL FOUNDATION ===== */
-
     body {
       margin: 0;
-      background: #cdcfc0; /* your green */
+      background: #cdcfc0;
       font-family: system-ui, -apple-system, sans-serif;
       color: #423f32;
     }
@@ -27,7 +25,7 @@
     }
 
     .section.alt {
-      background: #f1ebe5; /* cream blocks */
+      background: #f1ebe5;
       margin: 40px 0;
       border-top: 1px solid rgba(66,63,50,0.15);
       border-bottom: 1px solid rgba(66,63,50,0.15);
@@ -43,7 +41,6 @@
       opacity: 0.9;
     }
 
-    /* ===== NAV ===== */
     .nav {
       position: sticky;
       top: 0;
@@ -73,7 +70,6 @@
       opacity: 1;
     }
 
-    /* ===== HERO ===== */
     .hero {
       padding: 110px 0 80px;
     }
@@ -98,7 +94,6 @@
       line-height: 1.1;
     }
 
-    /* ===== CARDS (CMS FEEL) ===== */
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -126,7 +121,6 @@
       margin-bottom: 10px;
     }
 
-    /* ===== INSTAGRAM PLACEHOLDER ===== */
     .ig-placeholder {
       border: 1px dashed rgba(66,63,50,0.25);
       padding: 40px;
@@ -149,7 +143,6 @@
       background: rgba(255,255,255,0.4);
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .hero-grid, .grid-3 {
         grid-template-columns: 1fr;
@@ -182,24 +175,31 @@
   <div class="container hero-grid">
 
     <div>
-      <div class="kicker">Poet · Writer · Artist</div>
+      <div class="kicker">Poet · Writer · Archive</div>
+
       <h1>
-        Language, memory, and the quiet architecture of everyday life.
+        Writing that lingers in quiet spaces—
+        memory, language, and the domestic interior.
       </h1>
 
       <p style="margin-top:18px; max-width:520px;">
-        Joan J. Bell is a poet and writer working across fragmented narrative,
-        domestic observation, and lyric minimalism.
+        Joan J. Bell is a poet and writer whose work explores stillness,
+        repetition, and the subtle architecture of everyday life.
       </p>
 
-      <a class="button" href="about.html">Read More</a>
+      <a class="button" href="about.html">About the Work</a>
     </div>
 
     <div class="card">
       <div class="tag">Featured</div>
-      <h3>Latest Book</h3>
-      <p>Short description of your most recent work or publication.</p>
-      <a class="button" href="shop.html">View Work</a>
+      <h3>Selected Works</h3>
+
+      <p>
+        A growing body of poetry and hybrid writing centered on
+        observation, fragmentation, and tone.
+      </p>
+
+      <a class="button" href="shop.html">View Books</a>
     </div>
 
   </div>
@@ -209,26 +209,7 @@
 <section class="section alt">
   <div class="container">
     <h2>Books</h2>
-
-    <div class="grid-3">
-      <div class="card">
-        <div class="tag">Poetry</div>
-        <h3>Book Title One</h3>
-        <p>Short description of the work.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Hybrid</div>
-        <h3>Book Title Two</h3>
-        <p>Short description of the work.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Forthcoming</div>
-        <h3>Book Title Three</h3>
-        <p>Short description of the work.</p>
-      </div>
-    </div>
+    <div class="grid-3" id="books-grid"></div>
   </div>
 </section>
 
@@ -238,40 +219,132 @@
     <h2>Writing</h2>
 
     <div class="grid-3">
+
       <div class="card">
         <div class="tag">Essay</div>
-        <h3>Piece Title</h3>
-        <p>Excerpt or summary of writing.</p>
+        <h3>On Stillness</h3>
+        <p>
+          A short reflection on attention, silence,
+          and the act of noticing.
+        </p>
       </div>
 
       <div class="card">
         <div class="tag">Poem</div>
-        <h3>Piece Title</h3>
-        <p>Excerpt or summary of writing.</p>
+        <h3>Kitchen Light</h3>
+        <p>
+          A poem rooted in repetition, space,
+          and the quiet rituals of daily life.
+        </p>
       </div>
 
       <div class="card">
         <div class="tag">Fragment</div>
-        <h3>Piece Title</h3>
-        <p>Excerpt or summary of writing.</p>
+        <h3>Untitled (Morning)</h3>
+        <p>
+          A brief study in tone and atmosphere,
+          written in fragments.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- INSTAGRAM (TEMP PLACEHOLDER) -->
+<!-- ART -->
+<section class="section">
+  <div class="container">
+    <h2>Art</h2>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="tag">Visual</div>
+        <h3>Botanical Studies</h3>
+        <p>
+          Minimal line work exploring organic forms
+          and negative space.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Series</div>
+        <h3>Interior Frames</h3>
+        <p>
+          Compositions centered on structure,
+          stillness, and repetition.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Process</div>
+        <h3>Sketch Archive</h3>
+        <p>
+          Ongoing sketches and visual notes
+          from daily observation.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
 <section class="section alt">
   <div class="container">
     <h2>Studio Feed</h2>
 
     <div class="ig-placeholder">
-      <p>Instagram stream will appear here once API is enabled.</p>
-      <a class="button" href="https://instagram.com" target="_blank">
+      <p>
+        A visual stream of ongoing work, process, and fragments
+        from daily practice.
+      </p>
+
+      <a class="button" href="https://instagram.com/joanjbell_" target="_blank">
         View Instagram
       </a>
     </div>
   </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("./data/books.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Books JSON not found");
+      return res.json();
+    })
+    .then(books => {
+      const grid = document.getElementById('books-grid');
 
+      if (!grid) return;
+
+      books.forEach(book => {
+        const card = document.createElement('a');
+        card.href = book.link;
+        card.className = 'card-link';
+
+        card.innerHTML = `
+          <div class="card book-card">
+            <img src="${book.cover}" class="book-cover"/>
+
+            <div class="tag">${book.type}</div>
+            <h3>${book.title}</h3>
+            <p>${book.description}</p>
+
+            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
+              View Book →
+            </p>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error("Books failed to load:", err);
+    });
+});
+</script>
+</script>
 </body>
 </html>

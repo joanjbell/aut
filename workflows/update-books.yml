@@ -1,0 +1,27 @@
+name: Update Books
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # daily
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+
+      - run: npm install
+      - run: node scripts/update-goodreads.js
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'bot'
+          git config --global user.email 'bot@example.com'
+          git add .
+          git commit -m "Update books" || exit 0
+          git push
