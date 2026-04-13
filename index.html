@@ -94,10 +94,11 @@
       line-height: 1.1;
     }
 
-    .grid-3 {
+    #books-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 220px;
+      gap: 32px;
     }
 
     .card {
@@ -318,13 +319,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!grid) return;
 
-      books.forEach(book => {
+      books.forEach((book, i) => {
         const card = document.createElement('a');
         card.href = book.link;
         card.className = 'card-link';
 
+        let layoutClass;
+        if (i % 7 === 0) layoutClass = "book-large";
+        else if (i % 5 === 0) layoutClass = "book-wide";
+        else if (i % 3 === 0) layoutClass = "book-tall";
+        else layoutClass = "book-small";
+
         card.innerHTML = `
-          <div class="card book-card">
+          <div class="card book-card ${layoutClass}">
             <img src="${book.cover}" class="book-cover"/>
 
             <div class="tag">${book.type}</div>
@@ -344,7 +351,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Books failed to load:", err);
     });
 });
-</script>
 </script>
 </body>
 </html>
