@@ -154,195 +154,153 @@
 <!-- NAV -->
 <div class="nav">
   <div class="container nav-inner">
-    <div><strong>JOAN J. BELL</strong></div>
-    <div>
-      <a href="index.html">Home</a>
+    <div class="logo">JOAN J. BELL</div>
+
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
-      <a href="shop.html">Shop</a>
+      <a href="shop.html">Books</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
 </div>
 
-<!-- HERO -->
+<!-- HERO / ARCHIVE STATEMENT -->
 <section class="hero">
   <div class="container hero-grid">
 
     <div>
-      <div class="kicker">Poet · Writer · Archive</div>
+      <div class="kicker">Archive of fragments</div>
 
       <h1>
-        Writing that lingers in quiet spaces—
-        memory, language, and the domestic interior.
+        Writing from the domestic interior, where memory repeats itself quietly.
       </h1>
 
       <p style="margin-top:18px; max-width:520px;">
-        Joan J. Bell is a poet and writer whose work explores stillness,
-        repetition, and the subtle architecture of everyday life.
+        Poems, essays, and visual notes. Collected rather than published. Kept rather than performed.
       </p>
-
-      <a class="button" href="about.html">About the Work</a>
     </div>
 
     <div class="card">
-      <div class="tag">Featured</div>
-      <h3>Selected Works</h3>
-
+      <div class="tag">Note</div>
       <p>
-        A growing body of poetry and hybrid writing centered on
-        observation, fragmentation, and tone.
+        This is an ongoing archive of fragments, studies, and works in progress across writing and visual practice.
       </p>
-
-      <a class="button" href="shop.html">View Books</a>
     </div>
 
   </div>
 </section>
 
-<!-- BOOKS -->
-<section class="section alt">
-  <div class="container">
-    <h2>Books</h2>
-    <div id="books-grid"></div>
-  </div>
-</section>
-
-<!-- WRITING -->
+<!-- SELECTED FRAGMENTS -->
 <section class="section">
   <div class="container">
-    <h2>Writing</h2>
+    <h2>Selected Fragments</h2>
 
     <div class="grid-3">
 
       <div class="card">
-        <div class="tag">Essay</div>
-        <h3>On Stillness</h3>
-        <p>
-          A short reflection on attention, silence,
-          and the act of noticing.
-        </p>
+        <div class="tag">Poem</div>
+        <h3>Kitchen Light</h3>
+        <p>A study in repetition, warmth, and domestic stillness.</p>
       </div>
 
       <div class="card">
-        <div class="tag">Poem</div>
-        <h3>Kitchen Light</h3>
-        <p>
-          A poem rooted in repetition, space,
-          and the quiet rituals of daily life.
-        </p>
+        <div class="tag">Essay</div>
+        <h3>On Stillness</h3>
+        <p>Notes on attention, silence, and the act of noticing.</p>
       </div>
 
       <div class="card">
         <div class="tag">Fragment</div>
         <h3>Untitled (Morning)</h3>
-        <p>
-          A brief study in tone and atmosphere,
-          written in fragments.
-        </p>
+        <p>Observations from early light, written in fragments.</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ART -->
-<section class="section">
-  <div class="container">
-    <h2>Art</h2>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="tag">Visual</div>
-        <h3>Botanical Studies</h3>
-        <p>
-          Minimal line work exploring organic forms
-          and negative space.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Series</div>
-        <h3>Interior Frames</h3>
-        <p>
-          Compositions centered on structure,
-          stillness, and repetition.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Process</div>
-        <h3>Sketch Archive</h3>
-        <p>
-          Ongoing sketches and visual notes
-          from daily observation.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- INSTAGRAM -->
+<!-- INDEX -->
 <section class="section alt">
   <div class="container">
-    <h2>Studio Feed</h2>
+    <h2>Index</h2>
 
-    <div class="ig-placeholder">
-      <p>
-        A visual stream of ongoing work, process, and fragments
-        from daily practice.
-      </p>
+    <div class="index-grid">
 
-      <a class="button" href="https://instagram.com/joanjbell_" target="_blank">
-        View Instagram
-      </a>
+      <div class="index-block">
+        <h3>Writing</h3>
+        <p>Poems, essays, fragments, notes.</p>
+      </div>
+
+      <div class="index-block">
+        <h3>Books</h3>
+        <p>Published and printed works.</p>
+      </div>
+
+      <div class="index-block">
+        <h3>Art</h3>
+        <p>Visual studies, sketches, and series.</p>
+      </div>
+
     </div>
+
+    <!-- BOOK GRID (kept but now contextualized) -->
+    <div id="books-grid" style="margin-top:40px;"></div>
   </div>
 </section>
+
+<!-- EXTERNAL TRACE -->
+<section class="section">
+  <div class="container">
+    <h2>External Trace</h2>
+
+    <p style="max-width:520px; opacity:0.75;">
+      A daily stream of process, sketches, and fragments from ongoing work.
+    </p>
+
+    <a class="button" href="https://instagram.com/joanjbell_" target="_blank">
+      @joanjbell_
+    </a>
+  </div>
+</section>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   fetch("./data/books.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Books JSON not found");
-      return res.json();
-    })
+    .then(res => res.json())
     .then(books => {
       const grid = document.getElementById('books-grid');
-
       if (!grid) return;
 
       books.forEach((book, i) => {
-      const card = document.createElement('a');
-      card.href = book.link;
-      card.className = 'card-link';
+        const card = document.createElement('a');
+        card.href = book.link;
+        card.className = 'card-link';
 
-      // museum pattern (repeats cleanly)
-      if (i % 10 === 0) card.classList.add('is-large');     // hero piece
-      else if (i % 6 === 0) card.classList.add('is-wide');  // horizontal break
-      else if (i % 4 === 0) card.classList.add('is-tall');  // vertical emphasis
+        // controlled variation system
+        if (i % 9 === 0) card.classList.add('is-large');
+        else if (i % 6 === 0) card.classList.add('is-wide');
+        else if (i % 4 === 0) card.classList.add('is-tall');
 
-      card.innerHTML = `
-        <div class="book-card">
-          <img src="${book.cover}" class="book-cover"/>
+        card.innerHTML = `
+          <div class="book-card">
+            <img src="${book.cover}" class="book-cover"/>
 
-          <div class="tag">${book.type}</div>
-          <h3>${book.title}</h3>
-          <p>${book.description}</p>
+            <div class="tag">${book.type}</div>
+            <h3>${book.title}</h3>
+            <p>${book.description}</p>
 
-          <p style="margin-top:10px; font-size:13px; opacity:0.7;">
-            View Book →
-          </p>
-        </div>
-      `;
+            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
+              Open →
+            </p>
+          </div>
+        `;
 
-      grid.appendChild(card);
-    });
-    })
-    .catch(err => {
-      console.error("Books failed to load:", err);
+        grid.appendChild(card);
+      });
     });
 });
 </script>
+
 </body>
 </html>
