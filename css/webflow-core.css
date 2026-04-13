@@ -364,8 +364,10 @@ a {
 ========================= */
 
 #books-grid {
-  column-count: 3;
-  column-gap: 52px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 10px;
+  gap: 24px;
 }
 
 /* =========================
@@ -373,28 +375,24 @@ a {
    (THIS is what you were missing)
 ========================= */
 
-/* SMALL (baseline) */
-.book-small .book-card {
-  transform: none;
+.book-small {
+  grid-column: span 4;
+  grid-row: span 28;
 }
 
-/* MEDIUM (noticeably taller) */
-.book-medium .book-card {
-  transform: scaleY(1.15);
-  transform-origin: top;
+.book-medium {
+  grid-column: span 4;
+  grid-row: span 36;
 }
 
-/* TALL (significantly larger) */
-.book-tall .book-card {
-  transform: scaleY(1.35);
-  transform-origin: top;
+.book-tall {
+  grid-column: span 4;
+  grid-row: span 44;
 }
 
-/* FEATURED (dominant object) */
-.book-featured .book-card {
-  transform: scaleY(1.65);
-  transform-origin: top;
-  z-index: 3;
+.book-featured {
+  grid-column: span 8;
+  grid-row: span 60;
 }
 
 /* =========================
