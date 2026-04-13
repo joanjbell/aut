@@ -185,8 +185,26 @@ p {
 /* BOOK GRID */
 #books-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* LEFT large book */
+.card-link:nth-child(1) {
+  grid-row: span 2;
+}
+
+/* RIGHT column books stack neatly */
+.card-link {
+  grid-column: auto;
+}
+
+.card-link:not(:first-child) .book-card {
+  height: 100%;
+}
+
+.card-link:not(:first-child) .book-card {
+  height: 100%;
 }
 
 .card-link {
@@ -321,4 +339,10 @@ p {
 .card-link:hover .book-cover {
   transform: scale(1.03);
   transition: transform 0.35s ease;
+}
+
+/* allow tap reveal */
+.card-link.active .book-meta {
+  opacity: 1;
+  transform: translateY(0);
 }

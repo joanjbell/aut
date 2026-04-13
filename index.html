@@ -300,6 +300,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+document.addEventListener("click", (e) => {
+  const card = e.target.closest(".card-link");
+
+  // If you tapped a card
+  if (card) {
+    // If already active → allow link to work
+    if (card.classList.contains("active")) return;
+
+    // Otherwise, prevent navigation + show overlay
+    e.preventDefault();
+
+    document.querySelectorAll(".card-link.active")
+      .forEach(c => c.classList.remove("active"));
+
+    card.classList.add("active");
+  } else {
+    // Tap outside → close all
+    document.querySelectorAll(".card-link.active")
+      .forEach(c => c.classList.remove("active"));
+  }
+});
 </script>
 
 </body>
