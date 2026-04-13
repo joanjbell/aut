@@ -364,8 +364,8 @@ a {
 
 /* Each item in the masonry flow */
 .card-link {
-  display: inline-block;
-  width: 100%;
+  display: block;
+  width: auto;
   margin-bottom: 42px;
   break-inside: avoid;
 }
