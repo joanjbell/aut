@@ -344,13 +344,52 @@ a {
 /* =========================
    BOOK CARD BASE
 ========================= */
+
 .book-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
 
-  background: transparent;
-  height: auto;
+/* BASE SMALL */
+.book-small .book-cover {
+  aspect-ratio: 2 / 3;
+}
+
+/* MEDIUM (slightly taller, more presence) */
+.book-medium .book-cover {
+  aspect-ratio: 3 / 4;
+}
+
+/* TALL (vertical emphasis) */
+.book-tall .book-cover {
+  aspect-ratio: 4 / 5;
+}
+
+/* FEATURED (gallery anchor pieces) */
+.book-featured .book-cover {
+  aspect-ratio: 1 / 1.2;
+  transform: scale(1.02);
+}
+
+.book-card {
+  max-width: 100%;
+}
+
+/* subtle width variation inside columns */
+.book-small {
+  transform: scale(0.98);
+}
+
+.book-medium {
+  transform: scale(1);
+}
+
+.book-tall {
+  transform: scale(1.02);
+}
+
+.book-featured {
+  transform: scale(1.05);
 }
 
 
@@ -404,6 +443,14 @@ a {
 
 .card-link:nth-child(5n) {
   transform: translateY(-10px);
+}
+
+.card-link:nth-child(4n) {
+  transform: translateY(18px);
+}
+
+.card-link:nth-child(7n) {
+  transform: translateY(-12px);
 }
 
 /* =========================
