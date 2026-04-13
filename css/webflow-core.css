@@ -270,25 +270,22 @@ p {
   flex-direction: column;
   justify-content: flex-end;
 
-  padding: 18px;
+  padding: 12px;
 
   background: linear-gradient(
     to top,
-    rgba(20, 18, 15, 0.75),
-    rgba(20, 18, 15, 0.0)
+    rgba(20,18,15,0.8),
+    rgba(20,18,15,0)
   );
 
   color: #f6f1e8;
 
   opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.25s ease;
+  transition: opacity 0.25s ease;
 }
 
-/* hover reveal */
 .card-link:hover .book-meta {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* text styles inside overlay */
@@ -327,4 +324,68 @@ p {
 .card-link.active .book-meta {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* wrapper controls overflow */
+.shelf-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+}
+
+/* horizontal row */
+.shelf {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+
+  /* important: keeps it horizontal */
+  width: max-content;
+}
+
+/* each book */
+.card-link {
+  flex: 0 0 auto;
+  width: 160px; /* book width */
+}
+
+/* book object */
+.book-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* cover */
+.book-cover {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 4px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+  transition: transform 0.25s ease;
+}
+
+/* subtle lift on hover */
+.card-link:hover .book-cover {
+  transform: translateY(-6px);
+}
+
+/* subtle baseline shadow (like a shelf) */
+.shelf::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 6px;
+  background: rgba(0,0,0,0.08);
+  filter: blur(6px);
 }

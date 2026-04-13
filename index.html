@@ -245,8 +245,9 @@
     </div>
 
     <!-- BOOK GRID (kept but now contextualized) -->
-    <div id="books-grid" style="margin-top:40px;"></div>
-  </div>
+    <div class="shelf-wrapper">
+      <div id="books-shelf" class="shelf"></div>
+    </div>
 </section>
 
 <!-- EXTERNAL TRACE -->
@@ -269,18 +270,13 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("./data/books.json")
     .then(res => res.json())
     .then(books => {
-      const grid = document.getElementById('books-grid');
+      const grid = document.getElementById('books-shelf');
       if (!grid) return;
 
       books.forEach((book, i) => {
         const card = document.createElement('a');
         card.href = book.link;
         card.className = 'card-link';
-
-        // controlled variation system
-        if (i % 9 === 0) card.classList.add('is-large');
-        else if (i % 6 === 0) card.classList.add('is-wide');
-        else if (i % 4 === 0) card.classList.add('is-tall');
 
         card.innerHTML = `
           <div class="book-card">
