@@ -286,13 +286,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="book-card">
             <img src="${book.cover}" class="book-cover"/>
 
-            <div class="tag">${book.type}</div>
-            <h3>${book.title}</h3>
-            <p>${book.description}</p>
+            <div class="book-meta">
+              <div class="tag">${book.type}</div>
+              <h3>${book.title}</h3>
+              <p>${book.description}</p>
 
-            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
-              Open →
-            </p>
+              <div class="open">Open →</div>
+            </div>
           </div>
         `;
 
