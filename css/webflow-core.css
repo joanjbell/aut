@@ -348,72 +348,59 @@ a {
 .book-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
-/* BASE SMALL */
-.book-small .book-cover {
-  aspect-ratio: 2 / 3;
-}
-
-/* MEDIUM (slightly taller, more presence) */
-.book-medium .book-cover {
-  aspect-ratio: 3 / 4;
-}
-
-/* TALL (vertical emphasis) */
-.book-tall .book-cover {
-  aspect-ratio: 4 / 5;
-}
-
-/* FEATURED (gallery anchor pieces) */
-.book-featured .book-cover {
-  aspect-ratio: 1 / 1.2;
-  transform: scale(1.02);
-}
-
-.book-card {
-  max-width: 100%;
-}
-
-/* subtle width variation inside columns */
-.book-small {
-  opacity: 0.85;
-}
-
-.book-tall,
-.book-medium {
-  opacity: 0.95;
-}
-
-.book-medium {
-  transform: scale(1.04);
-}
-
-.book-featured {
-  transform: scale(1.08);
-  z-index: 2;
-}
-
-
-/* =========================
-   MASONRY LAYOUT (KEY FIX)
-========================= */
-#books-grid {
-  column-count: 3;
-  column-gap: 42px;
-}
-
-/* Each item in the masonry flow */
+/* IMPORTANT: make cards have real size variation */
 .card-link {
   display: block;
-  width: auto;
+  width: 100%;
   margin-bottom: 42px;
   break-inside: avoid;
 }
 
 /* =========================
-   BOOK COVER (FOCAL OBJECT)
+   MASONRY LAYOUT
 ========================= */
+
+#books-grid {
+  column-count: 3;
+  column-gap: 52px;
+}
+
+/* =========================
+   TRUE SIZE VARIATION SYSTEM
+   (THIS is what you were missing)
+========================= */
+
+/* SMALL (baseline) */
+.book-small .book-card {
+  transform: none;
+}
+
+/* MEDIUM (noticeably taller) */
+.book-medium .book-card {
+  transform: scaleY(1.15);
+  transform-origin: top;
+}
+
+/* TALL (significantly larger) */
+.book-tall .book-card {
+  transform: scaleY(1.35);
+  transform-origin: top;
+}
+
+/* FEATURED (dominant object) */
+.book-featured .book-card {
+  transform: scaleY(1.65);
+  transform-origin: top;
+  z-index: 3;
+}
+
+/* =========================
+   BOOK COVER (kept stable)
+========================= */
+
 .book-cover {
   width: 100%;
   aspect-ratio: 2 / 3;
@@ -428,17 +415,15 @@ a {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* hover still works */
 .book-card:hover .book-cover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.12),
-    0 40px 90px rgba(0,0,0,0.18);
+  transform: translateY(-10px) scale(1.03);
 }
 
 /* =========================
-   SUBTLE CURATION RHYTHM
-   (museum-like imperfection)
+   VISUAL RHYTHM (keep subtle)
 ========================= */
+
 .card-link:nth-child(3n) {
   transform: translateY(18px);
 }
@@ -447,70 +432,19 @@ a {
   transform: translateY(-10px);
 }
 
-.card-link:nth-child(4n) {
-  transform: translateY(18px);
-}
-
-.card-link:nth-child(7n) {
-  transform: translateY(-12px);
-}
-
 /* =========================
-   RESPONSIVE BREAKPOINTS
+   FEATURED BREAKOUT
 ========================= */
-@media (max-width: 1000px) {
-  #books-grid {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 600px) {
-  #books-grid {
-    column-count: 1;
-  }
-}
-
-.card.book-card {
-  padding: 18px 16px 14px;
-  border-radius: 16px;
-
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.card.book-card {
-  border: 1px solid rgba(60, 60, 60, 0.08);
-  background: rgba(255, 250, 245, 0.7);
-  backdrop-filter: blur(2px);
-}
-
-.book-featured .book-cover {
-  aspect-ratio: 3 / 4;
-  filter: contrast(1.05);
-}
-
-.book-featured {
-  margin-bottom: 10px;
-}
-
-.card-link {
-  margin-bottom: 52px;
-}
-
-#books-grid {
-  column-gap: 52px;
-}
 
 .book-featured {
   column-span: all;
   width: 100%;
-  margin: 20px 0 60px;
+  margin: 40px 0;
 }
+
 .book-featured .card {
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 24px;
   align-items: center;
-}
-.card-link:nth-child(6n) {
-  margin-bottom: 80px;
 }
