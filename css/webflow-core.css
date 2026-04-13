@@ -185,6 +185,14 @@ a {
     0 30px 70px rgba(0,0,0,0.18);
 }
 
+.book-card:nth-child(odd) {
+  transform: translateY(20px);
+}
+
+.book-card:nth-child(4n) {
+  transform: translateY(-10px);
+}
+
 .panel {
   background: var(--surface);
   border: 1px solid rgba(47, 44, 39, 0.08);
