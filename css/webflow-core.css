@@ -1,3 +1,7 @@
+html {
+  background: hotpink !important;
+}
+
 :root {
   /* CANVAS (GREEN BACKGROUND) */
   --bg: #cdd2c4;
