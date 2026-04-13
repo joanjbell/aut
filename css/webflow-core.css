@@ -1,7 +1,3 @@
-html {
-  background: hotpink !important;
-}
-
 :root {
   /* CANVAS (GREEN BACKGROUND) */
   --bg: #cdd2c4;
@@ -396,11 +392,4 @@ a {
   object-fit: cover;
 
   border-radius: 6px;
-}
-
-#books-grid {
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  gap: 20px !important;
-  background: rgba(255, 0, 0, 0.05); /* TEMP VISUAL DEBUG */
 }
