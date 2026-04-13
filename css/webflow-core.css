@@ -136,63 +136,6 @@ a {
   will-change: transform;
 }
 
-.book-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-/* Layout variations */
-.book-large {
-  grid-column: span 3;
-  grid-row: span 2;
-}
-
-.book-wide {
-  grid-column: span 4;
-  grid-row: span 1;
-}
-
-.book-tall {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.book-small {
-  grid-column: span 2;
-  grid-row: span 1;
-}
-
-.book-cover {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-
-  border-radius: 6px;
-
-  box-shadow:
-    0 2px 6px rgba(0,0,0,0.08),
-    0 20px 40px rgba(0,0,0,0.12);
-
-  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
-}
-
-.book-card:hover .book-cover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow:
-    0 10px 20px rgba(0,0,0,0.12),
-    0 30px 70px rgba(0,0,0,0.18);
-}
-
-.book-card:nth-child(odd) {
-  transform: translateY(20px);
-}
-
-.book-card:nth-child(4n) {
-  transform: translateY(-10px);
-}
-
 .panel {
   background: var(--surface);
   border: 1px solid rgba(47, 44, 39, 0.08);
@@ -397,4 +340,83 @@ a {
   text-transform: uppercase;
   opacity: 0.6;
   margin-bottom: 8px;
+}
+/* =========================
+   BOOK CARD BASE
+========================= */
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: transparent;
+  height: auto;
+}
+
+
+/* =========================
+   MASONRY LAYOUT (KEY FIX)
+========================= */
+#books-grid {
+  column-count: 3;
+  column-gap: 42px;
+}
+
+/* Each item in the masonry flow */
+.card-link {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 42px;
+  break-inside: avoid;
+}
+
+/* =========================
+   BOOK COVER (FOCAL OBJECT)
+========================= */
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.08),
+    0 25px 60px rgba(0,0,0,0.12);
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.book-card:hover .book-cover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12),
+    0 40px 90px rgba(0,0,0,0.18);
+}
+
+/* =========================
+   SUBTLE CURATION RHYTHM
+   (museum-like imperfection)
+========================= */
+.card-link:nth-child(3n) {
+  transform: translateY(18px);
+}
+
+.card-link:nth-child(5n) {
+  transform: translateY(-10px);
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+@media (max-width: 1000px) {
+  #books-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  #books-grid {
+    column-count: 1;
+  }
 }
