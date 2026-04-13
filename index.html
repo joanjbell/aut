@@ -313,32 +313,31 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!grid) return;
 
       books.forEach((book, i) => {
-        const card = document.createElement('a');
-        card.href = book.link;
-        card.className = 'card-link';
+      const card = document.createElement('a');
+      card.href = book.link;
+      card.className = 'card-link';
 
-        let layoutClass;
-        if (i % 7 === 0) layoutClass = "book-large";
-        else if (i % 5 === 0) layoutClass = "book-wide";
-        else if (i % 3 === 0) layoutClass = "book-tall";
-        else layoutClass = "book-small";
+      // museum pattern (repeats cleanly)
+      if (i % 10 === 0) card.classList.add('is-large');     // hero piece
+      else if (i % 6 === 0) card.classList.add('is-wide');  // horizontal break
+      else if (i % 4 === 0) card.classList.add('is-tall');  // vertical emphasis
 
-        card.innerHTML = `
-          <div class="card book-card ${layoutClass}">
-            <img src="${book.cover}" class="book-cover"/>
+      card.innerHTML = `
+        <div class="book-card">
+          <img src="${book.cover}" class="book-cover"/>
 
-            <div class="tag">${book.type}</div>
-            <h3>${book.title}</h3>
-            <p>${book.description}</p>
+          <div class="tag">${book.type}</div>
+          <h3>${book.title}</h3>
+          <p>${book.description}</p>
 
-            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
-              View Book →
-            </p>
-          </div>
-        `;
+          <p style="margin-top:10px; font-size:13px; opacity:0.7;">
+            View Book →
+          </p>
+        </div>
+      `;
 
-        grid.appendChild(card);
-      });
+      grid.appendChild(card);
+    });
     })
     .catch(err => {
       console.error("Books failed to load:", err);

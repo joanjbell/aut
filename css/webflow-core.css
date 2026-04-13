@@ -346,50 +346,49 @@ a {
 #books-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 28px;
-  align-items: start;
+  gap: 18px;
+
+  max-width: 1100px;
+  margin: 0 auto;
+
+  align-items: stretch;
 }
 
-.book-small {
-  grid-column: span 3;
+/* base card behavior */
+.card-link {
+  display: block;
+  grid-column: span 3; /* default tile size */
 }
 
-.book-medium {
-  grid-column: span 4;
-}
-
-.book-large {
+/* museum variation system (controlled, not random nth-child) */
+.card-link.is-wide {
   grid-column: span 6;
 }
 
-.card-link {
-  display: block;
+.card-link.is-tall .book-card {
+  min-height: 420px;
+}
+
+.card-link.is-large {
+  grid-column: span 6;
 }
 
 .book-card {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 
   padding: 18px;
   border-radius: 12px;
 
-  background: rgba(255, 250, 245, 0.65);
+  background: rgba(255, 250, 245, 0.7);
   border: 1px solid rgba(60, 60, 60, 0.08);
-}
-
-.card-link:nth-child(7n) {
-  grid-column: span 6;
-}
-
-.card-link:nth-child(11n) {
-  grid-column: 8 / span 4;
 }
 
 .book-cover {
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-
   border-radius: 6px;
 }
