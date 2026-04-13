@@ -1,0 +1,22 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1100px) 1fr;
+}
+
+.container {
+  grid-column: 2;
+  padding: 0 var(--space-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* responsive stacking like Webflow */
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    grid-column: 1;
+  }
+}

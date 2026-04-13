@@ -1,0 +1,343 @@
+:root {
+  /* CANVAS (GREEN BACKGROUND) */
+  --bg: #cdd2c4;
+
+  /* PAPER PANELS */
+  --surface: #f6f1e8;
+
+  /* INK */
+  --ink: #2f2c27;
+
+  --radius: 14px;
+  --container: 1080px;
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: system-ui, sans-serif;
+}
+
+
+/* GLOBAL */
+body {
+  margin: 0;
+  background: var(--bg); /* <-- green stays global */
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+/* OPTIONAL PAPER TEXTURE */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+}
+
+/* CONTAINER */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* SECTIONS */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  gap: 72px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-md);
+}
+
+h1 {
+  font-size: 64px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(233, 228, 219, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(47, 44, 39, 0.08);
+  padding: 14px 24px;
+}
+
+/* LINKS */
+a {
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+/* BUTTON */
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+}
+
+/* CARDS (paper feel) */
+.card {
+  background: rgba(255, 250, 245, 0.85); /* your cream */
+  border-radius: 18px;
+
+  /* THIS is the key change */
+  padding: 40px 44px;
+
+  border: 1px solid rgba(60, 60, 60, 0.08);
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+}
+
+.card p {
+  line-height: 1.6;
+  margin: 0;
+}
+
+.card {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  will-change: transform;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid rgba(47, 44, 39, 0.08);
+  border-radius: 18px;
+  padding: 64px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+/* LOGO STYLE HELPERS */
+.logo {
+  font-family: var(--font-display);
+  letter-spacing: 0.35em;
+  font-size: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  h1 { font-size: 40px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* =========================
+   NAV WRAPPER (sticky + blur)
+========================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(205, 207, 192, 0.75); /* your green base */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* inner alignment */
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+/* logo */
+.logo {
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #2f2f2a;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+/* link base */
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: #2f2f2a;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+/* hover fade */
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* animated underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: #2f2f2a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
+
+/* =========================
+   ACTIVE PAGE STATE
+   (add class="active" to link)
+========================= */
+.nav-links a.active {
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+/* Smooth hover lift system */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Make cards feel more "Webflow-like" */
+.card {
+  border: 1px solid rgba(66,63,50,0.15);
+  border-radius: 12px;
+  padding: 28px;
+  background: #f1ebe5; /* your cream blocks */
+}
+
+/* Section spacing */
+.section {
+  padding: 80px 0;
+}
+
+/* Container width control (important for stream feel) */
+.container {
+  width: min(1100px, 90%);
+  margin: 0 auto;
+}
+
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.ig-item {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(66,63,50,0.15);
+}
+
+.ig-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ig-item:hover img {
+  transform: scale(1.05);
+}
+
+.cms-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(66,63,50,0.15);
+  margin-top: 16px;
+  background: #f1ebe5;
+}
+
+.cms-tag {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}

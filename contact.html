@@ -1,84 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Joan J. Bell</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            background-color: #444;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            padding: 14px 20px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - J. Bell Price</title>
+
+  <link rel="stylesheet" href="css/webflow-core.css" />
+
+  <style>
+    /* Page layout consistency */
+    .section {
+      padding: 100px 0;
+    }
+
+    /* Contact layout */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Card style reused from About page system */
+    .card {
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 250, 245, 0.88);
+      border-radius: 18px;
+      padding: 42px;
+      border: 1px solid rgba(60, 60, 60, 0.08);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+      box-sizing: border-box;
+    }
+
+    .card form {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
+      border-color: rgba(60, 60, 60, 0.15);
+    }
+
+    /* Form styling */
+    label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #2f2f2a;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: rgba(255,255,255,0.7);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border 180ms ease, background 180ms ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(60, 60, 60, 0.4);
+      background: rgba(255,255,255,0.95);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: #2f3b2f; /* your muted green direction */
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Left intro text */
+    .contact-intro h1 {
+      margin-bottom: 12px;
+    }
+
+    .contact-intro p {
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 90%;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Joan J. Bell</h1>
-        <p>Author of Poetry Books</p>
-    </header>
 
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="contact.html">Contact</a>
-        <a href="shop.html">Shop</a>
-        <a href="instagram.html">Instagram Feed</a>
-    </nav>
+<!-- NAV -->
+<div class="nav">
+  <div class="container nav-inner">
 
-    <div class="container">
-        <h2>Contact Me</h2>
-        <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="4" required></textarea><br>
-            <input type="submit" value="Send">
-        </form>
+    <div class="logo">JOAN J. BELL</div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" >About</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html" class="active" >Contact</a>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Joan J. Bell. All rights reserved.</p>
-    </footer>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="container contact-grid">
+
+    <!-- LEFT SIDE -->
+    <div class="contact-intro">
+      <h1>Contact</h1>
+      <p>
+        For collaborations, readings, commissions, or general enquiries,
+        feel free to get in touch. I usually respond within a few days.
+      </p>
+    </div>
+
+    <!-- RIGHT SIDE FORM CARD -->
+    <div class="card">
+
+      <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button class="button" type="submit">Send Message</button>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
+
 </body>
 </html>
