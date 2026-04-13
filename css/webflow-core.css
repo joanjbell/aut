@@ -377,11 +377,12 @@ a {
 
 /* subtle width variation inside columns */
 .book-small {
-  opacity: 0.92;
+  opacity: 0.85;
 }
 
-.book-tall {
-  transform: scale(1.02);
+.book-tall,
+.book-medium {
+  opacity: 0.95;
 }
 
 .book-medium {
@@ -497,4 +498,19 @@ a {
 
 #books-grid {
   column-gap: 52px;
+}
+
+.book-featured {
+  column-span: all;
+  width: 100%;
+  margin: 20px 0 60px;
+}
+.book-featured .card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.card-link:nth-child(6n) {
+  margin-bottom: 80px;
 }
