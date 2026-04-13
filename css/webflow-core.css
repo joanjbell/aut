@@ -220,9 +220,21 @@ p {
 
 .book-cover {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
+
   border-radius: 6px;
+
+  /* KEY FIXES */
+  image-rendering: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.card-link img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* RESPONSIVE */
