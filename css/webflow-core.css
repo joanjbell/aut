@@ -322,9 +322,3 @@ p {
   transform: scale(1.03);
   transition: transform 0.35s ease;
 }
-
-/* allow tap reveal */
-.card-link.active .book-meta {
-  opacity: 1;
-  transform: translateY(0);
-}
