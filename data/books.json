@@ -1,6 +1,5 @@
 [
   {
-    "title": "Wild Hearts",
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/WildHearts.png",
@@ -8,7 +7,6 @@
     "link": "#"
   },
   {
-    "title": "Scars",
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/ScarsVolI.png",
@@ -16,7 +14,6 @@
     "link": "#"
   },
   {
-    "title": "Growing Pains",
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/GP.png",
@@ -24,14 +21,12 @@
     "link": "#"
   },
   {
-    "title": "Lessons from the Angel & the Sword",
     "type": "Book",
     "description": "From Goodreads",
     "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598999932i/55207483._SY75_.jpg",
     "link": "#"
   },
   {
-    "title": "The Lighthouse And Its Keeper",
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/Lighthouse.png",
