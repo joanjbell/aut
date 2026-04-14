@@ -10,6 +10,55 @@
   --font-body: system-ui, sans-serif;
 }
 
+/* =========================
+   TYPOGRAPHY SYSTEM
+========================= */
+
+/* base body text */
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* headings */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+/* scale */
+h1 {
+  font-size: 48px;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+/* paragraph rhythm */
+p {
+  margin: 0 0 16px;
+  max-width: 60ch; /* KEY: readable line length */
+}
+
+/* small label text (tags, kicker, etc) */
+.tag,
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
 /* GLOBAL */
 body {
   margin: 0;
@@ -356,4 +405,29 @@ p {
 .section.alt,
 .container {
   overflow: visible !important;
+}
+
+/* fragment links */
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* remove default link styling from cards */
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* prevent purple visited links */
+.card:visited {
+  color: inherit;
+}
+
+/* ensure hover doesn't change color */
+.card:hover {
+  color: inherit;
+  text-decoration: none;
 }
