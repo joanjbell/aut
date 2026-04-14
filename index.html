@@ -173,7 +173,7 @@
   <div class="container">
     <h2>Selected Fragments</h2>
 
-    <div class="grid-3">
+    <div id="fragments-grid" class="grid-3"></div>
 
       <div class="card">
         <div class="tag">Poem</div>
@@ -228,25 +228,7 @@
 
     <div class="index-grid">
 
-      <div class="card">
-        <div class="tag">Series</div>
-        <h3>Light Studies</h3>
-        <p>Explorations in natural light and domestic space.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Sketchbook</div>
-        <h3>Daily Marks</h3>
-        <p>Small observational drawings and fragments.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Study</div>
-        <h3>Material Notes</h3>
-        <p>Texture, surface, and repetition studies.</p>
-      </div>
-
-    </div>
+      <div id="art-grid" class="grid-3"></div>
 
   </div>
 </section>
@@ -344,6 +326,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+// =========================
+// LOAD SELECTED FRAGMENTS
+// =========================
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(items => {
+    const grid = document.getElementById("fragments-grid");
+    if (!grid) return;
+
+    const sorted = items
+      .filter(item => item.type !== "art")
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3);
+
+    sorted.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="tag">${item.type}</div>
+        <h3>${item.title}</h3>
+        <p>${item.description || ""}</p>
+      `;
+
+      grid.appendChild(card);
+    });
+  });
+
+  // =========================
+// LOAD ART
+// =========================
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(items => {
+    const grid = document.getElementById("art-grid");
+    if (!grid) return;
+
+    const art = items
+      .filter(item => item.type === "art")
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3);
+
+    art.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <img src="${item.image}" 
+             style="width:100%; border-radius:8px; margin-bottom:10px;" />
+        <h3>${item.title}</h3>
+      `;
+
+      grid.appendChild(card);
+    });
+  });
 </script>
 
 </body>
