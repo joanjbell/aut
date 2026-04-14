@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED FRAGMENTS
+// LOAD SELECTED FRAGMENTS (CLICKABLE)
 // =========================
 fetch("./data/content.json")
   .then(res => res.json())
@@ -341,8 +341,10 @@ fetch("./data/content.json")
       .slice(0, 3);
 
     sorted.forEach(item => {
-      const card = document.createElement("div");
+      const card = document.createElement("a");
       card.className = "card";
+      card.href = item.link || "#";
+      card.target = "_blank";
 
       card.innerHTML = `
         <div class="tag">${item.type}</div>

@@ -3,13 +3,15 @@
     "type": "poem",
     "title": "Kitchen Light",
     "description": "A study in repetition and warmth.",
-    "date": "2026-04-10"
+    "date": "2026-04-10",
+    "link": "writing/kitchen-light.html"
   },
   {
     "type": "essay",
     "title": "On Stillness",
     "description": "Notes on attention and silence.",
-    "date": "2026-04-08"
+    "date": "2026-04-08",
+    "link": "writing/on-stillness.html"
   },
   {
     "type": "fragment",
