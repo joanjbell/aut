@@ -41,31 +41,6 @@
       opacity: 0.9;
     }
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(205,207,192,0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 0;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .nav a {
-      text-decoration: none;
-      color: inherit;
-      margin-left: 18px;
-      opacity: 0.8;
-    }
-
     .nav a:hover {
       opacity: 1;
     }
@@ -154,14 +129,16 @@
 <!-- NAV -->
 <div class="nav">
   <div class="container nav-inner">
+
     <div class="logo">JOAN J. BELL</div>
 
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="shop.html">Books</a>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="shop.html">Shop</a>
       <a href="contact.html">Contact</a>
     </div>
+
   </div>
 </div>
 
@@ -195,57 +172,43 @@
 <section class="section">
   <div class="container">
     <h2>Selected Fragments</h2>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="tag">Poem</div>
-        <h3>Kitchen Light</h3>
-        <p>A study in repetition, warmth, and domestic stillness.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Essay</div>
-        <h3>On Stillness</h3>
-        <p>Notes on attention, silence, and the act of noticing.</p>
-      </div>
-
-      <div class="card">
-        <div class="tag">Fragment</div>
-        <h3>Untitled (Morning)</h3>
-        <p>Observations from early light, written in fragments.</p>
-      </div>
-
-    </div>
+    <div id="fragments-grid" class="grid-3"></div>
   </div>
 </section>
 
 <!-- INDEX -->
 <section class="section alt">
   <div class="container">
-    <h2>Index</h2>
 
-    <div class="index-grid">
+    <h2>Books</h2>
+    <p style="opacity:0.75; max-width:520px;">
+      Published and printed works.
+    </p>
 
-      <div class="index-block">
-        <h3>Writing</h3>
-        <p>Poems, essays, fragments, notes.</p>
-      </div>
+    <!-- BOOK SHELF -->
+    <div id="books-grid"></div>
 
-      <div class="index-block">
-        <h3>Books</h3>
-        <p>Published and printed works.</p>
-      </div>
+  </div>
+</section>
 
-      <div class="index-block">
-        <h3>Art</h3>
-        <p>Visual studies, sketches, and series.</p>
-      </div>
-
-    </div>
 
     <!-- BOOK GRID (kept but now contextualized) -->
     <div id="books-grid" style="margin-top:40px;"></div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+
+    <h2>Art</h2>
+    <p style="opacity:0.75; max-width:520px;">
+      Visual studies, sketches, and series.
+    </p>
+
+    <div class="index-grid">
+
+      <div id="art-grid" class="grid-3"></div>
+
   </div>
 </section>
 
@@ -284,15 +247,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.innerHTML = `
           <div class="book-card">
-            <img src="${book.cover}" class="book-cover"/>
 
-            <div class="tag">${book.type}</div>
-            <h3>${book.title}</h3>
-            <p>${book.description}</p>
+            <!-- spine -->
+            <img src="${book.spine}" class="book-spine"/>
 
-            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
-              Open →
-            </p>
+            <!-- hover preview -->
+            <div class="book-preview">
+              <img src="${book.cover}" class="book-full"/>
+            </div>
+
           </div>
         `;
 
@@ -300,6 +263,106 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const books = document.querySelectorAll(".card-link");
+
+  books.forEach(book => {
+    const preview = book.querySelector(".book-preview");
+
+    book.addEventListener("mouseenter", () => {
+      if (!preview) return;
+
+      // reset
+      preview.style.left = "50%";
+      preview.style.right = "auto";
+      preview.style.transform = "translateY(0) scale(1)";
+
+      const rect = preview.getBoundingClientRect();
+      const padding = 10;
+
+      // check right overflow
+      if (rect.right > window.innerWidth - padding) {
+        const overflow = rect.right - window.innerWidth + padding;
+        preview.style.left = "auto";
+        preview.style.right = "0px";
+        preview.style.transform = `translateY(0) translateX(-${overflow}px) scale(1)`;
+      }
+
+      // check left overflow
+      if (rect.left < padding) {
+        const overflow = padding - rect.left;
+        preview.style.left = "0px";
+        preview.style.transform = `translateY(0) translateX(${overflow}px) scale(1)`;
+      }
+    });
+
+    book.addEventListener("mouseleave", () => {
+      if (!preview) return;
+      preview.style.left = "0";
+      preview.style.right = "auto";
+      preview.style.transform = "translateY(10px) scale(0.98)";
+    });
+  });
+});
+// =========================
+// LOAD SELECTED FRAGMENTS (CLICKABLE)
+// =========================
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(items => {
+    const grid = document.getElementById("fragments-grid");
+    if (!grid) return;
+
+    const sorted = items
+      .filter(item => item.type !== "art")
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3);
+
+    sorted.forEach(item => {
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = item.link || "#";
+      card.target = "_blank";
+
+      card.innerHTML = `
+        <div class="tag">${item.type}</div>
+        <h3>${item.title}</h3>
+        <p>${item.description || ""}</p>
+      `;
+
+      grid.appendChild(card);
+    });
+  });
+
+  // =========================
+// LOAD ART
+// =========================
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(items => {
+    const grid = document.getElementById("art-grid");
+    if (!grid) return;
+
+    const art = items
+      .filter(item => item.type === "art")
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3);
+
+    art.forEach(item => {
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = item.link || "#";
+
+      card.innerHTML = `
+        <img src="${item.image}" 
+             style="width:100%; border-radius:8px; margin-bottom:10px;" />
+        <h3>${item.title}</h3>
+      `;
+
+      grid.appendChild(card);
+    });
+  });
 </script>
 
 </body>

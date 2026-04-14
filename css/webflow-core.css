@@ -10,6 +10,55 @@
   --font-body: system-ui, sans-serif;
 }
 
+/* =========================
+   TYPOGRAPHY SYSTEM
+========================= */
+
+/* base body text */
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* headings */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+/* scale */
+h1 {
+  font-size: 48px;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+/* paragraph rhythm */
+p {
+  margin: 0 0 16px;
+  max-width: 60ch; /* KEY: readable line length */
+}
+
+/* small label text (tags, kicker, etc) */
+.tag,
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
 /* GLOBAL */
 body {
   margin: 0;
@@ -44,6 +93,7 @@ body::before {
   background: rgba(246, 241, 232, 0.6);
   border-top: 1px solid rgba(47, 44, 39, 0.08);
   border-bottom: 1px solid rgba(47, 44, 39, 0.08);
+  overflow: visible;
 }
 
 /* TYPOGRAPHY */
@@ -66,6 +116,42 @@ h2 {
 p {
   margin: 0;
   font-size: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ABOUT HERO LAYOUT */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.about-hero .card {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.about-hero .card:hover {
+  transform: translateY(-6px);
 }
 
 /* NAV */
@@ -137,6 +223,29 @@ p {
   padding: 24px;
 }
 
+/*CARD LINKS RESET (CLEAN + COMPLETE)*/
+
+a.card,
+a.card:link,
+a.card:visited,
+a.card:hover,
+a.card:active {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+/* ensure card behaves like a block */
+a.card {
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* optional: subtle interaction */
+a.card:hover {
+  color: var(--ink);
+  transform: translateY(-4px);
+}
+
 /* TAG */
 .tag {
   font-size: 11px;
@@ -181,144 +290,160 @@ p {
   text-decoration: none;
   color: inherit;
 }
+/* =========================
+   BOOK SHELF (REAL SPINES)
+========================= */
 
-/* BOOK GRID */
+.book-full {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
 #books-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
-}
-
-.card-link {
-  display: block;
-  grid-column: span 3;
-}
-
-.card-link.is-wide {
-  grid-column: span 6;
-}
-
-.card-link.is-large {
-  grid-column: span 6;
-}
-
-.card-link.is-tall .book-card {
-  min-height: 420px;
-}
-
-/* BOOK CARD */
-.book-card {
-  background: rgba(255, 250, 245, 0.75);
-  border: 1px solid rgba(60, 60, 60, 0.08);
-  border-radius: 12px;
-  padding: 16px;
-
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 6px;
+
+  overflow-x: auto;
+  padding: 30px 0 20px;
+
+  position: relative;
 }
 
-.book-cover {
+/* shelf line */
+#books-grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+
+  height: 6px;
+  background: rgba(47, 44, 39, 0.25);
+  border-radius: 3px;
+}
+
+/* each book */
+.card-link {
+  flex: 0 0 auto;
+  width: 34px;
+  text-decoration: none;
+
+  position: relative;
+  display: flex;
+  align-items: flex-end; /* ensures consistent baseline */
+
+  overflow: visible;
+}
+
+/* spine container */
+.book-card {
+  height: 220px;
+  border-radius: 3px;
+  overflow: visible;
+
+  position: static; /* KEY FIX */
+}
+
+/* height variation */
+.card-link:nth-child(3n) .book-card { height: 260px; }
+.card-link:nth-child(5n) .book-card { height: 200px; }
+.card-link:nth-child(7n) .book-card { height: 240px; }
+
+/* spine image */
+.book-spine {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+
+  box-shadow: 
+    inset -2px 0 3px rgba(0,0,0,0.25),
+    inset 2px 0 2px rgba(255,255,255,0.15);
+
+  transition: transform 0.25s ease;
+}
+
+/* =========================
+   FIXED HOVER PREVIEW
+========================= */
+
+.book-preview {
+  position: absolute;
+
+  bottom: calc(100% + 18px); /* slightly higher = clears shelf */
+  left: 50%;
+
+  transform: translateX(-50%) translateY(6px) scale(0.98);
+  opacity: 0;
+
+  pointer-events: none;
+  z-index: 20;
+
+  width: 140px;
+}
+
+/* actual cover image */
+.book-full {
+  width: 140px;
+  height: auto;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 
+  display: block;
   border-radius: 6px;
 
-  /* KEY FIXES */
-  image-rendering: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  background: #fff;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
-.card-link img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  h1 { font-size: 38px; }
-
-  .hero-grid,
-  .index-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #books-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .card-link {
-    grid-column: span 6;
-  }
-}
-
-.book-card {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.35s ease;
-}
-
-/* metadata overlay */
-.book-meta {
+/* title */
+.book-preview {
   position: absolute;
-  inset: 0;
+  bottom: calc(100% + 18px);
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  padding: 18px;
-
-  background: linear-gradient(
-    to top,
-    rgba(20, 18, 15, 0.75),
-    rgba(20, 18, 15, 0.0)
-  );
-
-  color: #f6f1e8;
+  left: 0;
+  transform: translateY(10px) scale(0.98);
 
   opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 999;
+
+  width: 140px;
 }
 
-/* hover reveal */
-.card-link:hover .book-meta {
+/* hover trigger */
+.card-link:hover .book-preview {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
-/* text styles inside overlay */
-.book-meta h3 {
-  margin: 6px 0;
-  font-size: 16px;
-  letter-spacing: 0.02em;
+.book-preview {
+  background: none !important;
+  padding: 0 !important;
 }
 
-.book-meta p {
-  font-size: 13px;
-  opacity: 0.85;
-  margin: 0;
+#books-grid,
+.section,
+.section.alt,
+.container {
+  overflow: visible !important;
 }
 
-.open {
-  margin-top: 10px;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  opacity: 0.8;
-}
-.book-card {
-  padding: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(60, 60, 60, 0.08);
-  background: transparent;
+/* =========================
+   WRITING PAGE LAYOUT
+========================= */
+
+.reading-container {
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.card-link:hover .book-cover {
-  transform: scale(1.03);
-  transition: transform 0.35s ease;
+.reading-container h1 {
+  margin-bottom: 24px;
+}
+
+.reading-container p {
+  font-size: 17px;
+  line-height: 1.8;
 }
