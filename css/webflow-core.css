@@ -44,6 +44,7 @@ body::before {
   background: rgba(246, 241, 232, 0.6);
   border-top: 1px solid rgba(47, 44, 39, 0.08);
   border-bottom: 1px solid rgba(47, 44, 39, 0.08);
+  overflow: visible;
 }
 
 /* TYPOGRAPHY */
@@ -323,4 +324,10 @@ p {
 .book-preview {
   background: none !important;
   padding: 0 !important;
+}
+
+#books-grid {
+  overflow-x: auto;
+  overflow-y: visible; /* ADD THIS */
+  padding-top: 80px;
 }
