@@ -245,52 +245,64 @@ p {
 }
 
 /* =========================
-   HOVER PREVIEW PANEL
+   FIXED HOVER PREVIEW
 ========================= */
 
 .book-preview {
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 12px);
   left: 50%;
 
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) scale(0.98);
   opacity: 0;
+
   pointer-events: none;
+  z-index: 10;
 
-  transition: all 0.25s ease;
+  /* KEY FIXES */
+  width: auto;
+  max-width: 160px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
 }
 
-/* full cover */
+/* actual cover image */
 .book-full {
   width: 140px;
+  height: auto;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 
+  display: block;
   border-radius: 6px;
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+  background: #fff;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
-/* title under preview */
+/* title */
 .preview-title {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 12px;
-  letter-spacing: 0.04em;
   text-align: center;
-  max-width: 140px;
+  line-height: 1.3;
+
+  color: var(--ink);
 }
 
-/* hover interactions */
+/* hover trigger */
 .card-link:hover .book-preview {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) scale(1);
 }
 
-.card-link:hover .book-spine {
-  transform: translateY(-6px);
+.card-link {
+  position: relative;
+  overflow: visible;
+}
+
+.book-preview {
+  background: none !important;
+  padding: 0 !important;
 }
