@@ -69,6 +69,18 @@ p {
   font-size: 16px;
 }
 
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* NAV */
 .nav {
   position: sticky;
