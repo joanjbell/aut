@@ -289,28 +289,13 @@ p {
 .book-preview {
   position: absolute;
   bottom: calc(100% + 18px);
-  left: 50%;
 
-  transform: translateX(-50%) translateY(10px);
+  left: 0;
+  transform: translateY(10px) scale(0.98);
+
   opacity: 0;
-
   pointer-events: none;
   z-index: 999;
-
-  /* HARD RESET */
-  all: unset;
-  position: absolute;
-
-  /* rebuild only what we need */
-  bottom: calc(100% + 18px);
-  left: 50%;
-
-  transform: translateX(-50%) translateY(10px);
-  opacity: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   width: 140px;
 }
@@ -326,8 +311,9 @@ p {
   padding: 0 !important;
 }
 
-#books-grid {
-  overflow-x: auto;
-  overflow-y: visible; /* ADD THIS */
-  padding-top: 80px;
+#books-grid,
+.section,
+.section.alt,
+.container {
+  overflow: visible !important;
 }

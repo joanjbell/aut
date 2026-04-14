@@ -278,6 +278,48 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const books = document.querySelectorAll(".card-link");
+
+  books.forEach(book => {
+    const preview = book.querySelector(".book-preview");
+
+    book.addEventListener("mouseenter", () => {
+      if (!preview) return;
+
+      // reset
+      preview.style.left = "50%";
+      preview.style.right = "auto";
+      preview.style.transform = "translateY(0) scale(1)";
+
+      const rect = preview.getBoundingClientRect();
+      const padding = 10;
+
+      // check right overflow
+      if (rect.right > window.innerWidth - padding) {
+        const overflow = rect.right - window.innerWidth + padding;
+        preview.style.left = "auto";
+        preview.style.right = "0px";
+        preview.style.transform = `translateY(0) translateX(-${overflow}px) scale(1)`;
+      }
+
+      // check left overflow
+      if (rect.left < padding) {
+        const overflow = padding - rect.left;
+        preview.style.left = "0px";
+        preview.style.transform = `translateY(0) translateX(${overflow}px) scale(1)`;
+      }
+    });
+
+    book.addEventListener("mouseleave", () => {
+      if (!preview) return;
+      preview.style.left = "0";
+      preview.style.right = "auto";
+      preview.style.transform = "translateY(10px) scale(0.98)";
+    });
+  });
+});
 </script>
 
 </body>
