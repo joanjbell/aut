@@ -223,6 +223,29 @@ p {
   padding: 24px;
 }
 
+/*CARD LINKS RESET (CLEAN + COMPLETE)*/
+
+a.card,
+a.card:link,
+a.card:visited,
+a.card:hover,
+a.card:active {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+/* ensure card behaves like a block */
+a.card {
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* optional: subtle interaction */
+a.card:hover {
+  color: var(--ink);
+  transform: translateY(-4px);
+}
+
 /* TAG */
 .tag {
   font-size: 11px;
@@ -405,31 +428,6 @@ p {
 .section.alt,
 .container {
   overflow: visible !important;
-}
-
-/* fragment links */
-.card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* remove default link styling from cards */
-.card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* prevent purple visited links */
-.card:visited {
-  color: inherit;
-}
-
-/* ensure hover doesn't change color */
-.card:hover {
-  color: inherit;
-  text-decoration: none;
 }
 
 /* =========================
