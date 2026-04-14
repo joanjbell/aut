@@ -17,12 +17,14 @@
     "type": "fragment",
     "title": "Untitled (Morning)",
     "description": "Observations from early light.",
-    "date": "2026-04-06"
+    "date": "2026-04-06",
+    "link": "art/untitled-morning.html"
   },
   {
     "type": "art",
     "title": "Light Study I",
     "image": "images/art1.jpg",
-    "date": "2026-04-12"
+    "date": "2026-04-12",
+    "link": "art/light-study-i.html"
   }
 ]

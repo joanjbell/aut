@@ -350,8 +350,9 @@ fetch("./data/content.json")
       .slice(0, 3);
 
     art.forEach(item => {
-      const card = document.createElement("div");
+      const card = document.createElement("a");
       card.className = "card";
+      card.href = item.link || "#";
 
       card.innerHTML = `
         <img src="${item.image}" 
