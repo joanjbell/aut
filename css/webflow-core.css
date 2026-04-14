@@ -214,7 +214,12 @@ p {
   flex: 0 0 auto;
   width: 34px;
   text-decoration: none;
+
   position: relative;
+  display: flex;
+  align-items: flex-end; /* ensures consistent baseline */
+
+  overflow: visible;
 }
 
 /* spine container */
@@ -222,7 +227,8 @@ p {
   height: 220px;
   border-radius: 3px;
   overflow: visible;
-  position: relative;
+
+  position: static; /* KEY FIX */
 }
 
 /* height variation */
@@ -250,20 +256,17 @@ p {
 
 .book-preview {
   position: absolute;
-  bottom: calc(100% + 12px);
+
+  bottom: calc(100% + 18px); /* slightly higher = clears shelf */
   left: 50%;
 
-  transform: translateX(-50%) scale(0.98);
+  transform: translateX(-50%) translateY(6px) scale(0.98);
   opacity: 0;
 
   pointer-events: none;
-  z-index: 10;
+  z-index: 20;
 
-  /* KEY FIXES */
-  width: auto;
-  max-width: 160px;
-
-  display: block;
+  width: 140px;
 }
 
 /* actual cover image */
@@ -295,11 +298,6 @@ p {
 .card-link:hover .book-preview {
   opacity: 1;
   transform: translateX(-50%) scale(1);
-}
-
-.card-link {
-  position: relative;
-  overflow: visible;
 }
 
 .book-preview {
