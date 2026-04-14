@@ -3,14 +3,16 @@
     "title": "Wild Hearts",
     "type": "Book",
     "description": "From Goodreads",
-    "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1596470215i/54758214._SY75_.jpg",
+    "cover": "/images/books/WildHearts.png",
+    "spine": "/images/books/WildHearts_spine.png",
     "link": "#"
   },
   {
     "title": "Scars",
     "type": "Book",
     "description": "From Goodreads",
-    "cover": "/images/books/Scars_Vol_I.png",
+    "cover": "/images/books/ScarsVolI.png",
+    "spine": "/images/books/ScarsVolI_spine.png",
     "link": "#"
   },
   {
@@ -18,6 +20,7 @@
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/GP.png",
+    "spine": "/images/books/GP_spine.png",
     "link": "#"
   },
   {
@@ -32,6 +35,7 @@
     "type": "Book",
     "description": "From Goodreads",
     "cover": "/images/books/Lighthouse.png",
+    "spine": "/images/books/Lighthouse_spine.png",
     "link": "#"
   }
   
