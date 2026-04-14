@@ -285,19 +285,39 @@ p {
 }
 
 /* title */
-.preview-title {
-  margin-top: 6px;
-  font-size: 12px;
-  text-align: center;
-  line-height: 1.3;
+.book-preview {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  left: 50%;
 
-  color: var(--ink);
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+
+  pointer-events: none;
+  z-index: 999;
+
+  /* HARD RESET */
+  all: unset;
+  position: absolute;
+
+  /* rebuild only what we need */
+  bottom: calc(100% + 18px);
+  left: 50%;
+
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 140px;
 }
 
 /* hover trigger */
 .card-link:hover .book-preview {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
+  transform: translateX(-50%) translateY(0);
 }
 
 .book-preview {
