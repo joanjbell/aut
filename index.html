@@ -40,7 +40,7 @@
       line-height: 1.6;
       opacity: 0.9;
     }
-    
+
     .nav a:hover {
       opacity: 1;
     }
@@ -263,13 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="book-card">
             <img src="${book.cover}" class="book-cover"/>
 
-            <div class="tag">${book.type}</div>
-            <h3>${book.title}</h3>
-            <p>${book.description}</p>
-
-            <p style="margin-top:10px; font-size:13px; opacity:0.7;">
-              Open →
-            </p>
+            <div class="spine-text">
+              ${book.title}
+            </div>
           </div>
         `;
 
