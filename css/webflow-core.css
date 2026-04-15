@@ -447,3 +447,32 @@ a.card:hover {
   font-size: 17px;
   line-height: 1.8;
 }
+
+/* =========================
+   ART GRID (LARGER CARDS)
+========================= */
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .art-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.art-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.art-grid .card {
+  padding: 12px;
+}

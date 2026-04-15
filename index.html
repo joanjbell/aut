@@ -207,7 +207,7 @@
 
     <div class="index-grid">
 
-      <div id="art-grid" class="grid-3"></div>
+      <div id="art-grid" class="art-grid"></div>
 
   </div>
 </section>
@@ -355,8 +355,7 @@ fetch("./data/content.json")
       card.href = item.link || "#";
 
       card.innerHTML = `
-        <img src="${item.image}" 
-             style="width:100%; border-radius:8px; margin-bottom:10px;" />
+        <img src="${item.image}" class="art-image" />
         <h3>${item.title}</h3>
       `;
 
