@@ -449,13 +449,13 @@ a.card:hover {
 }
 
 /* =========================
-   ART GRID (LARGER CARDS)
+   ART GRID (BALANCED)
 ========================= */
 
 .art-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 @media (max-width: 900px) {
@@ -466,11 +466,11 @@ a.card:hover {
 
 .art-image {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 12px;
-
-  aspect-ratio: 4 / 5;
+  height: 220px;   /* KEY: fixed visual height */
   object-fit: cover;
+
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .art-grid .card {
