@@ -447,44 +447,47 @@ a.card:hover {
   font-size: 17px;
   line-height: 1.8;
 }
-
 /* =========================
-   ART GRID (FINAL – STABLE)
+   ART GRID (NO OVERFLOW FIX)
 ========================= */
 
 .art-grid {
   display: grid;
 
-  /* responsive columns that NEVER overflow */
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* force safe responsive columns */
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 
   gap: 20px;
-
   margin-top: 24px;
+
+  width: 100%;
 }
 
-/* remove card styling for art */
+/* VERY IMPORTANT: allow shrinking */
+.art-grid > * {
+  min-width: 0;
+}
+
+/* remove card styling */
 .art-grid .card {
   padding: 0;
   background: transparent;
   border: none;
+
+  display: block;
 }
 
-/* image sizing (critical) */
+/* image */
 .art-image {
   width: 100%;
-  height: 160px;   /* slightly smaller = avoids vertical stretching */
+  height: 160px;
   object-fit: cover;
 
   border-radius: 10px;
   display: block;
 }
 
-/* subtle hover (optional but nice) */
-.art-image {
-  transition: transform 0.3s ease;
-}
-
-.art-grid .card:hover .art-image {
-  transform: scale(1.03);
+/* prevent any internal overflow */
+.art-grid img {
+  max-width: 100%;
 }
