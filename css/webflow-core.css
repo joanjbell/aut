@@ -449,22 +449,42 @@ a.card:hover {
 }
 
 /* =========================
-   ART GRID (BALANCED)
+   ART GRID (FINAL – STABLE)
 ========================= */
 
 .art-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
 
-  max-width: 900px;   /* 👈 KEY: prevents over-stretching */
+  /* responsive columns that NEVER overflow */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  gap: 20px;
+
   margin-top: 24px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+/* remove card styling for art */
 .art-grid .card {
   padding: 0;
   background: transparent;
   border: none;
+}
+
+/* image sizing (critical) */
+.art-image {
+  width: 100%;
+  height: 160px;   /* slightly smaller = avoids vertical stretching */
+  object-fit: cover;
+
+  border-radius: 10px;
+  display: block;
+}
+
+/* subtle hover (optional but nice) */
+.art-image {
+  transition: transform 0.3s ease;
+}
+
+.art-grid .card:hover .art-image {
+  transform: scale(1.03);
 }
