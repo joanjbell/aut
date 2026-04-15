@@ -362,6 +362,25 @@ fetch("./data/content.json")
       grid.appendChild(card);
     });
   });
+fetch("https://graph.instagram.com/me/media?fields=id,media_url,permalink&access_token=EAASynlOZBxyIBRNCXlspUR1RwZBNQEBOupNUdD6E4h84xdcgJQecKJYzAm5RgN0S4LOXZBmqF7JMDu3BZC5Vb6nInoZBfJ2pZCp7KyzRdDkQvPuDDoCYaZBteD9GIgFTZAHdZBrgCdqd2vE6qyItcTEiEZB0DXZBpjqu9iVhwJGnQZCZBffN39GwwCNiNhatbiCZA1sFJ9")
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById("instagram-grid");
+
+    data.data.slice(0, 6).forEach(post => {
+      const el = document.createElement("a");
+      el.href = post.permalink;
+      el.target = "_blank";
+      el.className = "card";
+
+      el.innerHTML = `
+        <img src="${post.media_url}" class="art-image" />
+      `;
+
+      grid.appendChild(el);
+    });
+  });
+</script>
 </script>
 
 </body>
