@@ -519,3 +519,21 @@ a.card:hover {
   background: var(--ink);
   color: var(--surface);
 }
+
+/*ART PAGE FULL IMAGES*/
+.art-full {
+  width: 100%;
+  height: auto;
+
+  display: block;
+  border-radius: 12px;
+
+  max-height: 80vh;   /* prevents giant images */
+  object-fit: contain;
+}
+
+.art-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
