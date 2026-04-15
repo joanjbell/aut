@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Works</title>
+
+  <link rel="stylesheet" href="css/webflow-core.css" />
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="logo">JOAN J. BELL</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <h1>Works</h1>
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="poem">Poems</button>
+      <button data-filter="essay">Essays</button>
+      <button data-filter="fragment">Fragments</button>
+      <button data-filter="art">Art</button>
+    </div>
+
+    <!-- GRID -->
+    <div id="works-grid" class="grid-3"></div>
+
+  </div>
+</section>
+
+<script>
+let allItems = [];
+
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(data => {
+    allItems = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+    render("all");
+  });
+
+function render(filter) {
+  const grid = document.getElementById("works-grid");
+  grid.innerHTML = "";
+
+  const filtered = filter === "all"
+    ? allItems
+    : allItems.filter(item => item.type === filter);
+
+  filtered.forEach(item => {
+    const el = document.createElement("a");
+    el.href = item.link;
+    el.className = "card";
+
+    if (item.type === "art") {
+      el.innerHTML = `
+        <img src="${item.image}" class="art-image" />
+      `;
+    } else {
+      el.innerHTML = `
+        <div class="tag">${item.type}</div>
+        <h3>${item.title}</h3>
+      `;
+    }
+
+    grid.appendChild(el);
+  });
+}
+
+/* filter buttons */
+document.querySelectorAll(".filters button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    render(btn.dataset.filter);
+  });
+});
+</script>
+
+</body>
+</html>
