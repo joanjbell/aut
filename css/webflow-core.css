@@ -557,11 +557,9 @@ a.card:hover {
 
 .mosaic-grid {
   width: 100%;
-  max-width: 1200px; /* match whatever your main content uses */
-  margin: 0 auto;
 
   display: grid;
-  grid-template-columns: repeat(12, 1fr); /* more control */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 
   grid-auto-rows: 8px;
@@ -577,16 +575,17 @@ a.card:hover {
   text-decoration: none;
   color: inherit;
 }
+
 .mosaic-item.is-large {
-  grid-column: span 6;
+  grid-column: span 2;
 }
 
 .mosaic-item.is-wide {
-  grid-column: span 4;
+  grid-column: span 2;
 }
 
 .mosaic-item.is-normal {
-  grid-column: span 3;
+  grid-column: span 1;
 }
 
 .mosaic-item img {
@@ -621,7 +620,9 @@ a.card:hover {
 /* IMAGE CARDS */
 .image-card {
   height: 100%;
+  min-height: 220px; /* 👈 key fix */
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .image-card img {
@@ -629,6 +630,10 @@ a.card:hover {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.mosaic-item.is-large .image-card {
+  min-height: 320px;
 }
 
 .text-card {
