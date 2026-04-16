@@ -600,6 +600,10 @@ a.card:hover {
   color: inherit;
 }
 
+.mosaic-item:hover .card {
+  transform: translateY(-4px);
+}
+
 .mosaic-card {
   height: 100%;
   display: flex;

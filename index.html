@@ -336,8 +336,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED WORKS
+// LOAD SELECTED WORKS (MOSAIC FIXED)
 // =========================
+
+function resizeMasonryItems() {
+  const grid = document.querySelector(".mosaic-grid");
+  if (!grid) return;
+
+  const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue("grid-auto-rows"));
+  const gap = parseInt(getComputedStyle(grid).getPropertyValue("gap"));
+
+  grid.querySelectorAll(".mosaic-item").forEach(item => {
+    const content = item.querySelector(".card");
+    if (!content) return;
+
+    const contentHeight = content.getBoundingClientRect().height;
+    const rowSpan = Math.ceil((contentHeight + gap) / (rowHeight + gap));
+
+    item.style.gridRowEnd = `span ${rowSpan}`;
+  });
+}
+
 fetch("./data/content.json")
   .then(res => res.json())
   .then(items => {
@@ -353,11 +372,19 @@ fetch("./data/content.json")
       el.href = item.link || "#";
       el.className = "mosaic-item";
 
-      // variation system (same logic style as books)
-      if (i % 8 === 0) el.classList.add("is-large");     // big moment
-      else if (i % 5 === 0) el.classList.add("is-wide"); // horizontal
-      else el.classList.add("is-normal");
+      // ✅ FEATURE CONTROL (from JSON if available)
+      if (item.size === "large") {
+        el.classList.add("is-large");
+      } else if (item.size === "wide") {
+        el.classList.add("is-wide");
+      } else {
+        // fallback logic
+        if (i % 8 === 0) el.classList.add("is-large");
+        else if (i % 5 === 0) el.classList.add("is-wide");
+        else el.classList.add("is-normal");
+      }
 
+      // ✅ CONTENT TYPES
       if (item.type === "art") {
         el.innerHTML = `
           <div class="card mosaic-card image-card">
@@ -378,7 +405,32 @@ fetch("./data/content.json")
 
       grid.appendChild(el);
     });
+
+    // ✅ WAIT for layout + images before calculating
+    setTimeout(resizeMasonryItems, 100);
+
+    // also wait for all images
+    const images = grid.querySelectorAll("img");
+    let loaded = 0;
+
+    if (images.length === 0) {
+      resizeMasonryItems();
+    } else {
+      images.forEach(img => {
+        img.addEventListener("load", () => {
+          loaded++;
+          if (loaded === images.length) {
+            resizeMasonryItems();
+          }
+        });
+      });
+    }
   });
+
+// ✅ Recalculate on resize
+window.addEventListener("resize", () => {
+  resizeMasonryItems();
+});
 </script>
 
 </body>
