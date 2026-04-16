@@ -537,3 +537,16 @@ a.card:hover {
   margin: 0 auto;
   text-align: center;
 }
+
+.themes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.themes-grid a {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+}
