@@ -354,21 +354,24 @@ fetch("./data/content.json")
       el.className = "mosaic-item";
 
       // variation system (same logic style as books)
-      if (i % 7 === 0) el.classList.add("is-large");
-      else if (i % 5 === 0) el.classList.add("is-wide");
+      if (i % 8 === 0) el.classList.add("is-large");     // big moment
+      else if (i % 5 === 0) el.classList.add("is-wide"); // horizontal
+      else el.classList.add("is-normal");
 
       if (item.type === "art") {
         el.innerHTML = `
-          <div class="card">
+          <div class="card mosaic-card image-card">
             <img src="${item.image}" />
           </div>
         `;
       } else {
         el.innerHTML = `
-          <div class="card">
-            <div class="tag">${item.type}</div>
-            <h3>${item.title}</h3>
-            <p>${item.description || ""}</p>
+          <div class="card mosaic-card text-card">
+            <div>
+              <div class="tag">${item.type}</div>
+              <h3>${item.title}</h3>
+              <p>${item.description || ""}</p>
+            </div>
           </div>
         `;
       }
