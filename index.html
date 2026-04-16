@@ -384,6 +384,12 @@ fetch("./data/content.json")
         else el.classList.add("is-normal");
       }
 
+      // ✅ Only Art is Large
+      if (item.type !== "art" && item.size === "large") {
+        el.classList.remove("is-large");
+        el.classList.add("is-wide");
+      }
+
       // ✅ CONTENT TYPES
       if (item.type === "art") {
         el.innerHTML = `
