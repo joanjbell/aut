@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED WORKS (MOSAIC FIXED)
+// LOAD SELECTED WORKS (STABLE MASONRY)
 // =========================
 
 function resizeMasonryItems() {
@@ -357,6 +357,20 @@ function resizeMasonryItems() {
   });
 }
 
+// 🔥 NEW: stabilize layout over multiple passes
+function stabilizeMasonry(attempts = 6, delay = 100) {
+  let count = 0;
+
+  const interval = setInterval(() => {
+    resizeMasonryItems();
+    count++;
+
+    if (count >= attempts) {
+      clearInterval(interval);
+    }
+  }, delay);
+}
+
 fetch("./data/content.json")
   .then(res => res.json())
   .then(items => {
@@ -372,20 +386,19 @@ fetch("./data/content.json")
       el.href = item.link || "#";
       el.className = "mosaic-item";
 
-      // ✅ FEATURE CONTROL (from JSON if available)
+      // ✅ FEATURE CONTROL (JSON first, fallback second)
       if (item.size === "large") {
         el.classList.add("is-large");
       } else if (item.size === "wide") {
         el.classList.add("is-wide");
       } else {
-        // fallback logic
         if (i % 8 === 0) el.classList.add("is-large");
         else if (i % 5 === 0) el.classList.add("is-wide");
         else el.classList.add("is-normal");
       }
 
-      // ✅ Only Art is Large
-      if (item.type !== "art" && item.size === "large") {
+      // ✅ Prevent large text blocks
+      if (item.type !== "art" && el.classList.contains("is-large")) {
         el.classList.remove("is-large");
         el.classList.add("is-wide");
       }
@@ -412,30 +425,35 @@ fetch("./data/content.json")
       grid.appendChild(el);
     });
 
-    // ✅ WAIT for layout + images before calculating
-    setTimeout(resizeMasonryItems, 100);
+    // 🔥 KEY: wait a moment, then stabilize repeatedly
+    setTimeout(() => {
+      stabilizeMasonry();
+    }, 100);
 
-    // also wait for all images
+    // 🔥 ALSO: re-run after images load
     const images = grid.querySelectorAll("img");
-    let loaded = 0;
+    if (images.length > 0) {
+      let loaded = 0;
 
-    if (images.length === 0) {
-      resizeMasonryItems();
-    } else {
       images.forEach(img => {
         img.addEventListener("load", () => {
           loaded++;
           if (loaded === images.length) {
-            resizeMasonryItems();
+            stabilizeMasonry(8, 80); // extra passes after images
           }
         });
       });
     }
   });
 
-// ✅ Recalculate on resize
+// 🔥 Recalculate on resize (with stabilization)
 window.addEventListener("resize", () => {
-  resizeMasonryItems();
+  stabilizeMasonry(4, 100);
+});
+
+// 🔥 Final safety: after full page load
+window.addEventListener("load", () => {
+  stabilizeMasonry(8, 80);
 });
 </script>
 
