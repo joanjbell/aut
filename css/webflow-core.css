@@ -620,16 +620,14 @@ a.card:hover {
 /* IMAGE CARDS */
 .image-card {
   width: 100%;
-  aspect-ratio: 4 / 3; /* 👈 key fix */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 12px;
 }
 
 .image-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .mosaic-item.is-large .image-card {
