@@ -172,8 +172,11 @@
 <!-- SELECTED FRAGMENTS -->
 <section class="section">
   <div class="container">
-    <h2>Selected Fragments</h2>
-    <div id="fragments-grid" class="grid-3"></div>
+
+    <h2>Selected Works</h2>
+
+    <div id="works-grid" class="mosaic-grid"></div>
+
   </div>
 </section>
 
@@ -236,21 +239,6 @@
 
     <!-- BOOK GRID (kept but now contextualized) -->
     <div id="books-grid" style="margin-top:40px;"></div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="container">
-
-    <h2>Art</h2>
-    <p style="opacity:0.75; max-width:520px;">
-      Visual studies, sketches, and series.
-    </p>
-
-    <div class="index-grid">
-
-      <div id="art-grid" class="art-grid"></div>
-
   </div>
 </section>
 
@@ -348,80 +336,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED FRAGMENTS (CLICKABLE)
+// LOAD SELECTED WORKS
 // =========================
 fetch("./data/content.json")
   .then(res => res.json())
   .then(items => {
-    const grid = document.getElementById("fragments-grid");
+    const grid = document.getElementById("works-grid");
     if (!grid) return;
 
-    const sorted = items
-      .filter(item => item.type !== "art")
+    const selected = items
       .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 3);
+      .slice(0, 8);
 
-    sorted.forEach(item => {
-      const card = document.createElement("a");
-      card.className = "card";
-      card.href = item.link || "#";
-      card.target = "_blank";
-
-      card.innerHTML = `
-        <div class="tag">${item.type}</div>
-        <h3>${item.title}</h3>
-        <p>${item.description || ""}</p>
-      `;
-
-      grid.appendChild(card);
-    });
-  });
-
-  // =========================
-// LOAD ART
-// =========================
-fetch("./data/content.json")
-  .then(res => res.json())
-  .then(items => {
-    const grid = document.getElementById("art-grid");
-    if (!grid) return;
-
-    const art = items
-      .filter(item => item.type === "art")
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 3);
-
-    art.forEach(item => {
-      const card = document.createElement("a");
-      card.className = "card";
-      card.href = item.link || "#";
-
-      card.innerHTML = `
-        <img src="${item.image}" class="art-image" />
-      `;
-
-      grid.appendChild(card);
-    });
-  });
-fetch("https://graph.instagram.com/me/media?fields=id,media_url,permalink&access_token=EAASynlOZBxyIBRNCXlspUR1RwZBNQEBOupNUdD6E4h84xdcgJQecKJYzAm5RgN0S4LOXZBmqF7JMDu3BZC5Vb6nInoZBfJ2pZCp7KyzRdDkQvPuDDoCYaZBteD9GIgFTZAHdZBrgCdqd2vE6qyItcTEiEZB0DXZBpjqu9iVhwJGnQZCZBffN39GwwCNiNhatbiCZA1sFJ9")
-  .then(res => res.json())
-  .then(data => {
-    const grid = document.getElementById("instagram-grid");
-
-    data.data.slice(0, 6).forEach(post => {
+    selected.forEach((item, i) => {
       const el = document.createElement("a");
-      el.href = post.permalink;
-      el.target = "_blank";
-      el.className = "card";
+      el.href = item.link || "#";
+      el.className = "mosaic-item";
 
-      el.innerHTML = `
-        <img src="${post.media_url}" class="art-image" />
-      `;
+      // variation system (same logic style as books)
+      if (i % 7 === 0) el.classList.add("is-large");
+      else if (i % 5 === 0) el.classList.add("is-wide");
+
+      if (item.type === "art") {
+        el.innerHTML = `
+          <div class="card">
+            <img src="${item.image}" />
+          </div>
+        `;
+      } else {
+        el.innerHTML = `
+          <div class="card">
+            <div class="tag">${item.type}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ""}</p>
+          </div>
+        `;
+      }
 
       grid.appendChild(el);
     });
   });
-</script>
 </script>
 
 </body>
