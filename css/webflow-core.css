@@ -569,14 +569,24 @@ a.card:hover {
 
 .mosaic-item {
   grid-column: span 2;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mosaic-item a {
+  text-decoration: none;
+  color: inherit;
+}
+.mosaic-item.is-large {
+  grid-column: span 6;
 }
 
 .mosaic-item.is-wide {
-  grid-column: span 3;
+  grid-column: span 4;
 }
 
-.mosaic-item.is-large {
-  grid-column: span 4;
+.mosaic-item.is-normal {
+  grid-column: span 3;
 }
 
 .mosaic-item img {
@@ -610,7 +620,6 @@ a.card:hover {
 
 /* IMAGE CARDS */
 .image-card {
-  padding: 0;
   height: 100%;
   overflow: hidden;
 }
