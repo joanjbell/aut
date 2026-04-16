@@ -562,24 +562,24 @@ a.card:hover {
   margin-top: 30px;
 
   grid-auto-flow: dense;
-
-  /* 🔥 CRITICAL: define row height */
-  grid-auto-rows: 120px;
+  grid-auto-rows: 8px; /* 🔥 small unit = precise scaling */
 }
 
 .mosaic-item {
   grid-column: span 2;
-  grid-row: span 2;
+  grid-row: span 30;
+  text-decoration: none;
+  color: inherit;
 }
 
 .mosaic-item.is-wide {
   grid-column: span 3;
-  grid-row: span 2;
+  grid-row: span 30;
 }
 
 .mosaic-item.is-large {
   grid-column: span 4;
-  grid-row: span 3;
+  grid-row: span 45;
 }
 
 .mosaic-item img {
@@ -590,6 +590,14 @@ a.card:hover {
 
 .mosaic-item .card {
   height: 100%;
+}
+
+.mosaic-item:visited {
+  color: inherit;
+}
+
+.mosaic-item:hover {
+  color: inherit;
 }
 
 .mosaic-card {
@@ -617,3 +625,4 @@ a.card:hover {
 .text-card {
   min-height: 180px;
 }
+
