@@ -350,6 +350,13 @@ function resizeMasonryItems() {
     const content = item.querySelector(".card");
     if (!content) return;
 
+    // ✅ KEY FIX: skip masonry for images
+    if (content.classList.contains("image-card")) {
+      item.style.gridRowEnd = "span 30"; // 👈 controlled fixed height
+      return;
+    }
+
+    // normal masonry for text
     const contentHeight = content.getBoundingClientRect().height;
     const rowSpan = Math.ceil((contentHeight + gap) / (rowHeight + gap));
 
