@@ -634,6 +634,14 @@ a.card:hover {
   min-height: 320px;
 }
 
+.mosaic-item.is-portrait {
+  grid-column: span 1;
+}
+
+.mosaic-item.is-landscape {
+  grid-column: span 2;
+}
+
 .text-card {
   display: flex;
   align-items: flex-start;
@@ -650,4 +658,5 @@ a.card:hover {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 

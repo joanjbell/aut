@@ -352,9 +352,13 @@ function resizeMasonryItems() {
 
     // ✅ KEY FIX: skip masonry for images
     if (content.classList.contains("image-card")) {
-      item.style.gridRowEnd = "span 24"; // 👈 controlled fixed height
-      return;
+    if (item.classList.contains("is-portrait")) {
+      item.style.gridRowEnd = "span 22"; // taller
+    } else {
+      item.style.gridRowEnd = "span 16"; // landscape (what you liked)
     }
+    return;
+  }
 
     // normal masonry for text
     const contentHeight = content.getBoundingClientRect().height;
@@ -439,18 +443,20 @@ fetch("./data/content.json")
 
     // 🔥 ALSO: re-run after images load
     const images = grid.querySelectorAll("img");
-    if (images.length > 0) {
-      let loaded = 0;
+    images.forEach(img => {
+      img.addEventListener("load", () => {
+        const item = img.closest(".mosaic-item");
+        const isPortrait = img.naturalHeight > img.naturalWidth;
 
-      images.forEach(img => {
-        img.addEventListener("load", () => {
-          loaded++;
-          if (loaded === images.length) {
-            stabilizeMasonry(8, 80); // extra passes after images
-          }
-        });
+        if (isPortrait) {
+          item.classList.add("is-portrait");
+        } else {
+          item.classList.add("is-landscape");
+        }
+
+        stabilizeMasonry(6, 80);
       });
-    }
+    });
   });
 
 // 🔥 Recalculate on resize (with stabilization)
