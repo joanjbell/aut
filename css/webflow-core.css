@@ -579,26 +579,6 @@ a.card:hover {
   font-weight: 500;
 }
 
-.theme-card:nth-child(3n) {
-  transform: translateY(6px);
-}
-
-.theme-card:nth-child(4n) {
-  transform: translateY(-4px);
-}
-
-.theme-card[data-theme="grief"] {
-  background: rgba(220, 220, 230, 0.6);
-}
-
-.theme-card[data-theme="love"] {
-  background: rgba(235, 220, 220, 0.6);
-}
-
-.theme-card[data-theme="death"] {
-  background: rgba(210, 210, 215, 0.7);
-}
-
 .mosaic-grid {
   width: 100%;
 
