@@ -206,6 +206,12 @@
     <h3>Memory</h3>
     <p>Repetition, fragments, and quiet return.</p>
   </a>
+
+    <a href="theme-motherhod.html" class="theme-card" data-theme="theme-card">
+    <div class="tag">Theme</div>
+    <h3>Motherhood</h3>
+    <p>Matrescence, depth, and a highest love.</p>
+  </a>
 </div>
 
 <!-- SELECTED FRAGMENTS -->
@@ -394,6 +400,8 @@ fetch("./data/content.json")
       const el = document.createElement("a");
       el.href = item.link || "#";
       el.className = "mosaic-item";
+
+      el.dataset.theme = item.theme?.join(" ") || "";
 
       // ✅ FEATURE CONTROL (JSON first, fallback second)
       if (item.size === "large") {

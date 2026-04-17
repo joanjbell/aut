@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grief — J. Bell Price</title>
+
+  <link rel="stylesheet" href="css/webflow-core.css" />
+</head>
+
+<body>
+
+<div class="container section">
+  <h1>Grief</h1>
+  <p>Loss, absence, and the shape of what remains.</p>
+
+  <div id="theme-results" class="mosaic-grid"></div>
+</div>
+
+<script>
+fetch("./data/content.json")
+  .then(res => res.json())
+  .then(items => {
+    const grid = document.getElementById("theme-results");
+
+    const filtered = items.filter(item =>
+      item.theme && item.theme.includes("grief")
+    );
+
+    filtered.forEach(item => {
+      const el = document.createElement("a");
+      el.href = item.link || "#";
+      el.className = "mosaic-item";
+
+      if (item.type === "art") {
+        el.innerHTML = `
+          <div class="card mosaic-card image-card">
+            <img src="${item.image}" />
+          </div>
+        `;
+      } else {
+        el.innerHTML = `
+          <div class="card mosaic-card text-card">
+            <div>
+              <div class="tag">${item.type}</div>
+              <h3>${item.title}</h3>
+              <p>${item.description || ""}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      grid.appendChild(el);
+    });
+  });
+</script>
+
+</body>
+</html>
