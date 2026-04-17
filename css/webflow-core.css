@@ -538,24 +538,16 @@ a.card:hover {
   text-align: center;
 }
 
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 40px;
-  margin-top: 40px;
-}
-
 .theme-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+  width: auto !important;
+  display: block !important;
 
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
+  padding: 0 !important;
+  margin: 0 !important;
 
-  transition: opacity 0.2s ease;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .theme-card:hover {
@@ -610,6 +602,12 @@ a.card:hover {
   height: 1px;
   background: currentColor;
   opacity: 0.4;
+}
+
+.themes-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 40px !important;
 }
 
 .mosaic-grid {
