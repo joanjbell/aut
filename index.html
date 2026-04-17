@@ -340,51 +340,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED WORKS (STABLE MASONRY)
+// LOAD SELECTED WORKS (CONTROLLED GRID)
 // =========================
-
-function resizeMasonryItems() {
-  const grid = document.querySelector(".mosaic-grid");
-  if (!grid) return;
-
-  const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue("grid-auto-rows"));
-  const gap = parseInt(getComputedStyle(grid).getPropertyValue("gap"));
-
-  grid.querySelectorAll(".mosaic-item").forEach(item => {
-    const content = item.querySelector(".card");
-    if (!content) return;
-
-    // ✅ KEY FIX: skip masonry for images
-    if (content.classList.contains("image-card")) {
-    if (item.classList.contains("is-portrait")) {
-      item.style.gridRowEnd = "span 22"; // taller
-    } else {
-      item.style.gridRowEnd = "span 16"; // landscape (what you liked)
-    }
-    return;
-  }
-
-    // normal masonry for text
-    const contentHeight = content.getBoundingClientRect().height;
-    const rowSpan = Math.ceil((contentHeight + gap) / (rowHeight + gap));
-
-    item.style.gridRowEnd = `span ${rowSpan}`;
-  });
-}
-
-// 🔥 NEW: stabilize layout over multiple passes
-function stabilizeMasonry(attempts = 6, delay = 100) {
-  let count = 0;
-
-  const interval = setInterval(() => {
-    resizeMasonryItems();
-    count++;
-
-    if (count >= attempts) {
-      clearInterval(interval);
-    }
-  }, delay);
-}
 
 fetch("./data/content.json")
   .then(res => res.json())
@@ -403,28 +360,46 @@ fetch("./data/content.json")
 
       el.dataset.theme = item.theme?.join(" ") || "";
 
-      // ✅ FEATURE CONTROL (JSON first, fallback second)
-      if (item.size === "large") {
-        el.classList.add("is-large");
+      // =========================
+      // SIZE SYSTEM (NEW)
+      // =========================
+
+      // 1. JSON override (if you want control later)
+      if (item.size === "full") {
+        el.classList.add("is-full");
       } else if (item.size === "wide") {
         el.classList.add("is-wide");
+      } else if (item.size === "tall") {
+        el.classList.add("is-tall");
       } else {
-        if (i % 8 === 0) el.classList.add("is-large");
-        else if (i % 5 === 0) el.classList.add("is-wide");
-        else el.classList.add("is-normal");
+
+        // 2. Automatic layout logic
+
+        if (i === 0) {
+          // hero piece
+          el.classList.add("is-full");
+
+        } else if (item.type === "art") {
+          // images get presence
+          el.classList.add("is-wide");
+
+        } else if (item.type === "essay") {
+          // essays feel more vertical
+          el.classList.add("is-tall");
+
+        } else {
+          el.classList.add("is-normal");
+        }
       }
 
-      // ✅ Prevent large text blocks
-      if (item.type !== "art" && el.classList.contains("is-large")) {
-        el.classList.remove("is-large");
-        el.classList.add("is-wide");
-      }
+      // =========================
+      // CONTENT TYPES
+      // =========================
 
-      // ✅ CONTENT TYPES
       if (item.type === "art") {
         el.innerHTML = `
           <div class="card mosaic-card image-card">
-            <img src="${item.image}" />
+            <img src="${item.image}" alt="${item.title || ""}" />
           </div>
         `;
       } else {
@@ -441,39 +416,7 @@ fetch("./data/content.json")
 
       grid.appendChild(el);
     });
-
-    // 🔥 KEY: wait a moment, then stabilize repeatedly
-    setTimeout(() => {
-      stabilizeMasonry();
-    }, 100);
-
-    // 🔥 ALSO: re-run after images load
-    const images = grid.querySelectorAll("img");
-    images.forEach(img => {
-      img.addEventListener("load", () => {
-        const item = img.closest(".mosaic-item");
-        const isPortrait = img.naturalHeight > img.naturalWidth;
-
-        if (isPortrait) {
-          item.classList.add("is-portrait");
-        } else {
-          item.classList.add("is-landscape");
-        }
-
-        stabilizeMasonry(6, 80);
-      });
-    });
   });
-
-// 🔥 Recalculate on resize (with stabilization)
-window.addEventListener("resize", () => {
-  stabilizeMasonry(4, 100);
-});
-
-// 🔥 Final safety: after full page load
-window.addEventListener("load", () => {
-  stabilizeMasonry(8, 80);
-});
 </script>
 
 </body>

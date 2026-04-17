@@ -618,60 +618,55 @@ a.card:hover {
   gap: 20px;
 }
 
+/* =========================
+   ITEM BASE
+========================= */
+
 .mosaic-item {
   display: block;
-  grid-column: span 2;
+  grid-column: span 1;
+
   text-decoration: none;
   color: inherit;
 }
 
-.mosaic-item a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.mosaic-item.is-large {
-  grid-column: span 2;
+/* variation system */
+.mosaic-item.is-normal {
+  grid-column: span 1;
 }
 
 .mosaic-item.is-wide {
   grid-column: span 2;
 }
 
-.mosaic-item.is-normal {
+.mosaic-item.is-full {
+  grid-column: span 3;
+}
+
+/* optional portrait feel */
+.mosaic-item.is-tall {
   grid-column: span 1;
 }
 
-.mosaic-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
+/* =========================
+   CARD BEHAVIOR
+========================= */
 
 .mosaic-item .card {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.mosaic-item:visited {
-  color: inherit;
-}
-
-.mosaic-item:hover {
-  color: inherit;
-}
-
+/* hover */
 .mosaic-item:hover .card {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-.mosaic-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+/* =========================
+   IMAGE CARDS
+========================= */
 
-/* IMAGE CARDS */
 .image-card {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -686,48 +681,46 @@ a.card:hover {
   display: block;
 }
 
-.mosaic-item.is-large .image-card {
-  min-height: 320px;
+/* variation in image proportions */
+.mosaic-item.is-wide .image-card {
+  aspect-ratio: 16 / 9;
 }
 
-.mosaic-item.is-portrait {
-  grid-column: span 1;
+.mosaic-item.is-tall .image-card {
+  aspect-ratio: 3 / 4;
 }
 
-.mosaic-item.is-landscape {
-  grid-column: span 2;
+.mosaic-item.is-full .image-card {
+  aspect-ratio: 21 / 9;
 }
+
+/* =========================
+   TEXT CARDS
+========================= */
 
 .text-card {
   display: flex;
-  align-items: flex-start;
-  height: 100%;
-
-  /* 🔥 THIS FIXES THE GIANT CARDS */
-  max-height: 280px;
-  overflow: hidden;
-}
-
-.text-card p {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* clamp text cleanly */
+.text-card p {
+  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-a {
+/* =========================
+   LINK RESET
+========================= */
+
+.mosaic-item a,
+.mosaic-item:visited,
+.mosaic-item:hover {
   text-decoration: none;
   color: inherit;
-}
-
-a:visited {
-  color: inherit;
-}
-
-a:hover {
-  opacity: 0.7;
 }
 
 .theme-card h3::after {
