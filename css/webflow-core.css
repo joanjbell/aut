@@ -538,45 +538,78 @@ a.card:hover {
   text-align: center;
 }
 
-.theme-grid {
+.themes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+  margin-top: 40px;
 }
 
 .theme-card {
   display: block;
-  padding: 18px 20px;
-  border-radius: 14px;
-
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(6px);
-
   text-decoration: none;
   color: inherit;
 
-  transition: all 0.25s ease;
-  border: 1px solid rgba(0,0,0,0.05);
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  transition: opacity 0.2s ease;
 }
 
 .theme-card:hover {
-  transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  .themes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 }
 
 .theme-card .tag {
   font-size: 10px;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   opacity: 0.5;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .theme-card h3 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.theme-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.7;
+  max-width: 220px;
+}
+.theme-card:nth-child(2n) {
+  transform: translateY(6px);
+}
+
+.theme-card:nth-child(3n) {
+  transform: translateY(-4px);
+}
+
+.theme-card h3 {
+  position: relative;
+}
+
+.theme-card:hover h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
 }
 
 .mosaic-grid {
