@@ -540,17 +540,25 @@ a.card:hover {
 
 .themes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
   margin-top: 24px;
 }
 
 .theme-card {
-  width: 100%;
-  max-width: 100%;
   display: block;
-  grid-column: auto; /* 👈 prevents forced full width */
-  padding: 16px 18px;
+  padding: 20px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+
+  text-decoration: none;
+  color: inherit;
+
+  border: 1px solid rgba(0,0,0,0.06);
+
+  transition: all 0.25s ease;
 }
 
 .theme-card:hover {
@@ -580,11 +588,11 @@ a.card:hover {
 }
 
 .theme-card:nth-child(2n) {
-  transform: translateY(4px);
+  transform: translateY(6px);
 }
 
 .theme-card:nth-child(3n) {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .theme-card[data-theme="grief"] {
