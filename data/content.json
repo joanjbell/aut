@@ -31,5 +31,21 @@
     "theme": ["grief", "motherhood"],
     "size": "wide",
     "link": "art/the-mother-of-jesus-wept.html"
+  },
+    {
+    "type": "poem",
+    "title": "Testing1",
+    "description": "A study in repetition and warmth.",
+    "date": "2026-04-10",
+    "theme": ["grief", "motherhood"],
+    "link": "writing/kitchen-light.html"
+  },
+  {
+    "type": "essay",
+    "title": "Testing2",
+    "description": "Notes on attention and silence.",
+    "date": "2026-04-08",
+    "theme": ["grief", "motherhood"],
+    "link": "writing/on-stillness.html"
   }
 ]
