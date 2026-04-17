@@ -538,22 +538,66 @@ a.card:hover {
   text-align: center;
 }
 
-.themes-grid {
+.theme-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+  gap: 16px;
+  margin-top: 20px;
 }
 
 .theme-card {
+  display: block;
+  padding: 18px 20px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+
   text-decoration: none;
   color: inherit;
+
+  transition: all 0.25s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.theme-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.theme-card .tag {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 6px;
 }
 
 .theme-card h3 {
-  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
 }
 
+.theme-card:nth-child(3n) {
+  transform: translateY(6px);
+}
+
+.theme-card:nth-child(4n) {
+  transform: translateY(-4px);
+}
+
+.theme-card[data-theme="grief"] {
+  background: rgba(220, 220, 230, 0.6);
+}
+
+.theme-card[data-theme="love"] {
+  background: rgba(235, 220, 220, 0.6);
+}
+
+.theme-card[data-theme="death"] {
+  background: rgba(210, 210, 215, 0.7);
+}
 
 .mosaic-grid {
   width: 100%;
