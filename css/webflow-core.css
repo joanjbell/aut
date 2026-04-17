@@ -606,7 +606,7 @@ a.card:hover {
 
 .themes-grid {
   display: grid !important;
-  grid-template-columns: repeat(6, 1fr) !important;
+  grid-template-columns: repeat(7, 1fr) !important;
   gap: 40px !important;
 }
 
