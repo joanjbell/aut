@@ -605,9 +605,25 @@ a.card:hover {
 }
 
 .themes-grid {
-  display: grid !important;
-  grid-template-columns: repeat(7, 1fr) !important;
-  gap: 40px !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 32px;
+
+  width: 100%;
+  padding: 0 40px; /* gives breathing room at edges */
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .themes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .theme-card p {
+    max-width: none; /* prevents awkward wrapping */
+  }
 }
 
 .mosaic-grid {
