@@ -763,3 +763,24 @@ a {
   color: inherit !important;
   text-decoration: none !important;
 }
+
+@media (max-width: 600px) {
+  .mosaic-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px; /* ← THIS is missing (important) */
+    box-sizing: border-box;
+  }
+
+  .mosaic-item {
+    grid-column: span 1 !important;
+  }
+
+  /* optionally keep ONE featured item style */
+  .mosaic-item.is-full {
+    grid-column: span 2 !important;
+  }
+}
+
+.mosaic-grid > * {
+  min-width: 0;
+}
