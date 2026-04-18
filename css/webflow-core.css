@@ -627,11 +627,12 @@ a.card:hover {
 }
 
 .mosaic-grid {
-  width: 100%;
+  width: min(var(--container), 90%);
+  margin: 0 auto;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
 }
 
 /* =========================
@@ -646,22 +647,25 @@ a.card:hover {
   color: inherit;
 }
 
-/* variation system */
-.mosaic-item.is-normal {
-  grid-column: span 1;
+/* HERO (main featured work) */
+.mosaic-item.is-hero {
+  grid-column: span 6;
 }
 
-.mosaic-item.is-wide {
-  grid-column: span 2;
-}
-
-.mosaic-item.is-full {
+/* FEATURED (secondary works) */
+.mosaic-item.is-feature {
   grid-column: span 3;
 }
 
-/* optional portrait feel */
-.mosaic-item.is-tall {
-  grid-column: span 1;
+/* STANDARD */
+.mosaic-item.is-normal {
+  grid-column: span 2;
+}
+
+/* SMALL / FRAGMENTS */
+.mosaic-item.is-fragment {
+  grid-column: span 2;
+  opacity: 0.85;
 }
 
 /* =========================
@@ -697,17 +701,36 @@ a.card:hover {
   display: block;
 }
 
-/* variation in image proportions */
-.mosaic-item.is-wide .image-card {
+.mosaic-item.is-hero .image-card {
   aspect-ratio: 16 / 9;
 }
 
-.mosaic-item.is-tall .image-card {
-  aspect-ratio: 3 / 4;
+.mosaic-item.is-feature .image-card {
+  aspect-ratio: 4 / 3;
 }
 
-.mosaic-item.is-full .image-card {
-  aspect-ratio: 21 / 9;
+/* =========================
+   EDITORIAL RHYTHM
+========================= */
+
+.mosaic-item.is-feature:nth-child(2) {
+  transform: translateY(20px);
+}
+
+.mosaic-item.is-normal:nth-child(odd) {
+  transform: translateY(-10px);
+}
+
+/* =========================
+   TYPOGRAPHY HIERARCHY
+========================= */
+
+.mosaic-item.is-hero h3 {
+  font-size: 28px;
+}
+
+.mosaic-item.is-hero p {
+  font-size: 16px;
 }
 
 /* =========================
@@ -766,18 +789,13 @@ a {
 
 @media (max-width: 600px) {
   .mosaic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 20px; /* ← THIS is missing (important) */
-    box-sizing: border-box;
+    grid-template-columns: 1fr;
+    padding: 0 20px;
   }
 
   .mosaic-item {
     grid-column: span 1 !important;
-  }
-
-  /* optionally keep ONE featured item style */
-  .mosaic-item.is-full {
-    grid-column: span 2 !important;
+    transform: none !important;
   }
 }
 
