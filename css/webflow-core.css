@@ -629,7 +629,7 @@ a.card:hover {
 .mosaic-grid {
   width: min(var(--container), 90%);
   margin: 0 auto;
-
+  grid-auto-flow: dense;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 24px;
