@@ -631,8 +631,9 @@ a.card:hover {
   margin: 0 auto;
   grid-auto-flow: dense;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 24px;
+  align-items: start;
 }
 
 /* =========================
@@ -642,7 +643,7 @@ a.card:hover {
 .mosaic-item {
   display: block;
   grid-column: span 1;
-
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -804,6 +805,7 @@ a {
 
   .mosaic-inner {
     padding: 4px;
+    height: 100%;
   }
 }
 
