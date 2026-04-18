@@ -550,6 +550,11 @@ a.card:hover {
   box-shadow: none !important;
 }
 
+.theme-card * {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 .theme-card:hover {
   transform: translateY(-2px);
 }
