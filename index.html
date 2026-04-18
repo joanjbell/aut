@@ -171,6 +171,11 @@
 
 <!-- THEME SELECT -->
 <section class="section alt">
+
+  <p class="section-intro">
+    Writing organized by recurring emotional and philosophical threads.
+  </p>
+
   <div class="container">
 
     <h2>Themes</h2>
@@ -224,11 +229,18 @@
   </div> <!-- container -->
 </section>
 
+<hr class="section-divider">
+
 <!-- SELECTED FRAGMENTS -->
 <section class="section">
   <div class="container">
 
-    <h2>Selected Works</h2>
+    <div class="section-header">
+      <h2>Selected Works</h2>
+      <p class="section-intro">
+        A selection of recent fragments across writing and visual work.
+      </p>
+    </div>
 
     <div id="works-grid" class="mosaic-grid"></div>
 
@@ -247,12 +259,6 @@
     <!-- BOOK SHELF -->
     <div id="books-grid"></div>
 
-  </div>
-</section>
-
-
-    <!-- BOOK GRID (kept but now contextualized) -->
-    <div id="books-grid" style="margin-top:40px;"></div>
   </div>
 </section>
 
@@ -408,12 +414,15 @@ fetch("./data/content.json")
 
       if (item.type === "art") {
         el.innerHTML = `
-          <div class="card mosaic-card image-card">
-            <img src="${item.image}" alt="${item.title || ""}" />
+          <div class="mosaic-inner">
+            <div class="card mosaic-card image-card">
+              <img src="${item.image}" alt="${item.title || ""}" />
+            </div>
           </div>
         `;
       } else {
         el.innerHTML = `
+        <div class="mosaic-inner">
           <div class="card mosaic-card text-card">
             <div>
               <div class="tag">${item.type}</div>
@@ -421,6 +430,7 @@ fetch("./data/content.json")
               <p>${item.description || ""}</p>
             </div>
           </div>
+        </div>
         `;
       }
 

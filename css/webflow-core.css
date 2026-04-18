@@ -709,6 +709,10 @@ a.card:hover {
   aspect-ratio: 4 / 3;
 }
 
+.mosaic-inner {
+  padding: 6px; /* creates that journal-like breathing space */
+}
+
 /* =========================
    EDITORIAL RHYTHM
 ========================= */
@@ -797,8 +801,20 @@ a {
     grid-column: span 1 !important;
     transform: none !important;
   }
+
+  .mosaic-inner {
+    padding: 4px;
+  }
 }
 
 .mosaic-grid > * {
   min-width: 0;
+}
+
+.mosaic-item:nth-child(odd) .mosaic-inner {
+  padding-top: 12px;
+}
+
+.mosaic-item:nth-child(even) .mosaic-inner {
+  padding-bottom: 12px;
 }
