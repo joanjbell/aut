@@ -820,3 +820,57 @@ a {
 .mosaic-item:nth-child(even) .mosaic-inner {
   padding-bottom: 12px;
 }
+
+.works-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 40px;
+}
+
+/* shared */
+.work {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* TEXT WORKS */
+.work-text {
+  max-width: 640px;
+}
+
+.work-meta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.work-text h3 {
+  font-size: 26px;
+  margin: 0 0 10px;
+}
+
+.work-text p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ART WORKS */
+.work-art img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  display: block;
+}
+
+/* subtle rhythm */
+.work:nth-child(odd) {
+  margin-left: 0;
+}
+
+.work:nth-child(even) {
+  margin-left: auto;
+}

@@ -178,7 +178,7 @@
       <p class="section-intro">
         Writing organized by recurring emotional and philosophical threads.
       </p>
-      
+
     <div class="themes-grid">
 
       <a href="theme-grief.html" class="theme-card">
@@ -241,7 +241,7 @@
       </p>
     </div>
 
-    <div id="works-grid" class="mosaic-grid"></div>
+    <div id="works-feed" class="works-feed"></div>
 
   </div>
 </section>
@@ -355,88 +355,65 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // =========================
-// LOAD SELECTED WORKS (CONTROLLED GRID)
+// LOAD SELECTED WORKS (EDITORIAL FEED)
 // =========================
 
 fetch("./data/content.json")
   .then(res => res.json())
   .then(items => {
-    const grid = document.getElementById("works-grid");
-    if (!grid) return;
+    const container = document.getElementById("works-feed");
+    if (!container) return;
 
     const selected = items
       .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 8);
+      .slice(0, 6); // you can change to 5–7 as you like
 
     selected.forEach((item, i) => {
       const el = document.createElement("a");
       el.href = item.link || "#";
-      el.className = "mosaic-item";
-
-      el.dataset.theme = item.theme?.join(" ") || "";
+      el.className = "work";
 
       // =========================
-      // SIZE SYSTEM (NEW)
+      // FEATURED FIRST ITEM
       // =========================
+      if (i === 0) {
+        el.classList.add("work-text", "is-featured");
 
-      // 1. JSON override (if you want control later)
-      if (item.size === "full") {
-        el.classList.add("is-full");
-      } else if (item.size === "wide") {
-        el.classList.add("is-wide");
-      } else if (item.size === "tall") {
-        el.classList.add("is-tall");
-      } else {
-
-        // 2. Automatic layout logic
-
-        if (i === 0) {
-          // hero piece
-          el.classList.add("is-full");
-
-        } else if (item.type === "art") {
-          // images get presence
-          el.classList.add("is-wide");
-
-        } else if (item.type === "essay") {
-          // essays feel more vertical
-          el.classList.add("is-tall");
-
-        } else {
-          el.classList.add("is-normal");
-        }
-      }
-
-      // =========================
-      // CONTENT TYPES
-      // =========================
-
-      if (item.type === "art") {
         el.innerHTML = `
-          <div class="mosaic-inner">
-            <div class="card mosaic-card image-card">
-              <img src="${item.image}" alt="${item.title || ""}" />
-            </div>
-          </div>
-        `;
-      } else {
-        el.innerHTML = `
-        <div class="mosaic-inner">
-          <div class="card mosaic-card text-card">
-            <div>
-              <div class="tag">${item.type}</div>
-              <h3>${item.title}</h3>
-              <p>${item.description || ""}</p>
-            </div>
-          </div>
-        </div>
+          <div class="work-meta">${item.type}</div>
+          <h2>${item.title}</h2>
+          <p>${item.description || ""}</p>
         `;
       }
 
-      grid.appendChild(el);
+      // =========================
+      // ART WORKS
+      // =========================
+      else if (item.type === "art") {
+        el.classList.add("work-art");
+
+        el.innerHTML = `
+          <img src="${item.image}" alt="${item.title || ""}" />
+        `;
+      }
+
+      // =========================
+      // TEXT WORKS
+      // =========================
+      else {
+        el.classList.add("work-text");
+
+        el.innerHTML = `
+          <div class="work-meta">${item.type}</div>
+          <h3>${item.title}</h3>
+          <p>${item.description || ""}</p>
+        `;
+      }
+
+      container.appendChild(el);
     });
   });
+  
 </script>
-
 </body>
 </html>
