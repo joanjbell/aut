@@ -683,14 +683,13 @@ a {
   gap: 100px;
 }
 
-/* EACH ENTRY */
-/* ONE shared column system */
+/* unified column system */
 .work {
   width: 100%;
-  max-width: 620px;   /* ⬅️ everything obeys this */
+  max-width: 620px;
 }
 
-/* alignment still works */
+/* alignment */
 .align-left {
   align-self: flex-start;
   transform: translateX(-20px);
@@ -701,30 +700,13 @@ a {
   transform: translateX(20px);
 }
 
-/* remove oversized art */
-.work-art {
-  max-width: 620px;   /* ⬅️ SAME as text */
-}
-
-/* image behaves */
-.work-art img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-}
-
-/* NORMAL TEXT ENTRIES */
-.work-text {
-  max-width: 600px;
-}
-
+/* text */
 .work-text h3 {
   font-size: 26px;
   margin: 8px 0;
 }
 
-/* META (poem, essay, etc) */
+/* meta */
 .work-meta {
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -733,52 +715,34 @@ a {
   margin-bottom: 6px;
 }
 
-/* caption UNDER image */
+/* art */
+.work-art {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* image */
+.work-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* caption */
 .art-caption {
   font-size: 13px;
   font-style: italic;
-  letter-spacing: 0.02em;
-  opacity: 0.65;
+  opacity: 0.7;
 }
 
-.work:hover h2,
+/* hover */
 .work:hover h3 {
   text-decoration: underline;
 }
 
-/* DEFAULT (centered container already exists) */
-.work {
-  width: 100%;
-}
-
-/* LEFT / RIGHT OFFSET */
-.align-left {
-  align-self: flex-start;
-  transform: translateX(-60px);
-}
-
-.align-right {
-  align-self: flex-end;
-  transform: translateX(60px);
-}
-
-/* CONTROL WIDTHS */
-.work-text,
-.work-art {
-  max-width: 600px;
-}
-
-/* FEATURED stays centered */
-.work.is-featured {
-  align-self: center;
-  max-width: 700px;
-}
-
-/* ART can be slightly wider */
-.work-art {
-  max-width: 750px;
-}
-
+/* mobile */
 @media (max-width: 768px) {
   .works-feed {
     padding: 0 20px;
@@ -790,8 +754,7 @@ a {
     transform: none;
   }
 
-  .work-text,
-  .work-art {
+  .work {
     max-width: 100%;
   }
 }
