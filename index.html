@@ -368,44 +368,31 @@ fetch("./data/content.json")
       el.href = item.link || "#";
       el.className = "work";
 
-      // ALTERNATING LAYOUT (skip featured)
-      if (i !== 0) {
-        if (i % 2 === 0) {
-          el.classList.add("align-left");
-        } else {
-          el.classList.add("align-right");
-        }
-      }
-
-      // FEATURED FIRST ITEM
-      if (i === 0) {
-        el.classList.add("work-text", "is-featured");
-
-        el.innerHTML = `
-          <div class="work-meta">${item.type}</div>
-          <h2>${item.title}</h2>
-          <p>${item.description || ""}</p>
-        `;
-      }
-
-      // ART
-      else if (item.type === "art") {
-        el.classList.add("work-art");
-        el.setAttribute("data-title", item.title || "");
-
-        el.innerHTML = `
-          <img src="${item.image}" alt="${item.title || ""}" />
-        `;
+      // ALTERNATE: always start LEFT
+      if (i % 2 === 0) {
+        el.classList.add("align-left");
+      } else {
+        el.classList.add("align-right");
       }
 
       // TEXT
-      else {
+      if (item.type !== "art") {
         el.classList.add("work-text");
 
         el.innerHTML = `
           <div class="work-meta">${item.type}</div>
           <h3>${item.title}</h3>
           <p>${item.description || ""}</p>
+        `;
+      }
+
+      // ART
+      else {
+        el.classList.add("work-art");
+
+        el.innerHTML = `
+          <img src="${item.image}" alt="${item.title || ""}" />
+          <div class="art-caption">${item.title || ""}</div>
         `;
       }
 
