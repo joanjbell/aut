@@ -820,7 +820,6 @@ a {
 .mosaic-item:nth-child(even) .mosaic-inner {
   padding-bottom: 12px;
 }
-
 .works-feed {
   max-width: 900px;
   margin: 80px auto;

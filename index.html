@@ -373,9 +373,16 @@ fetch("./data/content.json")
       el.href = item.link || "#";
       el.className = "work";
 
-      // =========================
+      // ALTERNATING LAYOUT (skip featured)
+      if (i !== 0) {
+        if (i % 2 === 0) {
+          el.classList.add("align-left");
+        } else {
+          el.classList.add("align-right");
+        }
+      }
+
       // FEATURED FIRST ITEM
-      // =========================
       if (i === 0) {
         el.classList.add("work-text", "is-featured");
 
@@ -386,20 +393,17 @@ fetch("./data/content.json")
         `;
       }
 
-      // =========================
-      // ART WORKS
-      // =========================
+      // ART
       else if (item.type === "art") {
         el.classList.add("work-art");
+        el.setAttribute("data-title", item.title || "");
 
         el.innerHTML = `
           <img src="${item.image}" alt="${item.title || ""}" />
         `;
       }
 
-      // =========================
-      // TEXT WORKS
-      // =========================
+      // TEXT
       else {
         el.classList.add("work-text");
 
