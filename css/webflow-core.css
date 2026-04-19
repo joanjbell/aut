@@ -684,24 +684,34 @@ a {
 }
 
 /* EACH ENTRY */
+/* ONE shared column system */
 .work {
-  text-decoration: none;
-  color: inherit;
-  display: block;
   width: 100%;
+  max-width: 620px;   /* ⬅️ everything obeys this */
 }
 
-/* FEATURED (FIRST ITEM) */
-.work.is-featured {
-  max-width: 700px;
+/* alignment still works */
+.align-left {
+  align-self: flex-start;
+  transform: translateX(-20px);
 }
 
-.work.is-featured h2 {
-  font-size: 42px;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  align-self: center;
-  max-width: 700px;
+.align-right {
+  align-self: flex-end;
+  transform: translateX(20px);
+}
+
+/* remove oversized art */
+.work-art {
+  max-width: 620px;   /* ⬅️ SAME as text */
+}
+
+/* image behaves */
+.work-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
 }
 
 /* NORMAL TEXT ENTRIES */
@@ -721,30 +731,6 @@ a {
   text-transform: uppercase;
   opacity: 0.6;
   margin-bottom: 6px;
-}
-
-/* ART */
-.work-art {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start;
-  gap: 10px;
-
-  max-width: 700px;
-  width: 100%;
-}
-
-.work-art img {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 12px;
-  display: block;
-}
-
-.work-art {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 /* caption UNDER image */
