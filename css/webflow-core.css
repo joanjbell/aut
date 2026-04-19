@@ -626,118 +626,6 @@ a.card:hover {
   }
 }
 
-.mosaic-grid {
-  width: min(var(--container), 90%);
-  margin: 0 auto;
-  grid-auto-flow: dense;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-/* =========================
-   ITEM BASE
-========================= */
-
-.mosaic-item {
-  display: block;
-  grid-column: span 1;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* HERO (main featured work) */
-.mosaic-item.is-hero {
-  grid-column: span 6;
-}
-
-/* FEATURED (secondary works) */
-.mosaic-item.is-feature {
-  grid-column: span 3;
-}
-
-/* STANDARD */
-.mosaic-item.is-normal {
-  grid-column: span 2;
-}
-
-/* SMALL / FRAGMENTS */
-.mosaic-item.is-fragment {
-  grid-column: span 2;
-  opacity: 0.85;
-}
-
-/* =========================
-   CARD BEHAVIOR
-========================= */
-
-.mosaic-item .card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* hover */
-.mosaic-item:hover .card {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-}
-
-/* =========================
-   IMAGE CARDS
-========================= */
-
-.image-card {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--radius);
-}
-
-.image-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.mosaic-item.is-hero .image-card {
-  aspect-ratio: 16 / 9;
-}
-
-.mosaic-item.is-feature .image-card {
-  aspect-ratio: 4 / 3;
-}
-
-.mosaic-inner {
-  padding: 6px; /* creates that journal-like breathing space */
-}
-
-/* =========================
-   EDITORIAL RHYTHM
-========================= */
-
-.mosaic-item.is-feature:nth-child(2) {
-  transform: translateY(20px);
-}
-
-.mosaic-item.is-normal:nth-child(odd) {
-  transform: translateY(-10px);
-}
-
-/* =========================
-   TYPOGRAPHY HIERARCHY
-========================= */
-
-.mosaic-item.is-hero h3 {
-  font-size: 28px;
-}
-
-.mosaic-item.is-hero p {
-  font-size: 16px;
-}
-
 /* =========================
    TEXT CARDS
 ========================= */
@@ -759,13 +647,6 @@ a.card:hover {
 /* =========================
    LINK RESET
 ========================= */
-
-.mosaic-item a,
-.mosaic-item:visited,
-.mosaic-item:hover {
-  text-decoration: none;
-  color: inherit;
-}
 
 .theme-card h3::after {
   content: "";
@@ -791,36 +672,6 @@ a {
   color: inherit !important;
   text-decoration: none !important;
 }
-
-@media (max-width: 600px) {
-  .mosaic-grid {
-    grid-template-columns: 1fr;
-    padding: 0 20px;
-  }
-
-  .mosaic-item {
-    grid-column: span 1 !important;
-    transform: none !important;
-  }
-
-  .mosaic-inner {
-    padding: 4px;
-    height: 100%;
-  }
-}
-
-.mosaic-grid > * {
-  min-width: 0;
-}
-
-.mosaic-item:nth-child(odd) .mosaic-inner {
-  padding-top: 12px;
-}
-
-.mosaic-item:nth-child(even) .mosaic-inner {
-  padding-bottom: 12px;
-}
-
 .works-feed {
   width: 100%;
   max-width: 1200px;   /* wider canvas */
