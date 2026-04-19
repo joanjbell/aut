@@ -685,7 +685,7 @@ a {
 /* unified column system */
 .work {
   width: 100%;
-  max-width: 620px;
+  max-width: none;
 }
 
 /* alignment */
