@@ -820,14 +820,16 @@ a {
 .mosaic-item:nth-child(even) .mosaic-inner {
   padding-bottom: 12px;
 }
+
 .works-feed {
-  max-width: 900px;
+  width: 100%;
+  max-width: 1200px;   /* wider canvas */
   margin: 80px auto;
-  padding: 0 20px;
+  padding: 0 40px;
 
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 100px;
 }
 
 /* EACH ENTRY */
@@ -835,6 +837,7 @@ a {
   text-decoration: none;
   color: inherit;
   display: block;
+  width: 100%;
 }
 
 /* FEATURED (FIRST ITEM) */
@@ -846,6 +849,8 @@ a {
   font-size: 42px;
   line-height: 1.2;
   margin-bottom: 16px;
+  align-self: center;
+  max-width: 700px;
 }
 
 /* NORMAL TEXT ENTRIES */
@@ -871,6 +876,7 @@ a {
 .work-art {
   display: flex;
   justify-content: center;
+  max-width: 800px;
 }
 
 .work-art img {
@@ -893,4 +899,54 @@ a {
 .work:hover h2,
 .work:hover h3 {
   text-decoration: underline;
+}
+
+/* DEFAULT (centered container already exists) */
+.work {
+  width: 100%;
+}
+
+/* LEFT / RIGHT OFFSET */
+.align-left {
+  align-self: flex-start;
+  transform: translateX(-60px);
+}
+
+.align-right {
+  align-self: flex-end;
+  transform: translateX(60px);
+}
+
+/* CONTROL WIDTHS */
+.work-text,
+.work-art {
+  max-width: 600px;
+}
+
+/* FEATURED stays centered */
+.work.is-featured {
+  align-self: center;
+  max-width: 700px;
+}
+
+/* ART can be slightly wider */
+.work-art {
+  max-width: 750px;
+}
+
+@media (max-width: 768px) {
+  .works-feed {
+    padding: 0 20px;
+  }
+
+  .align-left,
+  .align-right {
+    align-self: center;
+    transform: none;
+  }
+
+  .work-text,
+  .work-art {
+    max-width: 100%;
+  }
 }
