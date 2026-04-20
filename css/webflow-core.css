@@ -685,7 +685,7 @@ a {
 /* unified column system */
 .work {
   width: 100%;
-  max-width: none;
+  max-width: 420px; /* pick a width that fits your design */
 }
 
 /* alignment */
@@ -703,9 +703,9 @@ a {
   margin: 8px 0;
 }
 
-.align-right .work-text,
-.align-right .work-art {
-  margin-left: auto;
+.align-right {
+  grid-column: 2;
+  justify-self: end; /* key line */
 }
 
 /* meta */
