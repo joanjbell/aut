@@ -708,6 +708,11 @@ a {
   margin-left: auto;
 }
 
+.align-right {
+  grid-column: 2;
+  justify-self: end; /* key line */
+}
+
 /* meta */
 .work-meta {
   font-size: 12px;
@@ -763,10 +768,4 @@ a {
     transform: none;
   }
 }
-
-/* full art pieces (type: art) */
-.work:not(.has-inline-image) img {
-  max-width: 620px;
-}
-
 
