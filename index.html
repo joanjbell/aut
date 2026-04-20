@@ -362,7 +362,7 @@ fetch("./data/content.json")
 
     const selected = items
       .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 6); // adjust 5–7 if you want
+      .slice(0, 6);
 
     selected.forEach((item, i) => {
       const el = document.createElement("a");
@@ -370,37 +370,34 @@ fetch("./data/content.json")
       el.className = "work";
 
       // =========================
-      // ALTERNATING LAYOUT
+      // ALTERNATE LEFT / RIGHT
       // =========================
-      if (i % 2 === 0) {
-        el.classList.add("align-left");
-      } else {
-        el.classList.add("align-right");
-      }
+      el.classList.add(i % 2 === 0 ? "align-left" : "align-right");
+
+      const hasImage = item.image && item.image.trim() !== "";
 
       // =========================
-      // IF ITEM HAS IMAGE → SHOW IT
+      // IMAGE + TEXT
       // =========================
-      if (item.type !== "art") {
-        el.classList.add("has-inline-image");
-      
+      if (hasImage) {
+
+        // smaller treatment for writing w/ images
+        if (item.type !== "art") {
+          el.classList.add("has-inline-image");
+        }
 
         el.innerHTML = `
           <img src="${item.image}" alt="${item.title || ""}" />
 
-          <div class="art-caption">
-            <div class="work-meta">${item.type}</div>
-            <h3>${item.title}</h3>
-            <p>${item.description || ""}</p>
-          </div>
+          <div class="work-meta">${item.type}</div>
+          <h3>${item.title}</h3>
+          <p>${item.description || ""}</p>
         `;
 
       } else {
         // =========================
-        // TEXT-ONLY ITEM
+        // TEXT ONLY
         // =========================
-        el.classList.add("work-text");
-
         el.innerHTML = `
           <div class="work-meta">${item.type}</div>
           <h3>${item.title}</h3>
