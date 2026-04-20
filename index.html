@@ -349,6 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 // =========================
 // LOAD SELECTED WORKS (EDITORIAL FEED)
 // =========================
@@ -361,45 +362,58 @@ fetch("./data/content.json")
 
     const selected = items
       .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 6); // you can change to 5–7 as you like
+      .slice(0, 6); // adjust 5–7 if you want
 
     selected.forEach((item, i) => {
       const el = document.createElement("a");
       el.href = item.link || "#";
       el.className = "work";
 
-      // ALTERNATE: always start LEFT
+      // =========================
+      // ALTERNATING LAYOUT
+      // =========================
       if (i % 2 === 0) {
         el.classList.add("align-left");
       } else {
         el.classList.add("align-right");
       }
 
-      // TEXT
-      if (item.type !== "art") {
-        el.classList.add("work-text");
-
-        el.innerHTML = `
-          <div class="work-meta">${item.type}</div>
-          <h3>${item.title}</h3>
-          <p>${item.description || ""}</p>
-        `;
-      }
-
-      // ART
-      else {
+      // =========================
+      // IF ITEM HAS IMAGE → SHOW IT
+      // =========================
+      if (item.image) {
         el.classList.add("work-art");
 
         el.innerHTML = `
-          <img src="${item.image}" alt="${item.title || ""}" />
-          <div class="art-caption">${item.title || ""}</div>
+          <div class="work-art">
+            <img src="${item.image}" alt="${item.title || ""}" />
+
+            <div class="art-caption">
+              <div class="work-meta">${item.type}</div>
+              <h3>${item.title}</h3>
+              <p>${item.description || ""}</p>
+            </div>
+          </div>
+        `;
+
+      } else {
+        // =========================
+        // TEXT-ONLY ITEM
+        // =========================
+        el.classList.add("work-text");
+
+        el.innerHTML = `
+          <div class="work-text">
+            <div class="work-meta">${item.type}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ""}</p>
+          </div>
         `;
       }
 
       container.appendChild(el);
     });
   });
-  
 </script>
 </body>
 </html>
