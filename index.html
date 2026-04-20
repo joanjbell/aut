@@ -386,14 +386,12 @@ fetch("./data/content.json")
       
 
         el.innerHTML = `
-          <div class="work-art">
-            <img src="${item.image}" alt="${item.title || ""}" />
+          <img src="${item.image}" alt="${item.title || ""}" />
 
-            <div class="art-caption">
-              <div class="work-meta">${item.type}</div>
-              <h3>${item.title}</h3>
-              <p>${item.description || ""}</p>
-            </div>
+          <div class="art-caption">
+            <div class="work-meta">${item.type}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ""}</p>
           </div>
         `;
 
@@ -404,11 +402,9 @@ fetch("./data/content.json")
         el.classList.add("work-text");
 
         el.innerHTML = `
-          <div class="work-text">
-            <div class="work-meta">${item.type}</div>
-            <h3>${item.title}</h3>
-            <p>${item.description || ""}</p>
-          </div>
+          <div class="work-meta">${item.type}</div>
+          <h3>${item.title}</h3>
+          <p>${item.description || ""}</p>
         `;
       }
 
