@@ -764,3 +764,12 @@ a {
   }
 }
 
+/* full art pieces (type: art) */
+.work:not(.has-inline-image) img {
+  max-width: 620px;
+}
+
+/* keep right-aligned art snapped correctly */
+.align-right.work:not(.has-inline-image) img {
+  margin-left: auto;
+}
