@@ -708,11 +708,6 @@ a {
   margin-left: auto;
 }
 
-.align-right {
-  grid-column: 2;
-  justify-self: end; /* key line */
-}
-
 /* meta */
 .work-meta {
   font-size: 12px;
