@@ -11,6 +11,7 @@
     "type": "essay",
     "title": "On Stillness",
     "description": "Notes on attention and silence.",
+    "image":"images/art/the-mother-of-jesus-wept.png",
     "date": "2026-04-08",
     "theme": ["grief", "motherhood"],
     "link": "writing/on-stillness.html"
@@ -35,6 +36,7 @@
     {
     "type": "poem",
     "title": "Testing1",
+    "image":"images/art/the-mother-of-jesus-wept.png",
     "description": "A study in repetition and warmth.",
     "date": "2026-04-10",
     "theme": ["grief", "motherhood"],
