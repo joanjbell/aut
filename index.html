@@ -381,8 +381,9 @@ fetch("./data/content.json")
       // =========================
       // IF ITEM HAS IMAGE → SHOW IT
       // =========================
-      if (item.image) {
-        el.classList.add("work-art");
+      if (item.type !== "art") {
+        el.classList.add("has-inline-image");
+      
 
         el.innerHTML = `
           <div class="work-art">

@@ -731,6 +731,12 @@ a {
   height: auto;
   display: block;
   border-radius: 12px;
+  
+}
+
+.has-inline-image img {
+  max-height: 320px;
+  object-fit: cover;
 }
 
 /* caption */
