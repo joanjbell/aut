@@ -726,6 +726,10 @@ a {
   justify-self: end;
 }
 
+.align-right .work-text {
+  text-align: right;
+}
+
 /* =========================
    SIZE SYSTEM (KEY TO DESIGN)
 ========================= */
