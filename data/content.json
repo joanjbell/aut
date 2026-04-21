@@ -3,9 +3,9 @@
     "type": "poem",
     "title": "Whispers of What We Could Become",
     "description": "A study in repetition and warmth.",
+    "image": "images/writing/whispers-of-what-we-could-become.png",
     "date": "2023-11-10",
     "theme": ["Change", "love", "Spirituality"],
-    "image": "images/writing/whispers-of-what-we-could-become.png",
     "link": "writing/whispers-of-what-we-could-become.html"
   },
   {
@@ -37,7 +37,7 @@
     {
     "type": "poem",
     "title": "Testing1",
-    "image":"images/art/the-mother-of-jesus-wept.png",
+    "image":"images/writing/whispers-of-what-we-could-become.png",
     "description": "A study in repetition and warmth.",
     "date": "2026-04-10",
     "theme": ["grief", "motherhood"],
