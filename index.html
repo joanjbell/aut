@@ -369,39 +369,43 @@ fetch("./data/content.json")
       el.href = item.link || "#";
       el.className = "work";
 
-      // =========================
-      // ALTERNATE LEFT / RIGHT
-      // =========================
-      el.classList.add(i % 2 === 0 ? "align-left" : "align-right");
+      // alternate columns
+      const isRight = i % 2 !== 0;
+      el.classList.add(isRight ? "align-right" : "align-left");
 
       const hasImage = item.image && item.image.trim() !== "";
 
-      // =========================
-      // IMAGE + TEXT
-      // =========================
+      // === SIZE VARIATION SYSTEM (editorial rhythm) ===
       if (hasImage) {
-
-        // smaller treatment for writing w/ images
-        if (item.type !== "art") {
-          el.classList.add("has-inline-image");
+        if (item.type === "art") {
+          el.classList.add("is-large");
+        } else {
+          el.classList.add(i % 3 === 0 ? "is-medium" : "is-small");
         }
-
-        el.innerHTML = `
-          <img src="${item.image}" alt="${item.title || ""}" />
-
-          <div class="work-meta">${item.type}</div>
-          <h3>${item.title}</h3>
-          <p>${item.description || ""}</p>
-        `;
-
       } else {
-        // =========================
-        // TEXT ONLY
-        // =========================
+        el.classList.add("is-text");
+      }
+
+      // === STRUCTURED LAYOUT ===
+      if (hasImage) {
         el.innerHTML = `
-          <div class="work-meta">${item.type}</div>
-          <h3>${item.title}</h3>
-          <p>${item.description || ""}</p>
+          <div class="work-art">
+            <img src="${item.image}" alt="${item.title || ""}" />
+          </div>
+
+          <div class="work-text">
+            <div class="work-meta">${item.type}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ""}</p>
+          </div>
+        `;
+      } else {
+        el.innerHTML = `
+          <div class="work-text">
+            <div class="work-meta">${item.type}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ""}</p>
+          </div>
         `;
       }
 

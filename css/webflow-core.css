@@ -682,15 +682,43 @@ a {
   gap: 120px 60px;
 }
 
-/* unified column system */
-.work {
-  width: auto;
-  max-width: 420px; /* pick a width that fits your design */
+/* =========================
+   GRID
+========================= */
+
+.works-feed {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 40px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 140px 80px;
 }
 
-/* alignment */
+/* =========================
+   BASE ITEM
+========================= */
+
+.work {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 420px;
+
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   COLUMN ALIGNMENT
+========================= */
+
 .align-left {
   grid-column: 1;
+  justify-self: start;
 }
 
 .align-right {
@@ -698,70 +726,89 @@ a {
   justify-self: end;
 }
 
-/* text */
-.work-text h3 {
-  font-size: 26px;
-  margin: 8px 0;
+/* =========================
+   SIZE SYSTEM (KEY TO DESIGN)
+========================= */
+
+.work.is-large {
+  max-width: 460px;
 }
 
-.align-right {
-  grid-column: 2;
-  justify-self: end; /* key line */
+.work.is-medium {
+  max-width: 380px;
 }
 
-/* meta */
-.work-meta {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: 6px;
+.work.is-small {
+  max-width: 300px;
 }
 
-/* art */
+.work.is-text {
+  max-width: 320px;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
 .work-art {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 100%;
+  width: 100%;
 }
 
-/* image */
 .work-art img {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 12px;
-  
 }
 
-.has-inline-image img {
-  max-height: 320px;
+/* smaller inline images */
+.is-small .work-art img {
+  max-height: 240px;
   object-fit: cover;
 }
 
-/* caption */
-.art-caption {
-  font-size: 13px;
-  font-style: italic;
-  opacity: 0.7;
+/* =========================
+   TEXT
+========================= */
+
+.work-text h3 {
+  font-size: 24px;
+  margin: 6px 0;
 }
 
-/* hover */
+.work-meta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* =========================
+   HOVER
+========================= */
+
 .work:hover h3 {
   text-decoration: underline;
 }
 
-/* mobile */
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 768px) {
   .works-feed {
+    grid-template-columns: 1fr;
+    gap: 60px;
     padding: 0 20px;
   }
 
   .align-left,
   .align-right {
-    align-self: center;
-    transform: none;
+    grid-column: auto;
+    justify-self: center;
+  }
+
+  .work {
+    max-width: 100%;
   }
 }
-
