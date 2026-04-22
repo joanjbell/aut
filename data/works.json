@@ -1,0 +1,55 @@
+[
+  {
+    "type": "poem",
+    "title": "Whispers of What We Could Become",
+    "description": "A study in repetition and warmth.",
+    "image": "images/writing/whispers-of-what-we-could-become.png",
+    "date": "2023-11-10",
+    "theme": ["Change", "love", "Spirituality"],
+    "link": "writing/whispers-of-what-we-could-become.html"
+  },
+  {
+    "type": "essay",
+    "title": "On Stillness",
+    "description": "Notes on attention and silence.",
+    "image":"images/art/the-mother-of-jesus-wept.png",
+    "date": "2026-04-08",
+    "theme": ["grief", "motherhood"],
+    "link": "writing/on-stillness.html"
+  },
+  {
+    "type": "fragment",
+    "title": "Untitled (Morning)",
+    "description": "Observations from early light.",
+    "image":"images/writing/whispers-of-what-we-could-become.png",
+    "date": "2026-04-06",
+    "theme": ["grief", "motherhood"],
+    "link": "art/untitled-morning.html"
+  },
+  {
+    "type": "art",
+    "title": "The Mother of Jesus Wept",
+    "image": "images/art/the-mother-of-jesus-wept.png",
+    "date": "2026-04-06",
+    "theme": ["grief", "motherhood"],
+    "size": "wide",
+    "link": "art/the-mother-of-jesus-wept.html"
+  },
+    {
+    "type": "poem",
+    "title": "Testing1",
+    "image":"images/writing/whispers-of-what-we-could-become.png",
+    "description": "A study in repetition and warmth.",
+    "date": "2026-04-10",
+    "theme": ["grief", "motherhood"],
+    "link": "writing/kitchen-light.html"
+  },
+  {
+    "type": "essay",
+    "title": "Testing2",
+    "description": "Notes on attention and silence.",
+    "date": "2026-04-08",
+    "theme": ["grief", "motherhood"],
+    "link": "writing/on-stillness.html"
+  }
+]
