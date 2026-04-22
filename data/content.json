@@ -47,6 +47,7 @@
     "type": "poem",
     "title": "Sanctuaire",
     "description": "Notes on those we call refuge.",
+    "image":"images/writing/sanctuaire.png",
     "date": "2023-11-12",
     "theme": ["grief", "safety", "love"],
     "link": "writing/sanctuaire.html"
