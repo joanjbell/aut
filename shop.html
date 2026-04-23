@@ -2,211 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shop - Joan J. Bell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | J. Bell Price</title>
 
-  <link rel="stylesheet" href="css/webflow-core.css" />
+  <!-- Shared typography so the shop matches the rest of the site -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    /* =========================
-       SHOP LAYOUT
-    ========================= */
-
-    .section {
-      padding: 90px 0;
-    }
-
-    .shop-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .shop-header h1 {
-      margin-bottom: 10px;
-    }
-
-    .shop-header p {
-      opacity: 0.75;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* grid */
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    /* product card */
-    .product {
-      background: rgba(255, 250, 245, 0.88);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.10);
-    }
-
-    .product-image {
-      height: 240px;
-      background: #e9e6dd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .product-content {
-      padding: 22px;
-    }
-
-    .product-title {
-      font-size: 15px;
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
-    }
-
-    .product-desc {
-      font-size: 13px;
-      opacity: 0.75;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .product-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    .price {
-      font-weight: 500;
-    }
-
-    .button-small {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: #2f3b2f;
-      color: #fff;
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .button-small:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    /* responsive */
-    @media (max-width: 1000px) {
-      .shop-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .shop-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
 
-<!-- NAV (same system as everything else) -->
-<div class="nav">
-  <div class="container nav-inner">
-
-    <div class="logo">JOAN J. BELL</div>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="shop.html"class="active">Shop</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-  </div>
-</div>
-
-<!-- HEADER -->
-<section class="section">
-  <div class="container shop-header">
-    <h1>Shop</h1>
-    <p>
-      Selected works, prints, and objects. Each piece is part of an ongoing exploration of language, memory, and form.
-    </p>
-  </div>
-
-  <!-- GRID -->
-  <div class="container shop-grid">
-
-    <!-- PRODUCT 1 -->
-    <div class="product">
-      <div class="product-image">
-        <img src="images/product1.jpg" alt="Product 1">
-      </div>
-      <div class="product-content">
-        <div class="product-title">Poetry Print I</div>
-        <div class="product-desc">Limited edition archival print.</div>
-
-        <div class="product-meta">
-          <div class="price">$40</div>
-          <a class="button-small" href="#">View</a>
-        </div>
+  <!-- Site navigation matches homepage / about / contact -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">J. BELL PRICE</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
+  </nav>
 
-    <!-- PRODUCT 2 -->
-    <div class="product">
-      <div class="product-image">
-        <img src="images/product2.jpg" alt="Product 2">
-      </div>
-      <div class="product-content">
-        <div class="product-title">Notebook Study</div>
-        <div class="product-desc">Hand-bound experimental writing.</div>
+  <!-- Shop intro keeps the same editorial spacing and tone as the homepage -->
+  <section class="hero shop-hero">
+    <div class="container shop-header">
+      <div class="kicker">Shop</div>
+      <h1>Selected works, prints, and objects.</h1>
+      <p>
+        Each piece extends the archive in another form — printed, held, collected,
+        or carried into domestic space.
+      </p>
+    </div>
+  </section>
 
-        <div class="product-meta">
-          <div class="price">$25</div>
-          <a class="button-small" href="#">View</a>
-        </div>
+  <!-- Product grid -->
+  <section class="section">
+    <div class="container">
+      <div class="shop-grid">
+
+        <!-- Product 1 -->
+        <article class="product card">
+          <a href="#" class="product-image-link" aria-label="View Poetry Print I">
+            <div class="product-image">
+              <img src="images/product1.jpg" alt="Poetry Print I" />
+            </div>
+          </a>
+          <div class="product-content">
+            <div class="tag">Print</div>
+            <h2 class="product-title">Poetry Print I</h2>
+            <p class="product-desc">Limited edition archival print.</p>
+
+            <div class="product-meta">
+              <div class="price">$40</div>
+              <a class="button product-button" href="#">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product card">
+          <a href="#" class="product-image-link" aria-label="View Notebook Study">
+            <div class="product-image">
+              <img src="images/product2.jpg" alt="Notebook Study" />
+            </div>
+          </a>
+          <div class="product-content">
+            <div class="tag">Object</div>
+            <h2 class="product-title">Notebook Study</h2>
+            <p class="product-desc">Hand-bound experimental writing.</p>
+
+            <div class="product-meta">
+              <div class="price">$25</div>
+              <a class="button product-button" href="#">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product card">
+          <a href="#" class="product-image-link" aria-label="View Collected Lines">
+            <div class="product-image">
+              <img src="images/product3.jpg" alt="Collected Lines" />
+            </div>
+          </a>
+          <div class="product-content">
+            <div class="tag">Book</div>
+            <h2 class="product-title">Collected Lines</h2>
+            <p class="product-desc">Selected fragments and poems.</p>
+
+            <div class="product-meta">
+              <div class="price">$18</div>
+              <a class="button product-button" href="#">View</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
+  </section>
 
-    <!-- PRODUCT 3 -->
-    <div class="product">
-      <div class="product-image">
-        <img src="images/product3.jpg" alt="Product 3">
-      </div>
-      <div class="product-content">
-        <div class="product-title">Collected Lines</div>
-        <div class="product-desc">Selected fragments & poems.</div>
-
-        <div class="product-meta">
-          <div class="price">$18</div>
-          <a class="button-small" href="#">View</a>
-        </div>
-      </div>
+  <!-- Closing note helps the page feel integrated with the archive site -->
+  <section class="section alt">
+    <div class="container narrow-copy about-endnote">
+      <p>
+        Editions, prints, and small objects appear here as they become available.
+      </p>
     </div>
-
-  </div>
-</section>
+  </section>
 
 </body>
 </html>
