@@ -184,12 +184,7 @@ function initPage(items) {
   });
 
   const themesContainer = document.getElementById("themes");
-  // support both `theme` and `themes`
-  const themes = [...new Set(items.flatMap(i => {
-    if (Array.isArray(i.themes)) return i.themes;
-    if (Array.isArray(i.theme)) return i.theme;
-    return [];
-  }))];
+  const themes = [...new Set(items.flatMap(i => Array.isArray(i.themes) ? i.themes : []))];
 
   themes.forEach(theme => {
     const div = document.createElement("div");
@@ -203,19 +198,8 @@ function initPage(items) {
 }
 
 function createCard(item, large) {
-  const link = item.url || item.link || '#';
-  const image = item.image || '';
-  const title = item.title || 'Untitled';
-
   return `
-    <a href="${link}" class="card" style="height:${large ? '400px' : '190px'}">
-      <img src="${image}" alt="${title}">
-      <div class="overlay">
-        <h2>${title}</h2>
-      </div>
-    </a>
-  `;
-}" class="card" style="height:${large ? '400px' : '190px'}">
+    <a href="${item.url || '#'}" class="card" style="height:${large ? '400px' : '190px'}">
       <img src="${item.image || ''}" alt="">
       <div class="overlay">
         <h2>${item.title || 'Untitled'}</h2>
