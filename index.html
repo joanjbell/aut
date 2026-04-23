@@ -283,12 +283,25 @@
 
     /* BOOKS (REAL SHELF) */
     #books-grid {
+      position: relative;
       display: flex;
       align-items: flex-end;
       gap: 0; /* no gaps = spines touch */
       margin-top: 24px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding-bottom: 16px; /* room for shelf */
+    }
+
+    /* shelf base */
+    #books-grid::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 8px;
+      background: rgba(66,63,50,0.25);
+      border-radius: 3px;
     }
 
     .card-link {
@@ -297,6 +310,9 @@
       align-items: flex-end;
       justify-content: center;
       margin-right: 2px; /* tiny separation like real books */
+      transform: rotate(var(--tilt, 0deg));
+      transform-origin: bottom center;
+      transition: transform 0.25s ease;
     }
 
     /* remove card look entirely */
@@ -311,10 +327,8 @@
       justify-content: center;
     }
 
-    .card-link:hover .book-card {
-      transform: translateY(-6px);
-      box-shadow: none;
-      background: none;
+    .card-link:hover {
+      transform: translateY(-6px) rotate(var(--tilt, 0deg));
     }
 
     .book-spine {
@@ -695,6 +709,10 @@
           if (i % 9 === 0) card.classList.add('is-large');
           else if (i % 6 === 0) card.classList.add('is-wide');
           else if (i % 4 === 0) card.classList.add('is-tall');
+
+          // random subtle tilt
+          const tilt = (Math.random() - 0.5) * 3; // -1.5deg to 1.5deg
+          card.style.setProperty('--tilt', `${tilt}deg`);
 
           const spine = book.spine || book.cover || '';
           const cover = book.cover || book.spine || '';
