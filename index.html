@@ -8,22 +8,8 @@
   <!-- Fonts: serif for artistic tone, sans-serif for readability -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- External stylesheet keeps HTML clean and reusable -->
+  <!-- Shared stylesheet used across the whole site -->
   <link rel="stylesheet" href="css/styles.css" />
-
-  <!-- NOTE:
-    All CSS has been moved to css/styles.css
-    See that file for layout, typography, and hover effects.
-
-    Key interaction added:
-    .work-art img {
-      transition: transform 0.4s ease;
-    }
-
-    .work:hover .work-art img {
-      transform: scale(1.05); // subtle zoom on hover
-    }
-  -->
 </head>
 <body>
 
@@ -52,7 +38,6 @@
         <a class="button" href="#works-feed">Enter the work</a>
       </div>
 
-      <!-- Supporting card for context -->
       <div class="card">
         <div class="tag">Note</div>
         <p>
@@ -63,7 +48,7 @@
     </div>
   </section>
 
-  <!-- THEMES (generated dynamically from JSON) -->
+  <!-- THEMES -->
   <section class="section alt">
     <div class="container">
       <div class="section-header">
@@ -108,7 +93,7 @@
         <p>A daily stream of process, sketches, and fragments from ongoing work.</p>
       </div>
       <div class="ig-placeholder">Instagram / process feed can slot in here.</div>
-      <a class="button" href="https://instagram.com/joanjbell_" target="_blank">@joanjbell_</a>
+      <a class="button" href="https://instagram.com/joanjbell_" target="_blank" rel="noopener noreferrer">@joanjbell_</a>
     </div>
   </section>
 
@@ -124,87 +109,92 @@
   </section>
 
   <script>
-    // Theme descriptions used to enrich dynamically generated theme cards
+    // Theme descriptions enrich the auto-generated theme cards.
     const THEME_DESCRIPTIONS = {
-      grief: "Loss, absence, and the shape of what remains.",
-      love: "Attachment, intimacy, and quiet devotion.",
-      death: "Endings, ritual, and the unseen threshold.",
-      spirituality: "Attention, stillness, and the interior life.",
-      change: "Transformation, movement, and becoming.",
-      memory: "Repetition, fragments, and quiet return.",
-      motherhood: "Matrescence, depth, and a highest love.",
-      safety: "Refuge, shelter, and the places we return to.",
-      default: "A recurring thread in the archive."
+      grief: 'Loss, absence, and the shape of what remains.',
+      love: 'Attachment, intimacy, and quiet devotion.',
+      death: 'Endings, ritual, and the unseen threshold.',
+      spirituality: 'Attention, stillness, and the interior life.',
+      change: 'Transformation, movement, and becoming.',
+      memory: 'Repetition, fragments, and quiet return.',
+      motherhood: 'Matrescence, depth, and a highest love.',
+      safety: 'Refuge, shelter, and the places we return to.',
+      default: 'A recurring thread in the archive.'
     };
 
-    // Main loader for content.json
+    // Load homepage data. Content and books are fetched separately so one
+    // section can still work even if the other one fails.
     async function loadContent() {
       try {
         const res = await fetch('./data/content.json');
-        if (!res.ok) throw new Error('Failed to load JSON');
+        if (!res.ok) throw new Error('Failed to load content.json');
 
         const items = await res.json();
-        if (!Array.isArray(items)) throw new Error('JSON must be an array');
+        if (!Array.isArray(items)) throw new Error('content.json must be an array');
 
         initThemes(items);
         initWorks(items);
-        loadBooks();
-
       } catch (err) {
         document.getElementById('error').textContent = err.message;
       }
+
+      loadBooks();
     }
 
-    // Normalize theme field (supports both theme and themes)
+    // Support both `theme` and `themes` keys in the JSON.
     function normalizeThemes(item) {
-      return item.theme || item.themes || [];
+      if (Array.isArray(item.theme)) return item.theme;
+      if (Array.isArray(item.themes)) return item.themes;
+      return [];
     }
 
-    // Build theme cards dynamically
+    // Build theme cards from unique theme names in content.json.
     function initThemes(items) {
       const grid = document.getElementById('themes-grid');
+      if (!grid) return;
 
       const themes = [...new Set(items.flatMap(normalizeThemes))];
 
       themes.forEach(theme => {
+        const label = String(theme || '').trim();
+        const key = label.toLowerCase();
         const el = document.createElement('a');
-        const label = String(theme).trim();
 
         el.className = 'theme-card';
         el.href = `theme-${slugify(label)}.html`;
-
         el.innerHTML = `
           <div class="tag">Theme</div>
           <h3>${capitalize(label)}</h3>
-          <p>${THEME_DESCRIPTIONS[label] || THEME_DESCRIPTIONS.default}</p>
+          <p>${THEME_DESCRIPTIONS[key] || THEME_DESCRIPTIONS.default}</p>
         `;
 
         grid.appendChild(el);
       });
     }
 
-    // Build featured works list
+    // Build the selected works feed from the six most recent items.
     function initWorks(items) {
       const container = document.getElementById('works-feed');
+      if (!container) return;
 
-      const selected = items
+      const selected = [...items]
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 6);
 
       selected.forEach((item, i) => {
         const el = document.createElement('a');
-        el.href = item.link || '#';
-        el.className = 'work';
+        const hasImage = Boolean(item.image && item.image.trim() !== '');
 
-        // alternate layout left/right
+        el.href = item.link || item.url || '#';
+        el.className = 'work';
         el.classList.add(i % 2 ? 'align-right' : 'align-left');
 
-        const hasImage = !!item.image;
-
-        // size variation system
         if (hasImage) {
-          if (item.type === 'art') el.classList.add('is-large');
-          else el.classList.add(i % 3 === 0 ? 'is-medium' : 'is-small');
+          if (item.type === 'art' || item.size === 'wide') {
+            el.classList.add('is-large');
+          } else {
+            el.classList.add(i % 3 === 0 ? 'is-medium' : 'is-small');
+          }
         } else {
           el.classList.add('is-text');
         }
@@ -215,14 +205,14 @@
               <img src="${item.image}" alt="${item.title || ''}" />
             </div>
             <div class="work-text">
-              <div class="work-meta">${item.type}</div>
-              <h3>${item.title}</h3>
+              <div class="work-meta">${item.type || 'work'}</div>
+              <h3>${item.title || 'Untitled'}</h3>
               <p>${item.description || ''}</p>
             </div>`
           : `
             <div class="work-text">
-              <div class="work-meta">${item.type}</div>
-              <h3>${item.title}</h3>
+              <div class="work-meta">${item.type || 'work'}</div>
+              <h3>${item.title || 'Untitled'}</h3>
               <p>${item.description || ''}</p>
             </div>`;
 
@@ -230,46 +220,131 @@
       });
     }
 
-    // Load bookshelf data
+    // Load bookshelf data and build a real shelf of touching spines.
+    // This version keeps size variation but does not add random tilt.
     async function loadBooks() {
       const grid = document.getElementById('books-grid');
+      const error = document.getElementById('books-error');
+      if (!grid) return;
 
       try {
         const res = await fetch('./data/books.json');
-        const books = await res.json();
+        if (!res.ok) throw new Error('Failed to load books.json');
 
-        books.forEach(book => {
+        const books = await res.json();
+        if (!Array.isArray(books)) throw new Error('books.json must be an array');
+
+        if (books.length === 0) {
+          grid.innerHTML = '<div class="books-empty">No books to display yet.</div>';
+          return;
+        }
+
+        books.forEach((book, i) => {
           const el = document.createElement('a');
-          el.href = book.link;
+          const spine = book.spine || book.cover || '';
+          const cover = book.cover || book.spine || '';
+          const title = book.title || 'Book';
+
+          el.href = book.link || '#';
           el.className = 'card-link';
+          el.setAttribute('aria-label', title);
+
+          if (i % 9 === 0) el.classList.add('is-large');
+          else if (i % 6 === 0) el.classList.add('is-wide');
+          else if (i % 4 === 0) el.classList.add('is-tall');
 
           el.innerHTML = `
             <div class="book-card">
-              <img src="${book.spine}" class="book-spine" />
-              <div class="book-preview">
-                <img src="${book.cover}" class="book-full" />
+              <img src="${spine}" class="book-spine" alt="${title} spine" />
+              <div class="book-preview" aria-hidden="true">
+                <img src="${cover}" class="book-full" alt="${title} cover" />
               </div>
             </div>`;
 
           grid.appendChild(el);
         });
 
+        attachBookPreviewBounds();
       } catch (e) {
         console.error(e);
+        if (error) error.textContent = e.message;
       }
     }
 
-    // Utility: convert text to URL slug
+    // Show the hovered book cover in a floating preview attached to the page,
+    // not inside the bookshelf container. This prevents clipping.
+    function attachBookPreviewBounds() {
+      const books = document.querySelectorAll('.card-link');
+      let floatingPreview = document.querySelector('.floating-book-preview');
+
+      if (!floatingPreview) {
+        floatingPreview = document.createElement('div');
+        floatingPreview.className = 'floating-book-preview';
+        document.body.appendChild(floatingPreview);
+      }
+
+      const hidePreview = () => {
+        floatingPreview.classList.remove('is-visible');
+      };
+
+      const showPreview = (book) => {
+        const img = book.querySelector('.book-full');
+        if (!img) return;
+
+        floatingPreview.innerHTML = `
+          <img src="${img.getAttribute('src')}" class="book-full" alt="${img.getAttribute('alt') || ''}" />
+        `;
+
+        const bookRect = book.getBoundingClientRect();
+        const previewWidth = 180;
+        const previewHeight = 260;
+        const gap = 14;
+        const padding = 12;
+
+        let left = bookRect.left + (bookRect.width / 2) - (previewWidth / 2);
+        left = Math.max(padding, Math.min(left, window.innerWidth - previewWidth - padding));
+
+        let top = bookRect.top - previewHeight - gap;
+
+        if (top < padding) {
+          top = Math.min(window.innerHeight - previewHeight - padding, bookRect.bottom + gap);
+        }
+
+        floatingPreview.style.left = `${left}px`;
+        floatingPreview.style.top = `${top}px`;
+
+        requestAnimationFrame(() => {
+          floatingPreview.classList.add('is-visible');
+        });
+      };
+
+      books.forEach(book => {
+        book.addEventListener('mouseenter', () => showPreview(book));
+        book.addEventListener('mouseleave', hidePreview);
+        book.addEventListener('focus', () => showPreview(book));
+        book.addEventListener('blur', hidePreview);
+      });
+
+      window.addEventListener('scroll', hidePreview, { passive: true });
+      window.addEventListener('resize', hidePreview);
+    }
+
+    // Utility: convert text into a simple URL slug.
     function slugify(str) {
-      return str.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return String(str)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
     }
 
-    // Utility: capitalize first letter
+    // Utility: capitalize the first letter for display labels.
     function capitalize(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
+      const value = String(str || '');
+      return value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
     }
 
-    // Initialize site
+    // Initialize the homepage.
     loadContent();
   </script>
 </body>

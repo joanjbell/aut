@@ -420,6 +420,10 @@ img {
   justify-content: center;
 }
 
+.book-preview {
+  display: none;
+}
+
 .card-link:hover {
   transform: translateY(-6px) rotate(var(--tilt, 0deg));
 }
