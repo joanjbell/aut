@@ -282,7 +282,98 @@
     }
 
     /* BOOKS */
-    .books-placeholder {
+    #books-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+      align-items: end;
+    }
+
+    .card-link {
+      position: relative;
+      display: block;
+      grid-column: span 2;
+      min-width: 0;
+    }
+
+    .card-link.is-large {
+      grid-column: span 3;
+    }
+
+    .card-link.is-wide {
+      grid-column: span 4;
+    }
+
+    .card-link.is-tall .book-card {
+      min-height: 220px;
+    }
+
+    .book-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 14px;
+      min-height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: visible;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .card-link:hover .book-card {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px var(--shadow);
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .book-spine {
+      width: auto;
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .card-link.is-large .book-spine,
+    .card-link.is-wide .book-spine,
+    .card-link.is-tall .book-spine {
+      height: 180px;
+    }
+
+    .book-preview {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 14px);
+      z-index: 20;
+      width: 180px;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 20px 40px var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(10px) scale(0.98);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .card-link:hover .book-preview,
+    .card-link:focus-visible .book-preview {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .book-full {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .books-empty {
       margin-top: 24px;
       border: 1px dashed rgba(66, 63, 50, 0.25);
       border-radius: 14px;
@@ -358,6 +449,16 @@
       .section {
         padding: 72px 0;
       }
+
+      #books-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card-link,
+      .card-link.is-large,
+      .card-link.is-wide {
+        grid-column: span 1;
+      }
     }
   </style>
 </head>
@@ -423,7 +524,8 @@
         <h2>Books</h2>
         <p class="section-intro">Published and printed works.</p>
       </div>
-      <div id="books-grid" class="books-placeholder">Your bookshelf section can drop back in here unchanged from the old site.</div>
+      <div id="books-grid"></div>
+      <div id="books-error" class="error"></div>
     </div>
   </section>
 
@@ -480,6 +582,7 @@
 
         initThemes(items);
         initWorks(items);
+        loadBooks();
       } catch (err) {
         document.getElementById('error').textContent = 'Error loading content: ' + err.message;
       }
@@ -562,6 +665,108 @@
         }
 
         container.appendChild(el);
+      });
+    }
+
+    async function loadBooks() {
+      const grid = document.getElementById('books-grid');
+      const error = document.getElementById('books-error');
+      if (!grid) return;
+
+      try {
+        const res = await fetch('./data/books.json');
+        if (!res.ok) throw new Error('Failed to load books.json (status ' + res.status + ')');
+
+        const text = await res.text();
+        let books;
+
+        try {
+          books = JSON.parse(text);
+        } catch (e) {
+          console.error('Invalid books JSON:', text);
+          throw new Error('books.json is not valid JSON');
+        }
+
+        if (!Array.isArray(books)) throw new Error('books.json must be an array');
+
+        if (books.length === 0) {
+          grid.innerHTML = '<div class="books-empty">No books to display yet.</div>';
+          return;
+        }
+
+        books.forEach((book, i) => {
+          const card = document.createElement('a');
+          card.href = book.link || '#';
+          card.className = 'card-link';
+          card.setAttribute('aria-label', book.title || 'Book');
+
+          if (i % 9 === 0) card.classList.add('is-large');
+          else if (i % 6 === 0) card.classList.add('is-wide');
+          else if (i % 4 === 0) card.classList.add('is-tall');
+
+          const spine = book.spine || book.cover || '';
+          const cover = book.cover || book.spine || '';
+          const title = book.title || 'Book';
+
+          card.innerHTML = `
+            <div class="book-card">
+              <img src="${spine}" class="book-spine" alt="${title} spine" />
+              <div class="book-preview">
+                <img src="${cover}" class="book-full" alt="${title} cover" />
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        attachBookPreviewBounds();
+      } catch (err) {
+        if (error) error.textContent = 'Error loading books: ' + err.message;
+      }
+    }
+
+    function attachBookPreviewBounds() {
+      const books = document.querySelectorAll('.card-link');
+
+      books.forEach(book => {
+        const preview = book.querySelector('.book-preview');
+        if (!preview) return;
+
+        const resetPreviewPosition = () => {
+          preview.style.left = '50%';
+          preview.style.right = 'auto';
+          preview.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+        };
+
+        book.addEventListener('mouseenter', () => {
+          resetPreviewPosition();
+
+          requestAnimationFrame(() => {
+            const rect = preview.getBoundingClientRect();
+            const padding = 10;
+
+            if (rect.right > window.innerWidth - padding) {
+              const overflow = rect.right - window.innerWidth + padding;
+              preview.style.left = 'auto';
+              preview.style.right = '0px';
+              preview.style.transform = `translateX(-${overflow}px) translateY(0) scale(1)`;
+            }
+
+            if (rect.left < padding) {
+              const overflow = padding - rect.left;
+              preview.style.left = '0px';
+              preview.style.right = 'auto';
+              preview.style.transform = `translateX(${overflow}px) translateY(0) scale(1)`;
+            }
+          });
+        });
+
+        book.addEventListener('mouseleave', () => {
+          preview.style.left = '50%';
+          preview.style.right = 'auto';
+          preview.style.transform = 'translateX(-50%) translateY(10px) scale(0.98)';
+        });
       });
     }
 
