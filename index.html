@@ -224,6 +224,16 @@
       align-items: center;
       padding: 18px 0;
       border-bottom: 1px solid var(--line);
+      transition: opacity 0.2s ease;
+    }
+
+    /* subtle dimming of non-hovered items */
+    .works-feed:hover .work {
+      opacity: 0.7;
+    }
+
+    .works-feed .work:hover {
+      opacity: 1;
     }
 
     .work.align-right {
@@ -241,6 +251,7 @@
     }
 
     .work-art {
+      position: relative;
       width: 100%;
       overflow: hidden;
       border-radius: 14px;
@@ -249,11 +260,31 @@
       min-height: 220px;
     }
 
+    /* dark overlay layer */
+    .work-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.25s ease;
+      pointer-events: none;
+    }
+
+    .work:hover .work-art::after {
+      background: rgba(0,0,0,0.25);
+    }
+
     .work-art img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+
+    .work:hover .work-art img {
+      transform: scale(1.04);
+      filter: brightness(0.9);
     }
 
     .work.is-large .work-art {
