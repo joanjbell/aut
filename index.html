@@ -344,29 +344,37 @@
 
     /* hover preview stays the same */
     .book-preview {
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 14px);
-      z-index: 20;
+      display: none;
+    }
+
+    .floating-book-preview {
+      position: fixed;
+      z-index: 1000;
       width: 180px;
       padding: 10px;
       border-radius: 14px;
       border: 1px solid var(--line);
       background: var(--surface);
       box-shadow: 0 20px 40px var(--shadow);
-      opacity: 0;
       pointer-events: none;
-      transform: translateX(-50%) translateY(10px) scale(0.98);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+      transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
-    .card-link:hover .book-preview,
-    .card-link:focus-visible .book-preview {
+    .floating-book-preview.is-visible {
       opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
+      transform: translateY(0) scale(1);
     }
 
     .book-full {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .floating-book-preview .book-full {
       width: 100%;
       height: auto;
       display: block;
@@ -725,46 +733,56 @@
 
     function attachBookPreviewBounds() {
       const books = document.querySelectorAll('.card-link');
+      let floatingPreview = document.querySelector('.floating-book-preview');
+
+      if (!floatingPreview) {
+        floatingPreview = document.createElement('div');
+        floatingPreview.className = 'floating-book-preview';
+        document.body.appendChild(floatingPreview);
+      }
+
+      const hidePreview = () => {
+        floatingPreview.classList.remove('is-visible');
+      };
+
+      const showPreview = (book) => {
+        const img = book.querySelector('.book-full');
+        if (!img) return;
+
+        floatingPreview.innerHTML = `<img src="${img.getAttribute('src')}" class="book-full" alt="${img.getAttribute('alt') || ''}" />`;
+
+        const bookRect = book.getBoundingClientRect();
+        const previewWidth = 180;
+        const previewHeight = 260;
+        const gap = 14;
+        const padding = 12;
+
+        let left = bookRect.left + (bookRect.width / 2) - (previewWidth / 2);
+        left = Math.max(padding, Math.min(left, window.innerWidth - previewWidth - padding));
+
+        let top = bookRect.top - previewHeight - gap;
+
+        if (top < padding) {
+          top = Math.min(window.innerHeight - previewHeight - padding, bookRect.bottom + gap);
+        }
+
+        floatingPreview.style.left = `${left}px`;
+        floatingPreview.style.top = `${top}px`;
+
+        requestAnimationFrame(() => {
+          floatingPreview.classList.add('is-visible');
+        });
+      };
 
       books.forEach(book => {
-        const preview = book.querySelector('.book-preview');
-        if (!preview) return;
-
-        const resetPreviewPosition = () => {
-          preview.style.left = '50%';
-          preview.style.right = 'auto';
-          preview.style.transform = 'translateX(-50%) translateY(0) scale(1)';
-        };
-
-        book.addEventListener('mouseenter', () => {
-          resetPreviewPosition();
-
-          requestAnimationFrame(() => {
-            const rect = preview.getBoundingClientRect();
-            const padding = 10;
-
-            if (rect.right > window.innerWidth - padding) {
-              const overflow = rect.right - window.innerWidth + padding;
-              preview.style.left = 'auto';
-              preview.style.right = '0px';
-              preview.style.transform = `translateX(-${overflow}px) translateY(0) scale(1)`;
-            }
-
-            if (rect.left < padding) {
-              const overflow = padding - rect.left;
-              preview.style.left = '0px';
-              preview.style.right = 'auto';
-              preview.style.transform = `translateX(${overflow}px) translateY(0) scale(1)`;
-            }
-          });
-        });
-
-        book.addEventListener('mouseleave', () => {
-          preview.style.left = '50%';
-          preview.style.right = 'auto';
-          preview.style.transform = 'translateX(-50%) translateY(10px) scale(0.98)';
-        });
+        book.addEventListener('mouseenter', () => showPreview(book));
+        book.addEventListener('mouseleave', hidePreview);
+        book.addEventListener('focus', () => showPreview(book));
+        book.addEventListener('blur', hidePreview);
       });
+
+      window.addEventListener('scroll', hidePreview, { passive: true });
+      window.addEventListener('resize', hidePreview);
     }
 
     function slugify(value) {
