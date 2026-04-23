@@ -2,174 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - J. Bell Price</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | J. Bell Price</title>
 
-  <link rel="stylesheet" href="css/webflow-core.css" />
+  <!-- Match homepage / about typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    /* Page layout consistency */
-    .section {
-      padding: 100px 0;
-    }
-
-    /* Contact layout */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    /* Card style reused from About page system */
-    .card {
-      display: flex;
-      justify-content: center;
-      background: rgba(255, 250, 245, 0.88);
-      border-radius: 18px;
-      padding: 42px;
-      border: 1px solid rgba(60, 60, 60, 0.08);
-      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-      box-sizing: border-box;
-    }
-
-    .card form {
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
-      border-color: rgba(60, 60, 60, 0.15);
-    }
-
-    /* Form styling */
-    label {
-      display: block;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      color: #2f2f2a;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px 14px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: rgba(255,255,255,0.7);
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: border 180ms ease, background 180ms ease;
-    }
-
-    input:focus, textarea:focus {
-      border-color: rgba(60, 60, 60, 0.4);
-      background: rgba(255,255,255,0.95);
-    }
-
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: #2f3b2f; /* your muted green direction */
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      border: none;
-      cursor: pointer;
-      transition: transform 180ms ease, opacity 180ms ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    /* Left intro text */
-    .contact-intro h1 {
-      margin-bottom: 12px;
-    }
-
-    .contact-intro p {
-      opacity: 0.8;
-      line-height: 1.6;
-      max-width: 90%;
-    }
-
-    /* Mobile */
-    @media (max-width: 900px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-    }
-  </style>
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="container nav-inner">
-
-    <div class="logo">JOAN J. BELL</div>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html" >About</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html" class="active" >Contact</a>
+  <!-- Consistent site navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">J. BELL PRICE</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
     </div>
+  </nav>
 
-  </div>
-</div>
+  <!-- Contact hero / intro -->
+  <section class="hero">
+    <div class="container contact-grid">
+      <div class="hero-copy contact-intro">
+        <div class="kicker">Contact</div>
+        <h1>For collaborations, readings, commissions, or general enquiries.</h1>
+        <p>
+          If you’d like to get in touch about a project, event, publication, or other inquiry,
+          feel free to send a message. I usually respond within a few days.
+        </p>
 
-<!-- CONTACT SECTION -->
-<section class="section">
-  <div class="container contact-grid">
+        <div class="contact-details card">
+          <div>
+            <div class="tag">Direct</div>
+            <p>
+              You can also reach me directly by email if you prefer a more personal or detailed introduction.
+            </p>
+          </div>
+        </div>
+      </div>
 
-    <!-- LEFT SIDE -->
-    <div class="contact-intro">
-      <h1>Contact</h1>
+      <!-- Contact form uses the same card language as the homepage and about page -->
+      <div class="card contact-form-card">
+        <form action="mailto:your-email@example.com" method="post" enctype="text/plain" class="contact-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+
+          <button class="button contact-submit" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing note keeps the page from feeling abrupt -->
+  <section class="section alt">
+    <div class="container narrow-copy about-endnote">
       <p>
-        For collaborations, readings, commissions, or general enquiries,
-        feel free to get in touch. I usually respond within a few days.
+        I welcome notes related to writing, visual work, books, interviews, exhibitions, and commissioned collaborations.
       </p>
     </div>
-
-    <!-- RIGHT SIDE FORM CARD -->
-    <div class="card">
-
-      <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
-
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required />
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-
-        <button class="button" type="submit">Send Message</button>
-
-      </form>
-
-    </div>
-
-  </div>
-</section>
+  </section>
 
 </body>
 </html>
