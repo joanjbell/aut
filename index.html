@@ -5,178 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>J. Bell Price</title>
 
+  <!-- Fonts: serif for artistic tone, sans-serif for readability -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- External stylesheet keeps HTML clean and reusable -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!--
-  Move the previous <style> contents into: css/styles.css
-  Paste everything below into that file:
+  <!-- NOTE:
+    All CSS has been moved to css/styles.css
+    See that file for layout, typography, and hover effects.
 
-  :root {
-    --bg: #cdcfc0;
-    --surface: #f1ebe5;
-    --text: #423f32;
-    --muted: rgba(66, 63, 50, 0.72);
-    --line: rgba(66, 63, 50, 0.15);
-    --line-strong: rgba(66, 63, 50, 0.3);
-    --shadow: rgba(0, 0, 0, 0.08);
-  }
+    Key interaction added:
+    .work-art img {
+      transition: transform 0.4s ease;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.02em;
-    margin: 0;
-  }
-
-  p { line-height: 1.65; color: var(--muted); }
-  a { color: inherit; text-decoration: none; }
-
-  .container { width: min(1100px, 92%); margin: 0 auto; }
-  .section { padding: 90px 0; }
-  .section.alt {
-    background: var(--surface);
-    margin: 40px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .section-header { margin-bottom: 28px; }
-  .section-header h2 { font-size: 2rem; margin-bottom: 10px; }
-  .section-intro { max-width: 560px; }
-
-  .kicker, .tag, .work-meta {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 11px;
-    color: rgba(66, 63, 50, 0.6);
-  }
-
-  .button {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 10px 16px;
-    border: 1px solid var(--line-strong);
-    border-radius: 8px;
-    font-size: 13px;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .button:hover { background: rgba(255,255,255,0.35); transform: translateY(-1px); }
-
-  /* NAV */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(205,207,192,0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-inner { display:flex; justify-content:space-between; align-items:center; gap:24px; padding:16px 0; }
-  .logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; letter-spacing:0.08em; white-space:nowrap; }
-  .nav-links { display:flex; gap:18px; flex-wrap:wrap; }
-  .nav-links a { color: rgba(66,63,50,0.72); font-size:0.95rem; transition:opacity .2s, color .2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--text); opacity:1; }
-
-  /* HERO */
-  .hero { padding: 110px 0 80px; }
-  .hero-grid { display:grid; grid-template-columns:1.3fr .7fr; gap:60px; align-items:center; }
-  .hero-copy .kicker { margin-bottom:14px; }
-  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.2rem); line-height:1.05; max-width:760px; }
-  .hero-copy p { margin-top:18px; max-width:560px; font-size:1.02rem; }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    padding: 26px; border-radius: 14px;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px var(--shadow); }
-
-  /* THEMES */
-  .themes-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap:18px; }
-  .theme-card {
-    display:block; background: rgba(255,255,255,0.18);
-    border:1px solid var(--line); border-radius:14px; padding:22px;
-    transition: transform .25s, box-shadow .25s, background .25s;
-  }
-  .theme-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px var(--shadow); background: rgba(255,255,255,0.28); }
-  .theme-card h3 { font-size:1.5rem; margin:6px 0 8px; }
-
-  /* WORKS */
-  .works-feed { display:grid; gap:34px; }
-  .work { display:grid; grid-template-columns: minmax(0,1.1fr) minmax(260px,.9fr); gap:24px; align-items:center; padding:18px 0; border-bottom:1px solid var(--line); }
-  .work.align-right { grid-template-columns: minmax(260px,.9fr) minmax(0,1.1fr); }
-  .work.align-right .work-art { order:2; }
-  .work.align-right .work-text { order:1; text-align:right; justify-self:end; }
-  .work-art { position:relative; width:100%; overflow:hidden; border-radius:14px; background:var(--surface); border:1px solid var(--line); min-height:220px; }
-  .work-art img { width:100%; height:100%; object-fit:cover; display:block; }
-  .work.is-large .work-art { min-height:360px; }
-  .work.is-medium .work-art { min-height:280px; }
-  .work.is-small .work-art { min-height:220px; }
-  .work.is-text { grid-template-columns:1fr; }
-  .work-text { max-width:420px; }
-  .work-text h3 { position:relative; font-size: clamp(1.6rem,3vw,2.1rem); margin:8px 0 12px; display:inline-block; }
-  .work-text h3::after { content:""; position:absolute; left:0; bottom:-4px; width:100%; height:1px; background: var(--text); transform: scaleX(0); transform-origin:left; transition: transform .25s ease; }
-  .work:hover .work-text h3::after { transform: scaleX(1); }
-  .work:hover .work-text h3 { transform: scale(1.02); transition: transform .25s ease; }
-
-  /* BOOKS (SHELF) */
-  .books-shelf-wrap { overflow-x:auto; overflow-y:visible; padding-top:220px; margin-top:-196px; }
-  #books-grid { display:flex; align-items:flex-end; gap:0; margin-top:24px; overflow:visible; padding-bottom:10px; min-width:max-content; }
-  .card-link { position:relative; display:flex; align-items:flex-end; justify-content:center; margin-right:2px; }
-  .book-card { position:relative; background:none; border:none; padding:0; display:flex; align-items:flex-end; justify-content:center; }
-  .card-link:hover .book-card { transform: translateY(-6px); }
-  .book-spine { width:auto; height:160px; object-fit:contain; display:block; transition: transform .2s ease; }
-  .card-link.is-large .book-spine { height:190px; }
-  .card-link.is-wide .book-spine { height:175px; }
-  .card-link.is-tall .book-spine { height:210px; }
-  .card-link:hover .book-spine { transform: translateY(-4px); }
-
-  .floating-book-preview {
-    position: fixed; z-index:1000; width:180px; padding:10px; border-radius:14px;
-    border:1px solid var(--line); background:var(--surface); box-shadow:0 20px 40px var(--shadow);
-    pointer-events:none; opacity:0; transform: translateY(10px) scale(.98);
-    transition: opacity .18s, transform .18s;
-  }
-  .floating-book-preview.is-visible { opacity:1; transform: translateY(0) scale(1); }
-  .book-full { width:100%; height:auto; display:block; border-radius:8px; }
-
-  .books-empty { margin-top:24px; border:1px dashed rgba(66,63,50,.25); border-radius:14px; padding:34px; text-align:center; color: var(--muted); background: rgba(255,255,255,.16); }
-
-  /* EXTERNAL TRACE */
-  .external-trace p { max-width:520px; }
-  .ig-placeholder { margin-top:22px; border:1px dashed rgba(66,63,50,.25); padding:40px; text-align:center; border-radius:14px; background: rgba(255,255,255,.16); color: var(--muted); }
-
-  .about { text-align:center; max-width:680px; margin:0 auto; }
-  .error { color:#8b2f2f; text-align:center; margin-top:28px; }
-
-  @media (max-width: 900px) {
-    .hero-grid, .work, .work.align-right { grid-template-columns:1fr; }
-    .hero { padding:90px 0 60px; }
-    .hero h1 { font-size:36px; }
-    .work.align-right .work-art, .work.align-right .work-text { order: initial; }
-    .work.align-right .work-text { text-align:left; justify-self:start; }
-  }
-
-  @media (max-width: 700px) {
-    .nav-inner { flex-direction:column; align-items:flex-start; }
-    .nav-links { gap:14px; }
-    .section { padding:72px 0; }
-    .books-shelf-wrap { padding-top:200px; margin-top:-176px; }
-  }
+    .work:hover .work-art img {
+      transform: scale(1.05); // subtle zoom on hover
+    }
   -->
 </head>
 <body>
 
+  <!-- NAVIGATION -->
   <nav class="nav">
     <div class="container nav-inner">
       <div class="logo">J. BELL PRICE</div>
@@ -189,6 +40,7 @@
     </div>
   </nav>
 
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
@@ -200,6 +52,7 @@
         <a class="button" href="#works-feed">Enter the work</a>
       </div>
 
+      <!-- Supporting card for context -->
       <div class="card">
         <div class="tag">Note</div>
         <p>
@@ -210,6 +63,7 @@
     </div>
   </section>
 
+  <!-- THEMES (generated dynamically from JSON) -->
   <section class="section alt">
     <div class="container">
       <div class="section-header">
@@ -220,6 +74,7 @@
     </div>
   </section>
 
+  <!-- FEATURED / SELECTED WORKS -->
   <section class="section">
     <div class="container">
       <div class="section-header">
@@ -231,6 +86,7 @@
     </div>
   </section>
 
+  <!-- BOOKSHELF -->
   <section class="section alt">
     <div class="container">
       <div class="section-header">
@@ -244,6 +100,7 @@
     </div>
   </section>
 
+  <!-- EXTERNAL FEED PLACEHOLDER -->
   <section class="section external-trace">
     <div class="container">
       <div class="section-header">
@@ -251,10 +108,11 @@
         <p>A daily stream of process, sketches, and fragments from ongoing work.</p>
       </div>
       <div class="ig-placeholder">Instagram / process feed can slot in here.</div>
-      <a class="button" href="https://instagram.com/joanjbell_" target="_blank" rel="noopener noreferrer">@joanjbell_</a>
+      <a class="button" href="https://instagram.com/joanjbell_" target="_blank">@joanjbell_</a>
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section class="section">
     <div class="container">
       <div class="about">
@@ -266,6 +124,7 @@
   </section>
 
   <script>
+    // Theme descriptions used to enrich dynamically generated theme cards
     const THEME_DESCRIPTIONS = {
       grief: "Loss, absence, and the shape of what remains.",
       love: "Attachment, intimacy, and quiet devotion.",
@@ -278,236 +137,139 @@
       default: "A recurring thread in the archive."
     };
 
+    // Main loader for content.json
     async function loadContent() {
       try {
         const res = await fetch('./data/content.json');
-        if (!res.ok) throw new Error('Failed to load JSON (status ' + res.status + ')');
+        if (!res.ok) throw new Error('Failed to load JSON');
 
-        const text = await res.text();
-        let items;
-
-        try {
-          items = JSON.parse(text);
-        } catch (e) {
-          console.error('Invalid JSON:', text);
-          throw new Error('content.json is not valid JSON');
-        }
-
+        const items = await res.json();
         if (!Array.isArray(items)) throw new Error('JSON must be an array');
 
         initThemes(items);
         initWorks(items);
         loadBooks();
+
       } catch (err) {
-        document.getElementById('error').textContent = 'Error loading content: ' + err.message;
+        document.getElementById('error').textContent = err.message;
       }
     }
 
+    // Normalize theme field (supports both theme and themes)
     function normalizeThemes(item) {
-      if (Array.isArray(item.theme)) return item.theme;
-      if (Array.isArray(item.themes)) return item.themes;
-      return [];
+      return item.theme || item.themes || [];
     }
 
+    // Build theme cards dynamically
     function initThemes(items) {
-      const themesGrid = document.getElementById('themes-grid');
-      if (!themesGrid) return;
+      const grid = document.getElementById('themes-grid');
 
       const themes = [...new Set(items.flatMap(normalizeThemes))];
 
       themes.forEach(theme => {
-        const card = document.createElement('a');
-        const label = String(theme || '').trim();
-        const slug = slugify(label);
-        card.className = 'theme-card';
-        card.href = `theme-${slug}.html`;
-        card.innerHTML = `
+        const el = document.createElement('a');
+        const label = String(theme).trim();
+
+        el.className = 'theme-card';
+        el.href = `theme-${slugify(label)}.html`;
+
+        el.innerHTML = `
           <div class="tag">Theme</div>
           <h3>${capitalize(label)}</h3>
-          <p>${THEME_DESCRIPTIONS[label.toLowerCase()] || THEME_DESCRIPTIONS.default}</p>
+          <p>${THEME_DESCRIPTIONS[label] || THEME_DESCRIPTIONS.default}</p>
         `;
-        themesGrid.appendChild(card);
+
+        grid.appendChild(el);
       });
     }
 
+    // Build featured works list
     function initWorks(items) {
       const container = document.getElementById('works-feed');
-      if (!container) return;
 
-      const selected = [...items]
+      const selected = items
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 6);
 
       selected.forEach((item, i) => {
         const el = document.createElement('a');
-        el.href = item.link || item.url || '#';
+        el.href = item.link || '#';
         el.className = 'work';
 
-        const isRight = i % 2 !== 0;
-        el.classList.add(isRight ? 'align-right' : 'align-left');
+        // alternate layout left/right
+        el.classList.add(i % 2 ? 'align-right' : 'align-left');
 
-        const hasImage = Boolean(item.image && item.image.trim() !== '');
+        const hasImage = !!item.image;
 
+        // size variation system
         if (hasImage) {
-          if (item.type === 'art' || item.size === 'wide') {
-            el.classList.add('is-large');
-          } else {
-            el.classList.add(i % 3 === 0 ? 'is-medium' : 'is-small');
-          }
+          if (item.type === 'art') el.classList.add('is-large');
+          else el.classList.add(i % 3 === 0 ? 'is-medium' : 'is-small');
         } else {
           el.classList.add('is-text');
         }
 
-        if (hasImage) {
-          el.innerHTML = `
+        el.innerHTML = hasImage
+          ? `
             <div class="work-art">
               <img src="${item.image}" alt="${item.title || ''}" />
             </div>
             <div class="work-text">
-              <div class="work-meta">${item.type || 'work'}</div>
-              <h3>${item.title || 'Untitled'}</h3>
+              <div class="work-meta">${item.type}</div>
+              <h3>${item.title}</h3>
               <p>${item.description || ''}</p>
-            </div>
-          `;
-        } else {
-          el.innerHTML = `
+            </div>`
+          : `
             <div class="work-text">
-              <div class="work-meta">${item.type || 'work'}</div>
-              <h3>${item.title || 'Untitled'}</h3>
+              <div class="work-meta">${item.type}</div>
+              <h3>${item.title}</h3>
               <p>${item.description || ''}</p>
-            </div>
-          `;
-        }
+            </div>`;
 
         container.appendChild(el);
       });
     }
 
+    // Load bookshelf data
     async function loadBooks() {
       const grid = document.getElementById('books-grid');
-      const error = document.getElementById('books-error');
-      if (!grid) return;
 
       try {
         const res = await fetch('./data/books.json');
-        if (!res.ok) throw new Error('Failed to load books.json (status ' + res.status + ')');
+        const books = await res.json();
 
-        const text = await res.text();
-        let books;
+        books.forEach(book => {
+          const el = document.createElement('a');
+          el.href = book.link;
+          el.className = 'card-link';
 
-        try {
-          books = JSON.parse(text);
-        } catch (e) {
-          console.error('Invalid books JSON:', text);
-          throw new Error('books.json is not valid JSON');
-        }
-
-        if (!Array.isArray(books)) throw new Error('books.json must be an array');
-
-        if (books.length === 0) {
-          grid.innerHTML = '<div class="books-empty">No books to display yet.</div>';
-          return;
-        }
-
-        books.forEach((book, i) => {
-          const card = document.createElement('a');
-          card.href = book.link || '#';
-          card.className = 'card-link';
-          card.setAttribute('aria-label', book.title || 'Book');
-
-          if (i % 9 === 0) card.classList.add('is-large');
-          else if (i % 6 === 0) card.classList.add('is-wide');
-          else if (i % 4 === 0) card.classList.add('is-tall');
-
-          const spine = book.spine || book.cover || '';
-          const cover = book.cover || book.spine || '';
-          const title = book.title || 'Book';
-
-          card.innerHTML = `
+          el.innerHTML = `
             <div class="book-card">
-              <img src="${spine}" class="book-spine" alt="${title} spine" />
+              <img src="${book.spine}" class="book-spine" />
               <div class="book-preview">
-                <img src="${cover}" class="book-full" alt="${title} cover" />
+                <img src="${book.cover}" class="book-full" />
               </div>
-            </div>
-          `;
+            </div>`;
 
-          grid.appendChild(card);
+          grid.appendChild(el);
         });
 
-        attachBookPreviewBounds();
-      } catch (err) {
-        if (error) error.textContent = 'Error loading books: ' + err.message;
+      } catch (e) {
+        console.error(e);
       }
     }
 
-    function attachBookPreviewBounds() {
-      const books = document.querySelectorAll('.card-link');
-      let floatingPreview = document.querySelector('.floating-book-preview');
-
-      if (!floatingPreview) {
-        floatingPreview = document.createElement('div');
-        floatingPreview.className = 'floating-book-preview';
-        document.body.appendChild(floatingPreview);
-      }
-
-      const hidePreview = () => {
-        floatingPreview.classList.remove('is-visible');
-      };
-
-      const showPreview = (book) => {
-        const img = book.querySelector('.book-full');
-        if (!img) return;
-
-        floatingPreview.innerHTML = `<img src="${img.getAttribute('src')}" class="book-full" alt="${img.getAttribute('alt') || ''}" />`;
-
-        const bookRect = book.getBoundingClientRect();
-        const previewWidth = 180;
-        const previewHeight = 260;
-        const gap = 14;
-        const padding = 12;
-
-        let left = bookRect.left + (bookRect.width / 2) - (previewWidth / 2);
-        left = Math.max(padding, Math.min(left, window.innerWidth - previewWidth - padding));
-
-        let top = bookRect.top - previewHeight - gap;
-
-        if (top < padding) {
-          top = Math.min(window.innerHeight - previewHeight - padding, bookRect.bottom + gap);
-        }
-
-        floatingPreview.style.left = `${left}px`;
-        floatingPreview.style.top = `${top}px`;
-
-        requestAnimationFrame(() => {
-          floatingPreview.classList.add('is-visible');
-        });
-      };
-
-      books.forEach(book => {
-        book.addEventListener('mouseenter', () => showPreview(book));
-        book.addEventListener('mouseleave', hidePreview);
-        book.addEventListener('focus', () => showPreview(book));
-        book.addEventListener('blur', hidePreview);
-      });
-
-      window.addEventListener('scroll', hidePreview, { passive: true });
-      window.addEventListener('resize', hidePreview);
+    // Utility: convert text to URL slug
+    function slugify(str) {
+      return str.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     }
 
-    function slugify(value) {
-      return String(value)
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
+    // Utility: capitalize first letter
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    function capitalize(value) {
-      if (!value) return 'Theme';
-      return value.charAt(0).toUpperCase() + value.slice(1);
-    }
-
+    // Initialize site
     loadContent();
   </script>
 </body>
