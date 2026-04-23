@@ -281,68 +281,60 @@
       margin: 8px 0 12px;
     }
 
-    /* BOOKS */
+    /* BOOKS (REAL SHELF) */
     #books-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 18px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0; /* no gaps = spines touch */
       margin-top: 24px;
-      align-items: end;
+      overflow-x: auto;
+      padding-bottom: 10px;
     }
 
     .card-link {
       position: relative;
-      display: block;
-      grid-column: span 2;
-      min-width: 0;
-    }
-
-    .card-link.is-large {
-      grid-column: span 3;
-    }
-
-    .card-link.is-wide {
-      grid-column: span 4;
-    }
-
-    .card-link.is-tall .book-card {
-      min-height: 220px;
-    }
-
-    .book-card {
-      position: relative;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 18px 14px;
-      min-height: 180px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      overflow: visible;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      margin-right: 2px; /* tiny separation like real books */
+    }
+
+    /* remove card look entirely */
+    .book-card {
+      position: relative;
+      background: none;
+      border: none;
+      padding: 0;
+      min-height: unset;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
     .card-link:hover .book-card {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px var(--shadow);
-      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-6px);
+      box-shadow: none;
+      background: none;
     }
 
     .book-spine {
       width: auto;
-      max-width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: contain;
       display: block;
+      transition: transform 0.2s ease;
     }
 
-    .card-link.is-large .book-spine,
-    .card-link.is-wide .book-spine,
-    .card-link.is-tall .book-spine {
-      height: 180px;
+    /* subtle variation like real shelf */
+    .card-link.is-large .book-spine { height: 190px; }
+    .card-link.is-wide .book-spine { height: 175px; }
+    .card-link.is-tall .book-spine { height: 210px; }
+
+    .card-link:hover .book-spine {
+      transform: translateY(-4px);
     }
 
+    /* hover preview stays the same */
     .book-preview {
       position: absolute;
       left: 50%;
