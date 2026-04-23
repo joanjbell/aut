@@ -2,123 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | J. Bell Price</title>
 
-  <link rel="stylesheet" href="css/webflow-core.css" />
+  <!-- Match homepage font stack for consistency across the site -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Reuse the same shared stylesheet as the homepage -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="container nav-inner">
-
-    <div class="logo">JOAN J. BELL</div>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-  </div>
-</div>
-
-<!-- HERO (asymmetric editorial layout) -->
-<section class="section">
-  <div class="container about-hero">
-    
-    <!-- TEXT -->
-    <div>
-
-      <div style="letter-spacing:0.25em; font-size:12px; opacity:0.7; margin-bottom:16px;">
-        ABOUT
+  <!-- Site navigation matches the homepage -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">J. BELL PRICE</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
       </div>
+    </div>
+  </nav>
 
-      <h1 style="margin-bottom:24px;">
-        Poet & Writer<br/>
-        working with memory
-      </h1>
-
-      <p style="max-width: 520px; opacity:0.9;">
-        I’m a poet and writer exploring the textures of memory, domestic space,
-        and the quiet structures that shape language. My work often moves between
-        observation and fragmentation.
-      </p>
-
-      <div style="margin-top:32px;">
+  <!-- About hero: uses the same editorial asymmetry as the homepage -->
+  <section class="hero">
+    <div class="container about-hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">About</div>
+        <h1>Poet &amp; writer working with memory, domestic space, and quiet structures of feeling.</h1>
+        <p>
+          I’m a poet and writer exploring the textures of memory, domestic interiors,
+          spiritual attention, and the forms that shape language. My work often moves
+          between observation, fragmentation, repetition, and devotion.
+        </p>
         <a class="button" href="contact.html">Get in touch</a>
       </div>
 
+      <!-- Portrait card visually echoes the homepage note card / image language -->
+      <div class="about-portrait card image-card">
+        <img src="images/portrait.jpg" alt="Portrait of J. Bell Price" />
+      </div>
     </div>
+  </section>
 
-    <!-- IMAGE -->
-    <div class="card" style="height:420px; padding:0; overflow:hidden; border-radius:18px;">
-      <img 
-        src="images/portrait.jpg" 
-        alt="Portrait"
-        style="width:100%; height:100%; object-fit:cover; display:block;"
-      />
-    </div>
-
-  </div>
-</section>
-
-<!-- DIVIDER SECTION (adds editorial structure) -->
-<section class="section" style="padding-top:40px; padding-bottom:40px;">
-  <div class="container">
-    <div style="height:1px; background:rgba(47,44,39,0.15);"></div>
-  </div>
-</section>
-
-<!-- THREE COLUMN EDITORIAL GRID -->
-<section class="section" style="padding-top:60px;">
-  <div class="container grid grid-3" style="gap:56px 72px;">
-
-    <div class="card">
-      <div style="letter-spacing:0.2em; font-size:11px; opacity:0.6; margin-bottom:12px;">
-        POETRY
+  <!-- Short statement section gives the page breathing room and editorial rhythm -->
+  <section class="section alt">
+    <div class="container narrow-copy">
+      <div class="section-header">
+        <h2>Practice</h2>
       </div>
       <p>
-        Minimal, voice-driven work that focuses on tone, rhythm, and absence.
+        My work gathers fragments rather than arguments. I’m interested in the emotional
+        architecture of ordinary life — rooms, rituals, repetitions, absences, devotion,
+        motherhood, and the ways language records what cannot be held directly.
       </p>
     </div>
+  </section>
 
-    <div class="card">
-      <div style="letter-spacing:0.2em; font-size:11px; opacity:0.6; margin-bottom:12px;">
-        WRITING
+  <!-- Three cards reuse the homepage card language so the site feels unified -->
+  <section class="section">
+    <div class="container">
+      <div class="about-focus-grid">
+        <div class="card">
+          <div class="tag">Poetry</div>
+          <p>
+            Voice-driven work shaped by tone, compression, rhythm, and the charged space around what is left unsaid.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Writing</div>
+          <p>
+            Hybrid and experimental prose that blurs the line between reflection, observation, and fragment.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Aesthetic</div>
+          <p>
+            Archival thinking, soft minimalism, domestic symbolism, and restrained visual language.
+          </p>
+        </div>
       </div>
-      <p>
-        Experimental prose and hybrid forms that blur structure and narrative.
-      </p>
     </div>
+  </section>
 
-    <div class="card">
-      <div style="letter-spacing:0.2em; font-size:11px; opacity:0.6; margin-bottom:12px;">
-        AESTHETIC
+  <!-- Quote block keeps the quieter, literary tone of the homepage -->
+  <section class="section alt">
+    <div class="container">
+      <div class="card about-quote-card">
+        <p class="about-quote">“Language is a room I keep rearranging.”</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Closing section helps the page feel complete instead of abruptly ending -->
+  <section class="section">
+    <div class="container narrow-copy about-endnote">
       <p>
-        Soft minimalism, archival thinking, and restrained visual language.
+        This site functions as an archive of ongoing work: poems, visual studies, fragments,
+        and printed books gathered over time rather than arranged into a single statement.
       </p>
     </div>
-
-  </div>
-</section>
-
-<!-- FEATURE QUOTE BLOCK (adds sophistication) -->
-<section class="section">
-  <div class="container">
-
-    <div class="card" style="padding:80px; text-align:center;">
-      <p style="font-size:22px; line-height:1.8; max-width:720px; margin:0 auto; font-family:Georgia, serif;">
-        “Language is a room I keep rearranging.”
-      </p>
-    </div>
-
-  </div>
-</section>
+  </section>
 
 </body>
 </html>
