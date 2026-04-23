@@ -278,12 +278,34 @@
     }
 
     .work-text h3 {
+      position: relative;
       font-size: clamp(1.6rem, 3vw, 2.1rem);
       margin: 8px 0 12px;
-      text-decoration: none;
-      text-underline-offset: 4px;
-      text-decoration-thickness: 1px;
-      transition: text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
+      display: inline-block;
+    }
+
+    /* animated underline */
+    .work-text h3::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    /* hover effects */
+    .work:hover .work-text h3::after {
+      transform: scaleX(1);
+    }
+
+    .work:hover .work-text h3 {
+      transform: scale(1.02);
+      transition: transform 0.25s ease;
     }
 
     /* subtle underline on hover */
