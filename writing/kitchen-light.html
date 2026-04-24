@@ -2,112 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kitchen Light</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work | J. Bell Price</title>
 
-  <link rel="stylesheet" href="../css/webflow-core.css" />
+  <!-- Shared typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    /* reading layout */
-    .reading-container {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .piece-meta {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 16px;
-    }
-
-    .piece-title {
-      margin-bottom: 24px;
-    }
-
-    .piece-body p {
-      font-size: 17px;
-      line-height: 1.8;
-      margin-bottom: 18px;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 40px;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      opacity: 0.7;
-    }
-
-    .back-link:hover {
-      opacity: 1;
-    }
-  </style>
+  <!-- This path assumes the page is inside /writing/ or /art/ -->
+  <link rel="stylesheet" href="../css/styles.css" />
 </head>
-
 <body>
 
-
-<!-- NAV -->
-<div class="nav">
-  <div class="container nav-inner">
-
-    <div class="logo">JOAN J. BELL</div>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">J. BELL PRICE</div>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../shop.html">Shop</a>
+        <a href="../contact.html">Contact</a>
+      </div>
     </div>
+  </nav>
 
-  </div>
-</div>
+  <!-- WORK HEADER -->
+  <main id="work-page">
+    <section class="hero work-page-hero">
+      <div class="container work-page-grid">
 
+        <!-- Metadata and title are filled from content.json -->
+        <div class="hero-copy">
+          <a class="button work-back-link" href="../index.html#works-feed">← Back to archive</a>
+          <div id="work-type" class="kicker">Work</div>
+          <h1 id="work-title">Loading…</h1>
+          <p id="work-description"></p>
+          <div id="work-themes" class="work-theme-list"></div>
+        </div>
 
-<!-- WRITING -->
-<section class="section">
-  <div class="container reading-container">
+        <!-- Image is filled from content.json -->
+        <div id="work-image-card" class="card image-card work-image-card">
+          <img id="work-image" src="" alt="" />
+        </div>
 
-    <!-- meta -->
-    <div class="piece-meta">
-      Poem · April 10, 2026
-    </div>
+      </div>
+    </section>
 
-    <!-- title -->
-    <h1 class="piece-title">
-      Kitchen Light
-    </h1>
+    <!-- BODY CONTENT -->
+    <section class="section alt">
+      <div class="container work-body">
 
-    <!-- body -->
-    <div class="piece-body">
+        <!--
+          The full work body is loaded from content.json.
 
-      <p>
-        The light rests on the counter again,
-        as if it has always known this surface.
-      </p>
+          Recommended JSON format:
 
-      <p>
-        A repetition of morning,
-        held quietly between objects.
-      </p>
+          "body": [
+            "First stanza or paragraph.",
+            "Second stanza or paragraph."
+          ]
 
-      <p>
-        Nothing insists.
-        Nothing leaves.
-      </p>
+          For poems, line breaks can be written with escaped newline characters
+          inside each stanza, like this:
 
-    </div>
+          "body": [
+            "line one\nline two\nline three",
+            "next stanza line one\nnext stanza line two"
+          ]
+        -->
 
-    <!-- back -->
-    <a href="../writing.html" class="back-link">
-      ← Back to writing
-    </a>
+        <div id="work-body-content" class="work-body-content">
+          <p>Loading text…</p>
+        </div>
 
-  </div>
-</section>
+      </div>
+    </section>
+  </main>
 
+  <script>
+    // This template finds the matching item in content.json by comparing
+    // the current page path to each item's `link` field.
+    async function loadWorkPage() {
+      const errorTarget = document.getElementById('work-title');
+
+      try {
+        const res = await fetch('../data/content.json');
+        if (!res.ok) throw new Error('Could not load content.json');
+
+        const items = await res.json();
+        if (!Array.isArray(items)) throw new Error('content.json must be an array');
+
+        const currentPath = normalizePath(window.location.pathname);
+
+        const item = items.find(entry => {
+          const entryPath = normalizePath(entry.link || entry.url || '');
+          return currentPath.endsWith(entryPath);
+        });
+
+        if (!item) {
+          throw new Error('This work was not found in content.json');
+        }
+
+        renderWork(item);
+      } catch (err) {
+        errorTarget.textContent = 'Work not found';
+        console.error(err);
+      }
+    }
+
+    // Fill the page with metadata from content.json.
+    function renderWork(item) {
+      const title = item.title || 'Untitled';
+      const type = item.type || 'work';
+      const description = item.description || '';
+      const image = item.image ? `../${item.image}` : '';
+      const themes = normalizeThemes(item);
+      const body = normalizeBody(item.body);
+
+      document.title = `${title} | J. Bell Price`;
+      document.getElementById('work-type').textContent = type;
+      document.getElementById('work-title').textContent = title;
+      document.getElementById('work-description').textContent = description;
+
+      const imageCard = document.getElementById('work-image-card');
+      const imageEl = document.getElementById('work-image');
+
+      if (image) {
+        imageEl.src = image;
+        imageEl.alt = title;
+      } else {
+        imageCard.style.display = 'none';
+      }
+
+      const themeList = document.getElementById('work-themes');
+      themeList.innerHTML = themes.map(theme => {
+        const label = String(theme).trim();
+        return `<a href="../theme-${slugify(label)}.html">${label}</a>`;
+      }).join('');
+
+      const bodyContainer = document.getElementById('work-body-content');
+      bodyContainer.className = type === 'poem'
+        ? 'work-body-content poem-text'
+        : 'work-body-content prose-text';
+
+      bodyContainer.innerHTML = body.length
+        ? body.map(section => `<p>${escapeHTML(section).replace(/\n/g, '<br>')}</p>`).join('')
+        : '<p>Full text coming soon.</p>';
+    }
+
+    // Convert the optional `body` field into an array of sections.
+    // This supports either a single string or an array of strings.
+    function normalizeBody(body) {
+      if (Array.isArray(body)) return body.filter(Boolean);
+      if (typeof body === 'string' && body.trim()) return [body];
+      return [];
+    }
+
+    // Escape user-entered JSON text before inserting it into the page.
+    // We add <br> tags after escaping so poem line breaks still render.
+    function escapeHTML(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Supports either `theme` or `themes` in content.json.
+    function normalizeThemes(item) {
+      if (Array.isArray(item.theme)) return item.theme;
+      if (Array.isArray(item.themes)) return item.themes;
+      return [];
+    }
+
+    // Normalize paths so matching works locally and on GitHub Pages.
+    function normalizePath(path) {
+      return String(path)
+        .replace(/^\.\//, '')
+        .replace(/^\//, '')
+        .replace(/%20/g, ' ');
+    }
+
+    function slugify(value) {
+      return String(value)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    loadWorkPage();
+  </script>
 </body>
 </html>
