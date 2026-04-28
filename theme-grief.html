@@ -2,58 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grief — J. Bell Price</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theme | J. Bell Price</title>
 
-  <link rel="stylesheet" href="css/webflow-core.css" />
+  <!-- Shared typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Theme pages live at the root, so this path matches index/about/shop/contact -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
 
-<div class="container section">
-  <h1>Grief</h1>
-  <p>Loss, absence, and the shape of what remains.</p>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">J. BELL PRICE</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <div id="theme-results" class="mosaic-grid"></div>
-</div>
+  <!-- THEME HEADER -->
+  <section class="hero theme-page-hero">
+    <div class="container narrow-copy">
+      <a class="button" href="index.html#themes-grid">← Back to themes</a>
+      <div class="kicker">Theme</div>
+      <h1 id="theme-title">Loading…</h1>
+      <p id="theme-description"></p>
+    </div>
+  </section>
 
-<script>
-fetch("./data/content.json")
-  .then(res => res.json())
-  .then(items => {
-    const grid = document.getElementById("theme-results");
+  <!-- FILTERED WORKS -->
+  <section class="section alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="theme-count-title">Works</h2>
+        <p class="section-intro">All works in this archive tagged with this theme.</p>
+      </div>
 
-    const filtered = items.filter(item =>
-      item.theme && item.theme.includes("grief")
-    );
+      <div id="theme-works-feed" class="works-feed"></div>
+      <div id="theme-error" class="error"></div>
+    </div>
+  </section>
 
-    filtered.forEach(item => {
-      const el = document.createElement("a");
-      el.href = item.link || "#";
-      el.className = "mosaic-item";
+  <script>
+    // Theme descriptions match the homepage cards.
+    const THEME_DESCRIPTIONS = {
+      grief: 'Loss, absence, and the shape of what remains.',
+      love: 'Attachment, intimacy, and quiet devotion.',
+      death: 'Endings, ritual, and the unseen threshold.',
+      spirituality: 'Attention, stillness, and the interior life.',
+      change: 'Transformation, movement, and becoming.',
+      memory: 'Repetition, fragments, and quiet return.',
+      motherhood: 'Matrescence, depth, and a highest love.',
+      safety: 'Refuge, shelter, and the places we return to.',
+      witness: 'Power, public grief, social memory, and what the world asks us to see.',
+      default: 'A recurring thread in the archive.'
+    };
 
-      if (item.type === "art") {
-        el.innerHTML = `
-          <div class="card mosaic-card image-card">
-            <img src="${item.image}" />
+    // The theme is pulled from the filename.
+    // Example: theme-grief.html becomes "grief".
+    function getThemeFromFilename() {
+      const filename = window.location.pathname.split('/').pop() || '';
+      return filename
+        .replace(/^theme-/, '')
+        .replace(/\.html$/, '')
+        .trim();
+    }
+
+    async function loadThemePage() {
+      const themeSlug = getThemeFromFilename();
+      const themeLabel = titleCase(themeSlug.replace(/-/g, ' '));
+      const themeKey = themeSlug.toLowerCase();
+
+      document.title = `${themeLabel} | J. Bell Price`;
+      document.getElementById('theme-title').textContent = themeLabel;
+      document.getElementById('theme-description').textContent = THEME_DESCRIPTIONS[themeKey] || THEME_DESCRIPTIONS.default;
+
+      try {
+        const res = await fetch('./data/content.json');
+        if (!res.ok) throw new Error('Failed to load content.json');
+
+        const items = await res.json();
+        if (!Array.isArray(items)) throw new Error('content.json must be an array');
+
+        const matches = items
+          .filter(item => normalizeThemes(item).some(theme => slugify(theme) === themeSlug))
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        renderThemeWorks(matches, themeLabel);
+      } catch (err) {
+        document.getElementById('theme-error').textContent = err.message;
+      }
+    }
+
+    function renderThemeWorks(items, themeLabel) {
+      const container = document.getElementById('theme-works-feed');
+      const countTitle = document.getElementById('theme-count-title');
+
+      countTitle.textContent = `${items.length} ${items.length === 1 ? 'Work' : 'Works'} tagged ${themeLabel}`;
+
+      if (!items.length) {
+        container.innerHTML = `
+          <div class="card">
+            <div class="tag">Empty</div>
+            <p>No works have been tagged with this theme yet.</p>
           </div>
         `;
-      } else {
-        el.innerHTML = `
-          <div class="card mosaic-card text-card">
-            <div>
-              <div class="tag">${item.type}</div>
-              <h3>${item.title}</h3>
-              <p>${item.description || ""}</p>
-            </div>
-          </div>
-        `;
+        return;
       }
 
-      grid.appendChild(el);
-    });
-  });
-</script>
+      items.forEach((item, i) => {
+        const el = document.createElement('a');
+        const hasImage = Boolean(item.image && item.image.trim() !== '');
 
+        el.href = item.link || item.url || '#';
+        el.className = 'work';
+        el.classList.add(i % 2 ? 'align-right' : 'align-left');
+
+        if (hasImage) {
+          if (item.type === 'art' || item.size === 'wide') {
+            el.classList.add('is-large');
+          } else {
+            el.classList.add(i % 3 === 0 ? 'is-medium' : 'is-small');
+          }
+        } else {
+          el.classList.add('is-text');
+        }
+
+        el.innerHTML = hasImage
+          ? `
+            <div class="work-art">
+              <img src="${item.image}" alt="${item.title || ''}" />
+            </div>
+            <div class="work-text">
+              <div class="work-meta">${item.type || 'work'}</div>
+              <h3>${item.title || 'Untitled'}</h3>
+              <p>${item.description || ''}</p>
+            </div>`
+          : `
+            <div class="work-text">
+              <div class="work-meta">${item.type || 'work'}</div>
+              <h3>${item.title || 'Untitled'}</h3>
+              <p>${item.description || ''}</p>
+            </div>`;
+
+        container.appendChild(el);
+      });
+    }
+
+    // Supports both `theme` and `themes` in content.json.
+    function normalizeThemes(item) {
+      if (Array.isArray(item.theme)) return item.theme;
+      if (Array.isArray(item.themes)) return item.themes;
+      return [];
+    }
+
+    function slugify(value) {
+      return String(value)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function titleCase(value) {
+      return String(value)
+        .split(' ')
+        .filter(Boolean)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+
+    loadThemePage();
+  </script>
 </body>
 </html>
