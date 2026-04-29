@@ -3,142 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop | J. Bell Price</title>
+  <title>About | J. Bell Price</title>
 
-  <!-- Shared typography so the shop matches the rest of the site -->
+  <!-- Match homepage font stack for consistency across the site -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Shared site stylesheet -->
+  <!-- Reuse the same shared stylesheet as the homepage -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- Site navigation matches the homepage -->
   <nav class="nav">
     <div class="container nav-inner">
       <div class="logo">J. BELL PRICE</div>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="shop.html" class="active">Shop</a>
+        <a href="about.html" class="active">About</a>
+        <a href="shop.html">Shop</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- SHOP INTRO -->
-  <section class="hero shop-hero">
-    <div class="container shop-header">
-      <div class="kicker">Shop</div>
-      <h1>Selected works, prints, and objects.</h1>
+  <!-- About hero: uses the same editorial asymmetry as the homepage -->
+  <section class="hero">
+    <div class="container about-hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">About</div>
+        <h1>Poet &amp; writer working with memory, domestic space, and quiet structures of feeling.</h1>
+        <p>
+          I’m a poet and writer exploring the textures of memory, domestic interiors,
+          spiritual attention, and the forms that shape language. My work often moves
+          between observation, fragmentation, repetition, and devotion.
+        </p>
+        <a class="button" href="contact.html">Get in touch</a>
+      </div>
+
+      <!-- Portrait card visually echoes the homepage note card / image language -->
+      <div class="about-portrait card image-card">
+        <img src="images/portrait.jpg" alt="Portrait of J. Bell Price" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Short statement section gives the page breathing room and editorial rhythm -->
+  <section class="section alt">
+    <div class="container narrow-copy">
+      <div class="section-header">
+        <h2>Practice</h2>
+      </div>
       <p>
-        Each piece extends the archive in another form — printed, held, collected,
-        or carried into domestic space.
+        My work gathers fragments rather than arguments. I’m interested in the emotional
+        architecture of ordinary life — rooms, rituals, repetitions, absences, devotion,
+        motherhood, and the ways language records what cannot be held directly.
       </p>
     </div>
   </section>
 
-  <!-- PRODUCT GRID: generated from data/products.json -->
+  <!-- Three cards reuse the homepage card language so the site feels unified -->
   <section class="section">
     <div class="container">
-      <div id="shop-grid" class="shop-grid"></div>
-      <div id="shop-error" class="error"></div>
+      <div class="about-focus-grid">
+        <div class="card">
+          <div class="tag">Poetry</div>
+          <p>
+            Voice-driven work shaped by tone, compression, rhythm, and the charged space around what is left unsaid.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Writing</div>
+          <p>
+            Hybrid and experimental prose that blurs the line between reflection, observation, and fragment.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Aesthetic</div>
+          <p>
+            Archival thinking, soft minimalism, domestic symbolism, and restrained visual language.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- CLOSING NOTE -->
+  <!-- Quote block keeps the quieter, literary tone of the homepage -->
   <section class="section alt">
+    <div class="container">
+      <div class="card about-quote-card">
+        <p class="about-quote">“Language is a room I keep rearranging.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing section helps the page feel complete instead of abruptly ending -->
+  <section class="section">
     <div class="container narrow-copy about-endnote">
       <p>
-        Editions, prints, and small objects appear here as they become available.
+        This site functions as an archive of ongoing work: poems, visual studies, fragments,
+        and printed books gathered over time rather than arranged into a single statement.
       </p>
     </div>
   </section>
 
   <script>
-    // Loads product information from data/products.json so the shop can be updated
-    // without changing this HTML file.
     async function loadProducts() {
       const grid = document.getElementById('shop-grid');
-      const error = document.getElementById('shop-error');
       if (!grid) return;
 
       try {
         const res = await fetch('./data/products.json');
-        if (!res.ok) throw new Error('Failed to load products.json');
 
-        const products = await res.json();
-        if (!Array.isArray(products)) throw new Error('products.json must be an array');
+        // If file doesn't exist → do nothing
+        if (!res.ok) return;
 
-        if (products.length === 0) {
-          grid.innerHTML = `
-            <div class="card shop-empty">
-              <div class="tag">Shop</div>
-              <p>No shop items are available yet.</p>
-            </div>
-          `;
-          return;
-        }
+        const text = await res.text();
+
+        // If file is empty → do nothing
+        if (!text.trim()) return;
+
+        const products = JSON.parse(text);
+
+        // If empty array → do nothing
+        if (!Array.isArray(products) || products.length === 0) return;
 
         products.forEach(product => {
-          grid.appendChild(createProductCard(product));
-        });
-      } catch (err) {
-        console.error(err);
-        if (error) error.textContent = err.message;
-      }
-    }
+          const el = document.createElement('article');
+          el.className = 'product card';
 
-    // Creates one product card using safe fallbacks for missing fields.
-    function createProductCard(product) {
-      const article = document.createElement('article');
-      article.className = 'product card';
-
-      const title = product.title || 'Untitled item';
-      const description = product.description || '';
-      const image = product.image || '';
-      const price = product.price || '';
-      const category = product.category || 'Item';
-      const link = product.link || '#';
-      const status = product.status || '';
-      const buttonText = product.buttonText || 'View';
-
-      article.innerHTML = `
-        <a href="${link}" class="product-image-link" aria-label="View ${escapeHTML(title)}">
-          <div class="product-image">
-            ${image
-              ? `<img src="${image}" alt="${escapeHTML(title)}" />`
-              : `<div class="product-image-placeholder">Image coming soon</div>`
-            }
-          </div>
-        </a>
-
-        <div class="product-content">
-          <div class="tag">${escapeHTML(category)}</div>
-          <h2 class="product-title">${escapeHTML(title)}</h2>
-          <p class="product-desc">${escapeHTML(description)}</p>
-
-          <div class="product-meta">
-            <div>
-              ${price ? `<div class="price">${escapeHTML(price)}</div>` : ''}
-              ${status ? `<div class="product-status">${escapeHTML(status)}</div>` : ''}
+          el.innerHTML = `
+            <div class="product-image">
+              ${product.image ? `<img src="${product.image}" alt="${product.title || ''}" />` : ''}
             </div>
-            <a class="button product-button" href="${link}">${escapeHTML(buttonText)}</a>
-          </div>
-        </div>
-      `;
+            <div class="product-content">
+              <div class="tag">${product.category || ''}</div>
+              <h2 class="product-title">${product.title || ''}</h2>
+              <p class="product-desc">${product.description || ''}</p>
+              <div class="product-meta">
+                <div class="price">${product.price || ''}</div>
+                <a class="button" href="${product.link || '#'}">${product.buttonText || 'View'}</a>
+              </div>
+            </div>
+          `;
 
-      return article;
-    }
+          grid.appendChild(el);
+        });
 
-    // Escapes product text before inserting it into the page.
-    function escapeHTML(value) {
-      return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      } catch (e) {
+        console.warn('Shop not loaded:', e);
+      }
     }
 
     loadProducts();
