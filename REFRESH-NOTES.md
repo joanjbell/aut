@@ -1,17 +1,16 @@
-# J. Bell Price — editorial cohesion refresh
+# J. Bell Price — Editorial Refresh v2
 
-This is a design-system refresh of the existing site, intended to preserve the original identity while making the pages feel more related.
+This refresh makes a more visible change to the overall site composition while preserving its existing identity.
 
-## What changed
-- Added a shared editorial styling layer to `css/styles.css`: consistent spacing, typography, borders, metadata labels, interaction states, responsive behavior, and reduced-motion support.
-- Unified the navigation across pages, including a consistent active-page state and working home link on the wordmark.
-- Added a restrained shared colophon to pages using the site navigation.
-- Refined homepage section labels to reinforce the archive concept.
-- Kept the sage/ivory palette, existing font pairing, archive data, page structure, and tactile bookshelf feature.
-- Kept the book spines upright and standardized corners and image treatments.
+## Main changes
+- Reordered the homepage so selected work leads before the theme index.
+- Created a larger, more expressive homepage opening with a typographic watermark and a note styled as an archival colophon.
+- Standardized section headings into a label/title/description hierarchy.
+- Made selected works feel like an edited sequence, with larger imagery, stronger titles, and fine rules.
+- Recast themes as a numbered editorial index rather than a generic card grid.
+- Made Elsewhere links and the author note feel like a consistent endnote.
+- Applied shared editorial refinements to archive, theme, and individual work pages.
+- Preserved the sage/ivory palette, Cormorant Garamond, Inter, bookshelf, existing content, and dynamic data behavior.
 
 ## Deployment
-Upload the contents of this folder to the same location that currently serves the website. Keep a copy of the current deployment so you can roll back if needed. The archive includes the existing content and media assets; no content JSON was intentionally rewritten.
-
-## Notes
-This package updates the local code only; it does not publish changes to the live website. External font loading still uses Google Fonts, as in the original.
+Upload the contents of this archive to the site's document root (the folder where `index.html` currently lives). Keep a copy of the deployed site before replacing files. This package is not published live.
