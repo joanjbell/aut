@@ -1,77 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Feed - Joan J. Bell</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            background-color: #444;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            padding: 14px 20px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Visual notes, sketches, and process from J. Bell Price." />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <title>Elsewhere: Instagram | J. Bell Price</title>
 </head>
 <body>
-    <header>
-        <h1>Joan J. Bell</h1>
-        <p>Author of Poetry Books</p>
-    </header>
-
-    <nav>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">J. BELL PRICE</a>
+      <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="contact.html">Contact</a>
+        <a href="works.html">Works</a>
+        <a href="about.html">About</a>
         <a href="shop.html">Shop</a>
-        <a href="instagram.html">Instagram Feed</a>
-    </nav>
-
-    <div class="container">
-        <h2>Feed</h2>
-        <p>Ch.</p>
-        <a href="https://your-shop-link.com" target="_blank">Visit Shop</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
+  </nav>
 
-    <footer>
-        <p>&copy; 2024 Joan J. Bell. All rights reserved.</p>
-    </footer>
+  <main>
+    <section class="hero">
+      <div class="container narrow-copy">
+        <p class="kicker">Elsewhere · 01</p>
+        <h1>Visual notes, sketches, and process.</h1>
+        <p class="section-intro">A companion space for the small visual things that sit alongside the writing: works in progress, fragments, and glimpses of the practice around the archive.</p>
+        <a class="button" href="https://instagram.com/joanjbell_" target="_blank" rel="noopener noreferrer">Visit Instagram ↗</a>
+      </div>
+    </section>
+    <section class="section alt">
+      <div class="container narrow-copy">
+        <div class="section-header">
+          <p class="kicker">Beyond the archive</p>
+          <h2>Another kind of notebook.</h2>
+        </div>
+        <p>Instagram holds the more immediate traces of the work. The complete collection of poems, essays, art, and related projects remains in the archive here.</p>
+        <a class="site-footer-link" href="works.html">Return to the works index ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <a class="site-footer-brand" href="index.html">J. BELL PRICE</a>
+      <p class="site-footer-note">A living archive of writing, art, and recurring things.</p>
+      <a class="site-footer-link" href="works.html">Return to the archive ↗</a>
+    </div>
+  </footer>
 </body>
 </html>

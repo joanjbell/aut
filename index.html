@@ -7,7 +7,7 @@
   <title>J. Bell Price</title>
 
   <!-- Fonts: serif for artistic tone, sans-serif for readability -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Shared stylesheet used across the whole site -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -69,8 +69,8 @@
   <section class="section alt">
     <div class="container">
       <div class="section-header">
-        <p class="kicker">Recurring threads</p>
-        <h2>Recurring themes<span class="heading-period">.</span></h2>
+        <p class="kicker">Thematic index</p>
+        <h2>Recurring threads<span class="heading-period">.</span></h2>
         <p class="section-intro">Recurring concerns, emotional structures, and interior rooms across the archive.</p>
       </div>
       <div id="themes-grid" class="themes-grid"></div>
@@ -78,7 +78,7 @@
   </section>
 
   <!-- BOOKSHELF -->
-  <section class="section alt">
+  <section class="section">
     <div class="container">
       <div class="section-header">
         <p class="kicker">On the shelf</p>
@@ -107,17 +107,17 @@
 
       <div class="elsewhere-index">
 
-        <a href="https://instagram.com/joanjbell_" target="_blank" class="elsewhere-link">
+        <a href="https://instagram.com/joanjbell_" target="_blank" rel="noopener noreferrer" class="elsewhere-link">
           <span class="elsewhere-name">Instagram</span>
           <span class="elsewhere-description">Visual notes, sketches, and process</span>
         </a>
 
-        <a href="https://substack.com/@jbellprice" target="_blank" class="elsewhere-link">
+        <a href="https://substack.com/@jbellprice" target="_blank" rel="noopener noreferrer" class="elsewhere-link">
           <span class="elsewhere-name">Substack</span>
           <span class="elsewhere-description">Letters, essays, and longer reflections</span>
         </a>
 
-        <a href="https://www.goodreads.com/author/show/18613685.J_Bell_Price" target="_blank" class="elsewhere-link">
+        <a href="https://www.goodreads.com/author/show/18613685.J_Bell_Price" target="_blank" rel="noopener noreferrer" class="elsewhere-link">
           <span class="elsewhere-name">Goodreads</span>
           <span class="elsewhere-description">Books, annotations, influences, and ongoing study.</span>
         </a>
@@ -183,9 +183,19 @@
       const grid = document.getElementById('themes-grid');
       if (!grid) return;
 
-      const themes = [...new Set(items.flatMap(normalizeThemes))];
+      const preferredOrder = ['grief', 'love', 'death', 'spirituality', 'change', 'memory', 'motherhood', 'safety', 'witness'];
+      const themes = [...new Set(items.flatMap(normalizeThemes))].sort((a, b) => {
+        const ai = preferredOrder.indexOf(String(a).toLowerCase());
+        const bi = preferredOrder.indexOf(String(b).toLowerCase());
+        if (ai !== -1 || bi !== -1) {
+          if (ai === -1) return 1;
+          if (bi === -1) return -1;
+          return ai - bi;
+        }
+        return String(a).localeCompare(String(b));
+      });
 
-      themes.forEach(theme => {
+      themes.forEach((theme, index) => {
         const label = String(theme || '').trim();
         const key = label.toLowerCase();
         const el = document.createElement('a');
@@ -193,7 +203,7 @@
         el.className = 'theme-card';
         el.href = `theme-${slugify(label)}.html`;
         el.innerHTML = `
-          <div class="tag">Theme</div>
+          <div class="tag">${String(index + 1).padStart(2, '0')} / Theme</div>
           <h3>${capitalize(label)}</h3>
           <p>${THEME_DESCRIPTIONS[key] || THEME_DESCRIPTIONS.default}</p>
         `;
@@ -232,7 +242,7 @@
         el.innerHTML = hasImage
           ? `
             <div class="work-art">
-              <img src="${item.image}" alt="${item.title || ''}" />
+              <img src="${item.image}" alt="${item.title || ''}" loading="lazy" decoding="async" />
             </div>
             <div class="work-text">
               <div class="work-meta">${item.type || 'work'}</div>

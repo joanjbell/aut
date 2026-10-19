@@ -3,61 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Book Title — J. Bell Price</title>
-
-  <!-- Shared typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
+  <meta name="description" content="Book details from the J. Bell Price bookshelf." />
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <title>Book | J. Bell Price</title>
 </head>
-
-<body>
-
-<nav class="nav">
-  <div class="container nav-inner">
-    <a class="logo" href="../index.html">J. BELL PRICE</a>
-    
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="../works.html" class="active" aria-current="page">Works</a>
-      <a href="../about.html">About</a>
-      <a href="../shop.html">Shop</a>
-      <a href="../contact.html">Contact</a>
-    </div>
-  </div>
-</nav>
-
-<main class="container section">
-  <div class="work-page-grid">
-    <div class="card image-card work-image-card">
-      <img src="../images/books/book-cover.png" alt="Book Title cover">
-    </div>
-
-    <div>
-      <p class="kicker">Book</p>
-      <h1>Book Title</h1>
-      <p>
-        A short literary description of the book goes here.
-      </p>
-
-      <div class="work-theme-list">
-        <a href="../theme-grief.html">Grief</a>
-        <a href="../theme-love.html">Love</a>
+<body data-book-slug="the-lighthouse-and-its-keeper">
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="../index.html">J. BELL PRICE</a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../works.html" class="active" aria-current="page">Works</a>
+        <a href="../about.html">About</a>
+        <a href="../shop.html">Shop</a>
+        <a href="../contact.html">Contact</a>
       </div>
-
-      <a class="button" href="../shop.html">View in shop</a>
     </div>
-  </div>
-</main>
+  </nav>
 
+  <main>
+    <section class="hero work-page-hero book-page-hero">
+      <div class="container work-page-grid">
+        <div class="hero-copy">
+          <a class="button work-back-link" href="../index.html#books-grid">← Back to the bookshelf</a>
+          <p id="book-type" class="kicker">Book</p>
+          <h1 id="book-title">Loading title…</h1>
+          <p id="book-description"></p>
+          <p id="book-note" class="book-source-note" hidden></p>
+          <a class="site-footer-link book-index-link" href="../index.html#books-grid">Explore the bookshelf ↗</a>
+        </div>
+        <div id="book-image-card" class="card image-card work-image-card" hidden>
+          <img id="book-image" src="" alt="" />
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container narrow-copy">
+        <p class="kicker">From the shelf</p>
+        <p class="book-return-note">The bookshelf gathers the titles currently indexed on this site. Return to the main collection to browse the collection.</p>
+      </div>
+    </section>
+  </main>
 
-<footer class="site-footer">
-  <div class="container site-footer-inner">
-    <a class="site-footer-brand" href="../index.html">J. BELL PRICE</a>
-    <p class="site-footer-note">A living archive of writing, art, and recurring things.</p>
-    <a class="site-footer-link" href="../works.html">Return to the archive ↗</a>
-  </div>
-</footer>
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <a class="site-footer-brand" href="../index.html">J. BELL PRICE</a>
+      <p class="site-footer-note">A living archive of writing, art, and recurring things.</p>
+      <a class="site-footer-link" href="../works.html">Return to the archive ↗</a>
+    </div>
+  </footer>
+  <script src="../js/book-page.js" defer></script>
 </body>
 </html>

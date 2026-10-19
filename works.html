@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -144,13 +144,13 @@ function renderFeatured() {
     }
 
     const hasImage = item.image && item.image.trim() !== "";
-    const themes = Array.isArray(item.theme) ? item.theme : [];
+    const themes = normalizeThemes(item);
     const year = item.date ? new Date(item.date).getFullYear() : "";
 
     el.innerHTML = `
       ${hasImage ? `
         <div class="recent-slide-image">
-          <img src="${item.image}" alt="${item.title || ""}">
+          <img src="${item.image}" alt="${item.title || ""}" loading="lazy" decoding="async">
         </div>
       ` : ""}
 
@@ -203,11 +203,17 @@ function renderThemeFilters() {
   const container = document.getElementById("works-theme-filters");
   if (!container) return;
 
-  const themes = [
-    ...new Set(
-      allItems.flatMap(item => Array.isArray(item.theme) ? item.theme : [])
-    )
-  ].sort();
+  const preferredOrder = ['grief', 'love', 'death', 'spirituality', 'change', 'memory', 'motherhood', 'safety', 'witness'];
+  const themes = [...new Set(allItems.flatMap(normalizeThemes))].sort((a, b) => {
+    const ai = preferredOrder.indexOf(String(a).toLowerCase());
+    const bi = preferredOrder.indexOf(String(b).toLowerCase());
+    if (ai !== -1 || bi !== -1) {
+      if (ai === -1) return 1;
+      if (bi === -1) return -1;
+      return ai - bi;
+    }
+    return String(a).localeCompare(String(b));
+  });
 
   container.innerHTML = "";
 
@@ -247,7 +253,7 @@ function renderArchive() {
     const matchesType =
       activeType === "all" || item.type === activeType;
 
-    const itemThemes = Array.isArray(item.theme) ? item.theme : [];
+    const itemThemes = normalizeThemes(item);
 
     const matchesTheme =
       activeTheme === "all" || itemThemes.includes(activeTheme);
@@ -289,6 +295,12 @@ document.querySelectorAll(".archive-filters button").forEach(btn => {
     renderArchive();
   });
 });
+
+function normalizeThemes(item) {
+  if (Array.isArray(item.theme)) return item.theme;
+  if (Array.isArray(item.themes)) return item.themes;
+  return [];
+}
 
 function formatLabel(value) {
   return value
