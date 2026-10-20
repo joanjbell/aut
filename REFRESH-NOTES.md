@@ -27,10 +27,3 @@
 ## Deployment notes
 
 This bundle has not been published to joanjbell.com. Back up the current live site, preview the package through a static server, and upload the package contents to the existing website root only after reviewing it.
-
-## Homepage embellishments — v4
-
-- Added a custom, hand-drawn botanical sprig SVG in `images/ornaments/botanical-sprig.svg`.
-- Used the sprig sparingly: as a quiet mark on the homepage archive note and beside selected section headings.
-- Added `images/ornaments/archive-thread.svg`, a fine-line divider motif that sits in the existing whitespace below “Recurring threads”. It is positioned decoratively and does not alter content flow or create new spacing.
-- Kept the palette and typography unchanged. Decorations are SVG, lightweight, decorative to assistive technology, and responsive; no new external image assets or scripts were added.

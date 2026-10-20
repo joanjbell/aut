@@ -231,26 +231,6 @@ button { color: inherit; }
 .hero .card { align-self: center; padding: 26px; }
 .hero .card p { max-width: 360px; color: var(--muted); font-size: 0.9rem; line-height: 1.72; }
 .hero .card .button { margin-top: 10px; }
-
-/* Homepage embellishments: small, hand-drawn details that don't alter layout. */
-.home-page .home-note-card {
-  position: relative;
-}
-.home-page .home-note-ornament {
-  position: absolute;
-  top: -31px;
-  right: 13px;
-  z-index: 0;
-  width: 38px;
-  height: 55px;
-  opacity: 0.72;
-  pointer-events: none;
-  transform: rotate(7deg);
-}
-.home-page .home-note-card > :not(.home-note-ornament) {
-  position: relative;
-  z-index: 1;
-}
 .works-hero { padding-bottom: 42px; }
 .works-hero h1 { max-width: 720px; }
 .works-intro { margin-top: 14px; }
@@ -275,32 +255,11 @@ button { color: inherit; }
   border-bottom: 1px solid var(--line);
   background: var(--surface-wash);
 }
-.section-header { position: relative; max-width: 700px; margin-bottom: 30px; }
+.section-header { max-width: 700px; margin-bottom: 30px; }
 .section-header .kicker { margin-bottom: 7px; }
 .section-header h2 { max-width: 650px; margin: 0; font-size: clamp(1.85rem, 3vw, 2.4rem); line-height: 1.06; }
 .section-header .section-intro { max-width: 580px; margin-top: 10px; color: var(--muted); font-size: 0.88rem; line-height: 1.72; }
 .section-header > p:not(.kicker) { color: var(--muted); }
-.home-page .section-ornament {
-  position: absolute;
-  top: 0;
-  right: 2px;
-  width: 30px;
-  height: 44px;
-  opacity: 0.68;
-  pointer-events: none;
-  transform: rotate(8deg);
-}
-.home-page .theme-index-section .section-header::after {
-  position: absolute;
-  bottom: -21px;
-  left: 0;
-  width: 126px;
-  height: 17px;
-  background: url("../images/ornaments/archive-thread.svg") left center / contain no-repeat;
-  content: "";
-  opacity: 0.72;
-  pointer-events: none;
-}
 
 /* Homepage: selected fragments */
 .works-feed {
@@ -738,9 +697,6 @@ button { color: inherit; }
   .works-hero { padding-bottom: 32px; }
   .shop-hero { padding-bottom: 40px; }
   .section-header { margin-bottom: 24px; }
-  .home-page .home-note-ornament { top: 12px; right: 13px; width: 25px; height: 36px; opacity: 0.58; }
-  .home-page .section-ornament { width: 24px; height: 35px; right: 0; opacity: 0.6; }
-  .home-page .theme-index-section .section-header::after { bottom: -17px; width: 108px; height: 15px; }
   .section-header h2 { font-size: clamp(1.8rem, 6vw, 2.2rem); }
   .work, .work.align-right { grid-template-columns: minmax(0, 1fr); gap: 15px; padding-bottom: 25px; }
   .work.align-right .work-art, .work.align-right .work-text { order: initial; }
