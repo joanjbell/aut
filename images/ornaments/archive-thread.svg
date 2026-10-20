@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 24" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Fine-line archive thread</title>
+  <g stroke="#746E5D" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M2 12H68"/><path d="M112 12H178"/>
+    <path d="M90 3.5C92 7.2 94.5 9.5 98.5 12C94.5 14.5 92 16.8 90 20.5C88 16.8 85.5 14.5 81.5 12C85.5 9.5 88 7.2 90 3.5Z"/>
+    <path d="M72 12C77 9 82 9 86 12C82 15 77 15 72 12Z"/>
+    <path d="M108 12C103 9 98 9 94 12C98 15 103 15 108 12Z"/>
+  </g>
+  <circle cx="90" cy="12" r="1.4" fill="#746E5D"/>
+</svg>
