@@ -668,6 +668,54 @@ button { color: inherit; }
 .site-footer-note { margin: 0; color: var(--muted); font-size: 0.72rem; }
 .site-footer-link { flex: 0 0 auto; font-size: 0.72rem; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
 
+
+
+/* Homepage embellishments: deliberately small, quiet, and attached to content. */
+.homepage .archive-note-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.homepage .archive-note-heading .tag {
+  margin: 0 0 10px;
+}
+.homepage .archive-sprig {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 23px;
+  margin: -3px 1px 0 0;
+  color: rgba(66, 63, 50, 0.62);
+}
+.homepage .section-header::after {
+  display: block;
+  width: 34px;
+  height: 1px;
+  margin-top: 18px;
+  background: var(--line-strong);
+  content: '';
+}
+.homepage .section-header::before {
+  position: relative;
+  top: 23px;
+  left: 13px;
+  display: block;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  content: '';
+  transform: rotate(45deg);
+}
+.homepage .section.alt .section-header::before {
+  background: var(--surface);
+}
+@media (max-width: 700px) {
+  .homepage .archive-sprig { flex-basis: 16px; width: 16px; height: 21px; }
+  .homepage .section-header::after { margin-top: 15px; }
+  .homepage .section-header::before { top: 20px; }
+}
+
 /* Responsive rules: the same rhythm, scaled down without inflated type */
 @media (max-width: 900px) {
   :root { --space-section: 60px; }
