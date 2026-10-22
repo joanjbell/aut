@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Theme pages live at the root, so this path matches index/about/shop/contact -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3.3" />
 </head>
 <body>
 
@@ -31,11 +31,19 @@
 
   <!-- THEME HEADER -->
   <section class="hero theme-page-hero">
-    <div class="container narrow-copy">
-      <a class="button" href="index.html#themes-grid">← Back to themes</a>
-      <div class="kicker">Theme</div>
-      <h1 id="theme-title">Loading…</h1>
-      <p id="theme-description"></p>
+    <div class="container theme-page-layout">
+      <div class="theme-hero-grid">
+        <div class="theme-hero-copy">
+          <a class="button theme-back-link" href="index.html#themes-grid">← Back to themes</a>
+          <div class="kicker">Theme</div>
+          <h1 id="theme-title">Loading…</h1>
+          <p id="theme-description"></p>
+        </div>
+        <figure class="theme-page-visual">
+          <img id="theme-hero-image" src="images/theme-previews/theme-grief.jpg" alt="Detail from The Mother of Jesus Wept" decoding="async" />
+          <figcaption id="theme-hero-caption">From the visual archive</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -67,6 +75,18 @@
       default: 'A recurring thread in the archive.'
     };
 
+    const THEME_VISUALS = {
+      grief: { image: 'images/theme-previews/theme-grief.jpg', alt: 'Detail from The Mother of Jesus Wept', caption: 'A detail from The Mother of Jesus Wept' },
+      love: { image: 'images/theme-previews/theme-love.jpg', alt: 'Detail from A Healing Light', caption: 'A detail from A Healing Light' },
+      death: { image: 'images/theme-previews/theme-death.jpg', alt: 'Detail from The Mother of Jesus Wept', caption: 'A detail from The Mother of Jesus Wept' },
+      spirituality: { image: 'images/theme-previews/theme-spirituality.jpg', alt: 'Detail from A Healing Light', caption: 'A detail from A Healing Light' },
+      change: { image: 'images/theme-previews/theme-change.jpg', alt: 'Detail from A Healing Light', caption: 'A detail from A Healing Light' },
+      memory: { image: 'images/theme-previews/theme-memory.jpg', alt: 'Detail from The Mother of Jesus Wept', caption: 'A detail from The Mother of Jesus Wept' },
+      motherhood: { image: 'images/theme-previews/theme-motherhood.jpg', alt: 'Detail from The Mother of Jesus Wept', caption: 'A detail from The Mother of Jesus Wept' },
+      safety: { image: 'images/theme-previews/theme-safety.jpg', alt: 'Detail from A Healing Light', caption: 'A detail from A Healing Light' },
+      witness: { image: 'images/theme-previews/theme-grief.jpg', alt: 'Detail from The Mother of Jesus Wept', caption: 'A detail from The Mother of Jesus Wept' }
+    };
+
     // The theme is pulled from the filename.
     // Example: theme-grief.html becomes "grief".
     function getThemeFromFilename() {
@@ -85,6 +105,13 @@
       document.title = `${themeLabel} | J. Bell Price`;
       document.getElementById('theme-title').textContent = themeLabel;
       document.getElementById('theme-description').textContent = THEME_DESCRIPTIONS[themeKey] || THEME_DESCRIPTIONS.default;
+
+      const visual = THEME_VISUALS[themeKey] || THEME_VISUALS.grief;
+      const heroImage = document.getElementById('theme-hero-image');
+      const heroCaption = document.getElementById('theme-hero-caption');
+      heroImage.src = visual.image;
+      heroImage.alt = visual.alt;
+      heroCaption.textContent = visual.caption;
 
       try {
         const res = await fetch('./data/content.json');

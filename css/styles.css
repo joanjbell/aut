@@ -232,42 +232,34 @@ button { color: inherit; }
 .hero .card p { max-width: 360px; color: var(--muted); font-size: 0.9rem; line-height: 1.72; }
 .hero .card .button { margin-top: 10px; }
 
-/* Homepage archive note: a small, linked artwork plate adds a human visual anchor. */
-.homepage .archive-note-heading {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-}
+/* Homepage note: use a real artwork detail as the visual anchor, not a botanical ornament. */
+.homepage .archive-note-heading { display: block; }
 .homepage .archive-note-heading .tag { margin: 0 0 10px; }
-.homepage .archive-sprig {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 25px;
-  margin: -3px 1px 0 0;
-  color: rgba(66, 63, 50, 0.64);
-}
 .homepage .archive-note-feature {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr) 14px;
+  grid-template-columns: minmax(0, 1fr) 14px;
+  grid-template-rows: auto auto;
   align-items: center;
-  gap: 12px;
+  gap: 10px 12px;
   margin-top: 17px;
   padding: 12px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 .homepage .archive-note-feature > img {
-  width: 82px;
-  height: 66px;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.2 / 1;
   border: 1px solid var(--line);
   border-radius: 3px;
   background: var(--surface);
   object-fit: cover;
-  object-position: center 48%;
+  object-position: center 49%;
   transition: opacity 180ms ease;
 }
-.archive-note-feature-copy { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+.archive-note-feature-copy { grid-column: 1; grid-row: 2; display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+.archive-note-feature-arrow { grid-column: 2; grid-row: 2; justify-self: end; }
 .archive-note-feature-kicker {
   color: var(--muted);
   font-family: var(--body);
@@ -309,6 +301,20 @@ button { color: inherit; }
 .work-page-hero h1 { font-size: clamp(2.4rem, 4.5vw, 3.45rem); }
 .theme-page-hero .hero-copy > p,
 .work-page-hero .hero-copy > p { max-width: 600px; }
+.theme-page-layout { max-width: 1080px; }
+.theme-back-link { margin-top: 0 !important; margin-bottom: 12px !important; }
+.theme-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+.theme-hero-copy { max-width: 680px; min-width: 0; }
+.theme-hero-copy h1 { max-width: 680px; margin-bottom: 0; }
+.theme-hero-copy > p { max-width: 580px; margin-top: 14px; color: var(--muted); font-size: 0.94rem; line-height: 1.75; }
+.theme-page-visual { width: 100%; max-width: 310px; justify-self: end; margin: 0; padding: 7px; border: 1px solid var(--line); background: rgba(241, 235, 229, 0.48); }
+.theme-page-visual img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); background: var(--surface); }
+.theme-page-visual figcaption { margin-top: 8px; color: var(--muted); font-family: var(--body); font-size: 9px; letter-spacing: 0.11em; line-height: 1.45; text-transform: uppercase; }
 .shop-hero { padding-bottom: 54px; }
 .shop-header { max-width: 760px; }
 .shop-header h1 { margin: 0; }
@@ -410,7 +416,7 @@ button { color: inherit; }
 .work.is-text .work-text { max-width: 660px; padding: 6px 0; }
 .work.is-text .work-text h3 { font-size: clamp(1.65rem, 2.7vw, 2.35rem); }
 
-/* Themes: an index of recurring subjects rather than isolated tiles */
+/* Themes: a literary index connected by small details from the visual archive. */
 .themes-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -418,17 +424,50 @@ button { color: inherit; }
   width: 100%;
 }
 .theme-card {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 76px;
+  align-items: center;
+  gap: 16px;
   min-width: 0;
   padding: 18px 0 20px;
   border-bottom: 1px solid var(--line);
   color: inherit;
   transition: color 180ms ease;
 }
+.theme-card-copy { display: block; min-width: 0; }
 .theme-card .tag { margin-bottom: 8px; }
-.theme-card h3 { display: inline; margin: 0; font-size: 1.5rem; line-height: 1.12; }
-.theme-card p { max-width: 280px; margin: 8px 0 0; color: var(--muted); font-size: 0.84rem; line-height: 1.62; }
-.theme-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.theme-card-title {
+  display: inline;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.12;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 180ms ease;
+}
+.theme-card-description { display: block; max-width: 280px; margin: 8px 0 0; color: var(--muted); font-size: 0.84rem; line-height: 1.62; }
+.theme-card-visual {
+  display: block;
+  width: 76px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface);
+}
+.theme-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.88);
+  transition: transform 240ms ease, filter 240ms ease;
+}
+.theme-card:hover .theme-card-title { text-decoration-color: var(--line-strong); }
+.theme-card:hover .theme-card-visual img { transform: scale(1.035); filter: saturate(1); }
 
 /* Bookshelf: the original spines remain the homepage's tactile signature */
 .books-shelf-wrap {
@@ -789,12 +828,14 @@ button { color: inherit; }
   .nav-links a { font-size: 0.72rem; }
   .hero, .home-hero { padding: 52px 0 46px; }
   .hero-grid, .about-hero-grid, .contact-grid, .work-page-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .theme-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .theme-page-visual { max-width: 320px; justify-self: start; }
+  .theme-page-visual img { aspect-ratio: 5 / 3; }
   .hero h1 { max-width: 620px; font-size: clamp(2.25rem, 8.5vw, 3.2rem); line-height: 1.02; }
   .hero-copy > p, #theme-description, .works-intro { font-size: 0.9rem; }
   .hero .card { max-width: 560px; padding: 22px; }
-  .homepage .archive-sprig { flex-basis: 18px; width: 18px; height: 23px; }
-  .homepage .archive-note-feature { grid-template-columns: 78px minmax(0, 1fr) 12px; gap: 11px; }
-  .homepage .archive-note-feature > img { width: 78px; height: 62px; }
+  .homepage .archive-note-feature { grid-template-columns: minmax(0, 1fr) 12px; gap: 10px 11px; }
+  .homepage .archive-note-feature > img { width: 100%; height: auto; aspect-ratio: 2.2 / 1; }
   .archive-note-feature-title { font-size: 1.16rem; }
   .homepage .section-header > .kicker { gap: 8px; }
   .homepage .section-header > .kicker::before { flex-basis: 17px; width: 17px; }
@@ -808,8 +849,10 @@ button { color: inherit; }
   .work-text { max-width: 100%; }
   .work-text h3, .work.is-text .work-text h3 { font-size: clamp(1.55rem, 5.5vw, 1.9rem); }
   .themes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
-  .theme-card { padding: 16px 0 18px; }
-  .theme-card h3 { font-size: 1.35rem; }
+  .theme-card { grid-template-columns: minmax(0, 1fr) 62px; gap: 11px; padding: 16px 0 18px; }
+  .theme-card-title { font-size: 1.35rem; }
+  .theme-card-visual { width: 62px; height: 62px; }
+  .theme-card-description { font-size: 0.8rem; }
   .books-shelf-wrap { margin-top: 12px; }
   .book-spine { height: 138px; }
   .card-link.is-large .book-spine { height: 160px; }
@@ -844,6 +887,8 @@ button { color: inherit; }
   .nav-links a { font-size: 0.68rem; }
   .hero h1 { font-size: 2.2rem; }
   .themes-grid { grid-template-columns: minmax(0, 1fr); }
+  .theme-card { grid-template-columns: minmax(0, 1fr) 72px; }
+  .theme-card-visual { width: 72px; height: 72px; }
   .button { width: auto; }
   .product-button { width: auto; }
 }
